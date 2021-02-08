@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentDao">
+    <resultMap type="com.example.demo.entity.Student" id="StudentMap">
+        <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+        <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+        <result property="studentEmail" column="student_email" jdbcType="VARCHAR"/>
+        <result property="studentPassword" column="student_password" jdbcType="VARCHAR"/>
+        <result property="studentNumber" column="student_number" jdbcType="VARCHAR"/>
+        <result property="studentSex" column="student_sex" jdbcType="VARCHAR"/>
+        <result property="studentSchool" column="student_school" jdbcType="VARCHAR"/>
+        <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
+        <result property="studentStatus" column="studentstatus" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--学生注册，添加一条信息-->
+    <insert id="register_student" keyProperty="studentId" useGeneratedKeys="true">
+
+                insert ignore  into graduation.student(  student_email, student_password)
+                values (  #{studentEmail}, #{studentPassword})
+
+    </insert>
+
+
+    <!--通过studentEmail修改数据-->
+    <update id="update">
+        update graduation.student
+        <set>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="studentPassword != null and studentPassword != ''">
+                student_password = #{studentPassword},
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                student_number = #{studentNumber},
+            </if>
+            <if test="studentSex != null and studentSex != ''">
+                student_sex = #{studentSex},
+            </if>
+            <if test="studentSchool != null and studentSchool != ''">
+                student_school = #{studentSchool},
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                student_phone = #{studentPhone},
+            </if>
+        </set>
+        where student_email = #{studentEmail}
+    </update>
+
+
+    <!--根据email，password查询单个==实现登录功能-->
+    <select id="select_one_login" resultMap="StudentMap">
+
+                select
+                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone,studentStatus
+                from graduation.student
+                where student_email = #{studentEmail} and student_password= #{studentPassword}
+
+    </select>
+
+
+    <!--查询单个-->
+    <select id="student_queryByEmail" resultMap="StudentMap">
+
+                select
+                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone,studentStatus
+                from graduation.student
+                where student_email = #{studentEmail}
+
+    </select>
+    <!--==============================分界线==============================-->
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+
+                select
+                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone
+                from graduation.student
+                where student_id = #{studentId}
+
+    </select>
+
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentMap">
+
+                select
+                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone
+                from graduation.student
+                limit #{offset}, #{limit}
+
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentMap">
+        select
+        student_id, student_name, student_email, student_password, student_number, student_sex, student_school,
+        student_phone
+        from graduation.student
+        <where>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="studentName != null and studentName != ''">
+                and student_name = #{studentName}
+            </if>
+            <if test="studentEmail != null and studentEmail != ''">
+                and student_email = #{studentEmail}
+            </if>
+            <if test="studentPassword != null and studentPassword != ''">
+                and student_password = #{studentPassword}
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                and student_number = #{studentNumber}
+            </if>
+            <if test="studentSex != null and studentSex != ''">
+                and student_sex = #{studentSex}
+            </if>
+            <if test="studentSchool != null and studentSchool != ''">
+                and student_school = #{studentSchool}
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                and student_phone = #{studentPhone}
+            </if>
+            <if test="studentStatus != null and studentStatus != ''">
+                and studentStatus = #{studentStatus}
+            </if>
+
+
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
+
+                insert into graduation.student(student_name, student_email, student_password, student_number, student_sex, student_school, student_phone)
+                values (#{studentName}, #{studentEmail}, #{studentPassword}, #{studentNumber}, #{studentSex}, #{studentSchool}, #{studentPhone})
+
+    </insert>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+
+                delete from graduation.student where student_id = #{studentId}
+
+    </delete>
+</mapper>

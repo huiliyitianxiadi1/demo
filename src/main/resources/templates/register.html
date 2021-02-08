@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body class="authentication-bg">
+<div class="account-pages mt-5 mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card">
+
+                    <div class="card-header pt-4 pb-4 text-center bg-primary">
+                        <a href="welcome.html">
+                            <span><img src="assets/images/logo.png" alt="" height="18"></span>
+                        </a>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Free Sign Up</h4>
+                            <p class="text-muted mb-4">Don't have an account? Create your account, it takes less than a
+                                minute </p>
+                        </div>
+                        <label style="color: red" th:text="${have}"></label>
+                        <form id="RegisterForm" onsubmit="return toVaild()">
+
+
+                            <!--邮箱-->
+                            <div class="form-group">
+                                <label for="emailaddress">Email address</label>
+                                <input class="form-control"
+                                       type="email"
+                                       id="emailaddress"
+                                       name="Email"
+                                       required
+                                       placeholder="Enter your email">
+                            </div>
+                            <!--密码-->
+                            <div class="form-group">
+                                <label for="password">密码</label>
+                                <input class="form-control"
+                                       type="password"
+                                       name="Password"
+                                       required
+                                       id="password"
+                                       placeholder="Enter your password">
+                            </div>
+                            <!--确认密码-->
+                            <div class="form-group">
+                                <label for="password">确认密码</label>
+                                <input class="form-control"
+                                       type="password"
+                                       required
+                                       name="queren_password"
+                                       id="queren_password"
+                                       placeholder="Enter your password">
+                            </div>
+
+
+                            <!-- 选择身份 -->
+                            <div class="form-group">
+                                <label for="shenfen">身份</label>
+                                <div class="text-dark-50 text-center mt-0 font-weight-bold" name="shenfen" id="shenfen">
+                                    <label><input type="radio" name="shenfen" value="teacher">教师</label>
+                                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    <label><input type="radio" name="shenfen" value="student">学生</label>
+                                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                                    <label><input type="radio" name="shenfen" value="admin">管理员</label>
+                                </div>
+                            </div>
+
+                            <!--我接受条款和条件-->
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox"
+                                           class="custom-control-input"
+                                           id="checkbox_signup"
+                                           name="checkbox_signup">
+                                    <label class="custom-control-label"
+                                           for="checkbox_signup">
+                                        I accept
+                                        <a href="#" class="text-muted">
+                                            Terms and Conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 text-center">
+                                <button id="SignUpButton"
+                                        class="btn btn-primary"
+                                        type="submit">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12 text-center">
+                        <p class="text-muted">
+                            Already have account?
+                            <a href="login.html" class="text-muted ml-1">
+                                <b>
+                                    Log In
+                                </b>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--底部信息-->
+<div th:replace="Page_Component/Footer_Component.html ::footer_component_login_register"></div>
+
+
+
+<script src="assets/js/app.min.js"></script>
+<script src="register.js"></script>
+<script src="jquery.js"></script>
+
+</body>
+</html>

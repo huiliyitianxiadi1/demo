@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<div id="top-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" th:fragment="LogOutModel">
+    <div class="modal-dialog modal-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">是否确定退出</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">取消
+                </button>
+                <a class="btn btn-sm btn-primary" th:href="@{/logout}">确定退出</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

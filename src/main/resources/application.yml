@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 7200  # 设置session的有效时长 7200s，2小时
+
+spring:
+  web:
+    resources:
+      add-mappings: true
+
+  datasource:
+    #基本属性
+    url: jdbc:mysql://127.0.0.1:3306/graduation?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 10
+      max-lifetime: 30000
+      connection-test-query: SELECT 1
+    jpa:
+      hibernate:
+        ddl-auto: update #新增数据库链接必备参数
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.example.demo.model  # 注意：对应实体类的路径

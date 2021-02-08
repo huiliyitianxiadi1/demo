@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TeacherDao">
+
+    <resultMap type="com.example.demo.entity.Teacher" id="TeacherMap">
+        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+        <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+        <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+        <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+        <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+        <result property="teacherSex" column="teacher_sex" jdbcType="VARCHAR"/>
+        <result property="school" column="school" jdbcType="VARCHAR"/>
+        <result property="subject" column="subject" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--学生注册，添加一条信息-->
+    <insert id="register_teacher" keyProperty="teacherId" useGeneratedKeys="true">
+    insert  ignore into graduation.teacher(  teacher_email, teacher_password)
+    values (  #{teacherEmail}, #{teacherPassword})
+    </insert>
+
+    <!--根据email，password查询单个==实现登录功能-->
+    <select id="select_teacher_login" resultMap="TeacherMap">
+        select
+                teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title,teacherStatus
+        from graduation.teacher
+        where teacher_email = #{teacherEmail} and teacher_password= #{teacherPassword}
+    </select>
+
+    <!--查询单个-->
+    <select id="teacher_queryByEmail" resultMap="TeacherMap">
+        select
+          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title,teacherStatus
+        from graduation.teacher
+        where teacher_email = #{teacherEmail}
+    </select>
+    <!--==============================分界线==============================-->
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TeacherMap">
+        select
+          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title
+        from graduation.teacher
+        where teacher_id = #{teacherId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TeacherMap">
+        select
+          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title
+        from graduation.teacher
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TeacherMap">
+        select
+        teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title
+        from graduation.teacher
+        <where>
+            <if test="teacherId != null">
+                and teacher_id = #{teacherId}
+            </if>
+            <if test="teacherName != null and teacherName != ''">
+                and teacher_name = #{teacherName}
+            </if>
+            <if test="teacherEmail != null and teacherEmail != ''">
+                and teacher_email = #{teacherEmail}
+            </if>
+            <if test="teacherPassword != null and teacherPassword != ''">
+                and teacher_password = #{teacherPassword}
+            </if>
+            <if test="teacherNumber != null and teacherNumber != ''">
+                and teacher_number = #{teacherNumber}
+            </if>
+            <if test="teacherSex != null and teacherSex != ''">
+                and teacher_sex = #{teacherSex}
+            </if>
+            <if test="school != null and school != ''">
+                and school = #{school}
+            </if>
+            <if test="subject != null and subject != ''">
+                and subject = #{subject}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="teacherId" useGeneratedKeys="true">
+        insert into graduation.teacher(teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title)
+        values (#{teacherName}, #{teacherEmail}, #{teacherPassword}, #{teacherNumber}, #{teacherSex}, #{school}, #{subject}, #{title})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update graduation.teacher
+        <set>
+            <if test="teacherName != null and teacherName != ''">
+                teacher_name = #{teacherName},
+            </if>
+            <if test="teacherEmail != null and teacherEmail != ''">
+                teacher_email = #{teacherEmail},
+            </if>
+            <if test="teacherPassword != null and teacherPassword != ''">
+                teacher_password = #{teacherPassword},
+            </if>
+            <if test="teacherNumber != null and teacherNumber != ''">
+                teacher_number = #{teacherNumber},
+            </if>
+            <if test="teacherSex != null and teacherSex != ''">
+                teacher_sex = #{teacherSex},
+            </if>
+            <if test="school != null and school != ''">
+                school = #{school},
+            </if>
+            <if test="subject != null and subject != ''">
+                subject = #{subject},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+        </set>
+        where teacher_id = #{teacherId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from graduation.teacher where teacher_id = #{teacherId}
+    </delete>
+
+</mapper>

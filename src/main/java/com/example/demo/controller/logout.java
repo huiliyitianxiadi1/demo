@@ -20,7 +20,7 @@ public class logout {
 
     /***
      * 用户退出
-     * @param request x
+     * @param request
      * @return
      */
 

@@ -18,22 +18,43 @@
 
     <!--学生注册，添加一条信息-->
     <insert id="register_teacher" keyProperty="teacherId" useGeneratedKeys="true">
-    insert  ignore into graduation.teacher(  teacher_email, teacher_password)
-    values (  #{teacherEmail}, #{teacherPassword})
+        insert
+        ignore into graduation.teacher(  teacher_email, teacher_password)
+    values (
+        #{teacherEmail},
+        #{teacherPassword}
+        )
     </insert>
 
     <!--根据email，password查询单个==实现登录功能-->
     <select id="select_teacher_login" resultMap="TeacherMap">
-        select
-                teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title,teacherStatus
+        select teacher_id,
+               teacher_name,
+               teacher_email,
+               teacher_password,
+               teacher_number,
+               teacher_sex,
+               school,
+               subject,
+               title,
+               teacherStatus
         from graduation.teacher
-        where teacher_email = #{teacherEmail} and teacher_password= #{teacherPassword}
+        where teacher_email = #{teacherEmail}
+          and teacher_password = #{teacherPassword}
     </select>
 
     <!--查询单个-->
     <select id="teacher_queryByEmail" resultMap="TeacherMap">
-        select
-          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title,teacherStatus
+        select teacher_id,
+               teacher_name,
+               teacher_email,
+               teacher_password,
+               teacher_number,
+               teacher_sex,
+               school,
+               subject,
+               title,
+               teacherStatus
         from graduation.teacher
         where teacher_email = #{teacherEmail}
     </select>
@@ -42,18 +63,31 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="TeacherMap">
-        select
-          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title
+        select teacher_id,
+               teacher_name,
+               teacher_email,
+               teacher_password,
+               teacher_number,
+               teacher_sex,
+               school,
+               subject,
+               title
         from graduation.teacher
         where teacher_id = #{teacherId}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TeacherMap">
-        select
-          teacher_id, teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title
-        from graduation.teacher
-        limit #{offset}, #{limit}
+        select teacher_id,
+               teacher_name,
+               teacher_email,
+               teacher_password,
+               teacher_number,
+               teacher_sex,
+               school,
+               subject,
+               title
+        from graduation.teacher limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
@@ -94,8 +128,10 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="teacherId" useGeneratedKeys="true">
-        insert into graduation.teacher(teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex, school, subject, title)
-        values (#{teacherName}, #{teacherEmail}, #{teacherPassword}, #{teacherNumber}, #{teacherSex}, #{school}, #{subject}, #{title})
+        insert into graduation.teacher(teacher_name, teacher_email, teacher_password, teacher_number, teacher_sex,
+                                       school, subject, title)
+        values (#{teacherName}, #{teacherEmail}, #{teacherPassword}, #{teacherNumber}, #{teacherSex}, #{school},
+                #{subject}, #{title})
     </insert>
 
     <!--通过主键修改数据-->
@@ -104,9 +140,6 @@
         <set>
             <if test="teacherName != null and teacherName != ''">
                 teacher_name = #{teacherName},
-            </if>
-            <if test="teacherEmail != null and teacherEmail != ''">
-                teacher_email = #{teacherEmail},
             </if>
             <if test="teacherPassword != null and teacherPassword != ''">
                 teacher_password = #{teacherPassword},
@@ -127,12 +160,14 @@
                 title = #{title},
             </if>
         </set>
-        where teacher_id = #{teacherId}
+        where teacher_email = #{teacherEmail}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from graduation.teacher where teacher_id = #{teacherId}
+        delete
+        from graduation.teacher
+        where teacher_id = #{teacherId}
     </delete>
 
 </mapper>

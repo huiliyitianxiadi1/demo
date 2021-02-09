@@ -11,14 +11,14 @@
         <result property="studentSchool" column="student_school" jdbcType="VARCHAR"/>
         <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
         <result property="studentStatus" column="studentstatus" jdbcType="VARCHAR"/>
+        <result property="photo" column="photo" jdbcType="BLOB"/>
     </resultMap>
+
 
     <!--学生注册，添加一条信息-->
     <insert id="register_student" keyProperty="studentId" useGeneratedKeys="true">
-
-                insert ignore  into graduation.student(  student_email, student_password)
-                values (  #{studentEmail}, #{studentPassword})
-
+        insert ignore into graduation.student(student_email, student_password)
+        values (#{studentEmail}, #{studentPassword})
     </insert>
 
 
@@ -44,6 +44,10 @@
             <if test="studentPhone != null and studentPhone != ''">
                 student_phone = #{studentPhone},
             </if>
+
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
         </set>
         where student_email = #{studentEmail}
     </update>
@@ -52,10 +56,18 @@
     <!--根据email，password查询单个==实现登录功能-->
     <select id="select_one_login" resultMap="StudentMap">
 
-                select
-                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone,studentStatus
-                from graduation.student
-                where student_email = #{studentEmail} and student_password= #{studentPassword}
+        select student_id,
+               student_name,
+               student_email,
+               student_password,
+               student_number,
+               student_sex,
+               student_school,
+               student_phone,
+               studentStatus
+        from graduation.student
+        where student_email = #{studentEmail}
+          and student_password = #{studentPassword}
 
     </select>
 
@@ -63,10 +75,17 @@
     <!--查询单个-->
     <select id="student_queryByEmail" resultMap="StudentMap">
 
-                select
-                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone,studentStatus
-                from graduation.student
-                where student_email = #{studentEmail}
+        select student_id,
+               student_name,
+               student_email,
+               student_password,
+               student_number,
+               student_sex,
+               student_school,
+               student_phone,
+               studentStatus
+        from graduation.student
+        where student_email = #{studentEmail}
 
     </select>
     <!--==============================分界线==============================-->
@@ -75,10 +94,16 @@
     <!--查询单个-->
     <select id="queryById" resultMap="StudentMap">
 
-                select
-                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone
-                from graduation.student
-                where student_id = #{studentId}
+        select student_id,
+               student_name,
+               student_email,
+               student_password,
+               student_number,
+               student_sex,
+               student_school,
+               student_phone
+        from graduation.student
+        where student_id = #{studentId}
 
     </select>
 
@@ -86,10 +111,16 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StudentMap">
 
-                select
-                  student_id, student_name, student_email, student_password, student_number, student_sex, student_school, student_phone
-                from graduation.student
-                limit #{offset}, #{limit}
+        select student_id,
+               student_name,
+               student_email,
+               student_password,
+               student_number,
+               student_sex,
+               student_school,
+               student_phone
+        from graduation.student
+        limit #{offset}, #{limit}
 
     </select>
 
@@ -135,8 +166,10 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="studentId" useGeneratedKeys="true">
 
-                insert into graduation.student(student_name, student_email, student_password, student_number, student_sex, student_school, student_phone)
-                values (#{studentName}, #{studentEmail}, #{studentPassword}, #{studentNumber}, #{studentSex}, #{studentSchool}, #{studentPhone})
+        insert into graduation.student(student_name, student_email, student_password, student_number, student_sex,
+                                       student_school, student_phone)
+        values (#{studentName}, #{studentEmail}, #{studentPassword}, #{studentNumber}, #{studentSex}, #{studentSchool},
+                #{studentPhone})
 
     </insert>
 
@@ -144,7 +177,9 @@
     <!--通过主键删除-->
     <delete id="deleteById">
 
-                delete from graduation.student where student_id = #{studentId}
+        delete
+        from graduation.student
+        where student_id = #{studentId}
 
     </delete>
 </mapper>

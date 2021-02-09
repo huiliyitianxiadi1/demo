@@ -4,10 +4,20 @@ server:
     session:
       timeout: 7200  # 设置session的有效时长 7200s，2小时
 
+
+
+
 spring:
-  web:
-    resources:
-      add-mappings: true
+  # 模板引擎
+  #thymeleaf:
+  #  mode: HTML
+  #  encoding: utf-8
+  # 禁用缓存
+  #  cache: false
+  # 资源信息
+  # web:
+  #  resources:
+  #   add-mappings: true
 
   datasource:
     #基本属性
@@ -20,9 +30,18 @@ spring:
       maximum-pool-size: 10
       max-lifetime: 30000
       connection-test-query: SELECT 1
-    jpa:
-      hibernate:
-        ddl-auto: update #新增数据库链接必备参数
+  jpa:
+    hibernate:
+      ddl-auto: update #新增数据库链接必备参数
+
+    # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 10MB
+      # 设置总上传的文件大小
+      max-request-size: 20MB
+
 
 
 mybatis:

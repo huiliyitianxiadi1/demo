@@ -3,7 +3,7 @@ function jinyong() {
 
     $('#name').attr("disabled", true);
     $('#email').attr("disabled", true);
-    $('#studentNumber').attr("disabled", true);
+    $('#teacherNumber').attr("disabled", true);
 
     $('#sex_nan1').attr("disabled", true);
     $('#sex_nv1').attr("disabled", true);
@@ -12,6 +12,9 @@ function jinyong() {
 
     $('#school').attr("disabled", true);
     $('#iphone').attr("disabled", true);
+    $('#subject').attr("disabled", true);
+    $('#title').attr("disabled", true);
+
 
 }
 
@@ -19,7 +22,7 @@ function jinyong() {
 function qiyong() {
 
     $('#name').attr("disabled", false);
-    $('#studentNumber').attr("disabled", false);
+    $('#teacherNumber').attr("disabled", false);
 
     $('#sex_nv1').attr("disabled", false);
     $('#sex_nan1').attr("disabled", false);
@@ -28,6 +31,8 @@ function qiyong() {
 
     $('#school').attr("disabled", false);
     $('#iphone').attr("disabled", false);
+    $('#subject').attr("disabled", false);
+    $('#title').attr("disabled", false);
 }
 
 
@@ -38,14 +43,14 @@ $("#baocun").hide();
 
 
 //ajax
-//修改信息-学生
+//修改信息-教师
 function BaoCunXinXi(msg) {
-    //alert(msg);
+    // alert(msg);
     $.ajax({
         cache: false,//每次读取的是最新的数据。
         type: "POST",
         dataType: "json",//预期服务器返回的数据类型
-        url: "/student/student_update",
+        url: "/teacher/teacher_update",
         data: msg,    //获取模态对话框的全部输入数据
         async: true,  //必须要为false,必须必须//同步
         clearForm: true,        // 成功提交后，清除所有的表单元素的值.
@@ -74,7 +79,7 @@ function BaoCunXinXi(msg) {
 //  外层的 AJAX 和内层的 AJAX 的 async 属性都要设置为 false,
 //  如果不这样的话, 两次请求都是异步的, 可能会导致数据获取不到,
 //  但是也有一个弊端, 因为同步, 在异步请求时, 浏览器是锁死状态, 不能进行其他的操作.
-function student_verification_password_Button() {
+function teacher_verification_password_Button() {
 
     var message = $("#old_form_password").serialize();
 
@@ -83,7 +88,7 @@ function student_verification_password_Button() {
         cache: false,//每次读取的是最新的数据。
         type: "POST",
         dataType: "json",//预期服务器返回的数据类型
-        url: "/student/check_st_old_password",
+        url: "/teacher/check_teacher_old_password",
         data: message,    //获取模态对话框的全部输入数据
         async: false,  //必须要为false,必须必须//同步
         clearForm: true,        // 成功提交后，清除所有的表单元素的值.
@@ -93,7 +98,7 @@ function student_verification_password_Button() {
             if (data == '1') {
                 // alert("一致" + data);
                 //触发model
-                $('#xiugai_st').modal();
+                $('#xiugai_tea').modal();
 
 
             } else {
@@ -110,16 +115,16 @@ function student_verification_password_Button() {
 
 
 //确认修改密码按钮
-function xiugai_st_ok() {
+function xiugai_tea_ok() {
 
-    var message2 = $("#xiugai_s_form").serialize();
-    //  alert(message2);
+    var message2 = $("#xiugai_tea_form").serialize();
+    // alert(message2);
 
     $.ajax({
         cache: false,//每次读取的是最新的数据。
         type: "POST",
         dataType: "json",//预期服务器返回的数据类型
-        url: "/student/student_update",
+        url: "/teacher/teacher_update",
         data: message2,    //获取模态对话框的全部输入数据
         async: false,  //必须要为false,必须必须//同步
         clearForm: true,        // 成功提交后，清除所有的表单元素的值.
@@ -151,7 +156,7 @@ function xiugai_st_ok() {
 
 //提交
 function baocunButton() {
-    var msg = $("#xiugai_information").serialize();
+    var msg = $("#xiugai_information_tea").serialize();
 
     $("#xiugai").show();
     $("#baocun").hide();

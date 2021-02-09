@@ -36,14 +36,13 @@
 
 
 
-
             <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
 
-                            <h4 class="page-title">Checkout</h4>
+                            <h4 class="page-title">teacher</h4>
                         </div>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                                             <div class="col-lg-8">
                                                 <h4 class="mt-2"> 基本信息</h4>
                                                 <p></p>
-                                                <form id="xiugai_information">
+                                                <form id="xiugai_information_tea">
                                                     <div class="row">
 
                                                         <!--名字-->
@@ -99,9 +98,9 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <input class="form-control"
-                                                                       name="studentName"
+                                                                       name="teacherName"
                                                                        type="text"
-                                                                       th:value="${session.loginUser.studentName}"
+                                                                       th:value="${session.loginUser.teacherName}"
                                                                        id="name"/>
                                                             </div>
                                                         </div>
@@ -114,9 +113,9 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <input class="form-control"
-                                                                       name="studentemail"
+                                                                       name="teacheremail"
                                                                        type="email"
-                                                                       th:value="${session.loginUser.studentEmail}"
+                                                                       th:value="${session.loginUser.teacherEmail}"
                                                                        id="email"/>
                                                             </div>
                                                         </div>
@@ -124,16 +123,16 @@
                                                     </div>
 
 
-                                                    <!--学号-->
+                                                    <!--教工编号-->
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="studentNumber">学号
+                                                                <label for="teacherNumber">教工编号
                                                                 </label>
                                                                 <input class="form-control"
-                                                                       name="studentNumber"
-                                                                       th:value="${session.loginUser.studentNumber}"
-                                                                       id="studentNumber"/>
+                                                                       name="teacherNumber"
+                                                                       th:value="${session.loginUser.teacherNumber}"
+                                                                       id="teacherNumber"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -148,35 +147,34 @@
                                                                      name="sex" id="sex">
                                                                     <label>
                                                                         <input
-                                                                                th:if="${session.loginUser.studentSex} eq 男"
+                                                                                th:if="${session.loginUser.teacherSex} eq 男"
                                                                                 checked
                                                                                 type="radio"
                                                                                 id="sex_nan1"
-                                                                                name="studentSex"
+                                                                                name="teacherSex"
                                                                                 value="男">
                                                                         <input
-                                                                                th:if="${session.loginUser.studentSex} eq 女"
-
+                                                                                th:if="${session.loginUser.teacherSex} eq 女"
                                                                                 type="radio"
                                                                                 id="sex_nan2"
-                                                                                name="studentSex"
+                                                                                name="teacherSex"
                                                                                 value="男">
                                                                         男
                                                                     </label>
                                                                     <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                                                     <label>
                                                                         <input
-                                                                                th:if="${session.loginUser.studentSex} eq 女"
+                                                                                th:if="${session.loginUser.teacherSex} eq 女"
                                                                                 checked
                                                                                 type="radio"
                                                                                 id="sex_nv1"
-                                                                                name="studentSex"
+                                                                                name="teacherSex"
                                                                                 value="女">
                                                                         <input
-                                                                                th:if="${session.loginUser.studentSex} eq 男"
+                                                                                th:if="${session.loginUser.teacherSex} eq 男"
                                                                                 id="sex_nv2"
                                                                                 type="radio"
-                                                                                name="studentSex"
+                                                                                name="teacherSex"
                                                                                 value="女">
                                                                         女
                                                                     </label>
@@ -191,28 +189,45 @@
                                                             <div class="form-group">
                                                                 <label for="school">所属学校</label>
                                                                 <input class="form-control"
-                                                                       name="studentSchool"
+                                                                       name="school"
                                                                        type="text"
-                                                                       th:value="${session.loginUser.studentSchool}"
+                                                                       th:value="${session.loginUser.school}"
                                                                        id="school">
                                                             </div>
                                                         </div>
                                                     </div>
 
 
-                                                    <!--手机号-->
+                                                    <!--教授科目-->
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="iphone">手机号</label>
+                                                                <label for="subject">教授科目</label>
                                                                 <input class="form-control"
                                                                        type="text"
-                                                                       name="studentPhone"
-                                                                       th:value="${session.loginUser.studentPhone}"
-                                                                       id="iphone"/>
+                                                                       name="subject"
+                                                                       th:value="${session.loginUser.subject}"
+                                                                       id="subject"/>
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+                                                    <!--职称-->
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="title">职称</label>
+                                                                <input class="form-control"
+                                                                       type="text"
+                                                                       name="title"
+                                                                       th:value="${session.loginUser.title}"
+                                                                       id="title"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
 
 
                                                     <!--按钮-->
@@ -288,9 +303,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <button type="button"
-                                                                    onclick="student_verification_password_Button()"
-
-
+                                                                    onclick="teacher_verification_password_Button()"
                                                                     class="btn btn-outline-success">验证
                                                             </button>
                                                         </div>
@@ -571,7 +584,7 @@
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
 <!--修改密码model框-->
-<span th:replace="Model/PasswordModification.html :: xiugai_student"></span>
+<span th:replace="Model/PasswordModification.html :: xiugai_teacher"></span>
 
 
 
@@ -579,10 +592,8 @@
 <script src="jquery.js"></script>
 <script src="assets/js/app.min.js"></script>
 
-<script src="jquerysession.js"></script>
 
-
-<script src="student_Information.js"></script>
+<script src="teacher_Information.js"></script>
 
 
 </body>

@@ -2,11 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
+import com.example.demo.entity.User;
 import com.example.demo.service.TeacherService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -110,5 +114,87 @@ public class TeacherController {
     public Teacher selectOne(Integer id) {
         return this.teacherService.queryById(id);
     }
+
+
+
+
+
+
+    /**
+     * 教师-检查旧密码模块
+     *可优化（懒得改）
+     * @param oldPassword
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("check_teacher_old_password")
+    public String check_teacher_old_password(String oldPassword) {
+
+
+        System.out.println("-----check_teacher_old_password模块begin-----");
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+
+        //根据Session的账号和密码获得学生所有信息
+        List<Teacher> teacher = this.teacherService.select_teacher_login(user.getEmail(), user.getPassword());
+        System.out.println(teacher.get(0));
+
+        System.out.println("-----check_teacher_old_password模块end-----");
+        //检查获取的密码是否与旧密码相同
+        //不相同，返回0
+        //相同，返回1
+        if (teacher.get(0).getTeacherPassword().equals(oldPassword)) {
+            return "1";
+        } else {
+            return "0";
+        }
+
+
+    }
+
+
+
+
+
+
+
+    /***API
+     * 通过teacherEmail修改数据
+     * @param
+     * @return
+     *
+     * http://localhost:8080/teacher/teacher_update?teacherEmail=1@qq.com&teacherPassword=123456
+     * http://localhost:8080/teacher/teacher_update?teacherEmail=1@qq.com&teacherSex=男&teacherName=a&teacherPassword=1&teacherNumber=aa&teacherSchool=aa&teacherPhone=111
+     */
+
+    @ResponseBody
+    @PostMapping("teacher_update")
+    public int teacher_update(Teacher teacher) {
+
+        //获得电子邮箱 teacherEmail
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        teacher.setTeacherEmail(user.getEmail());
+
+
+        System.out.println("teacher_update测试点:"+teacher);
+
+
+        return this.teacherService.update(teacher);
+
+    }
+
+
+
+
+
+
 
 }

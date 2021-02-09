@@ -53,6 +53,53 @@ public class StudentController {
     }
 
 
+    /**
+     * 学生-检查旧密码模块
+     * http://localhost:8080/student/
+     *
+     * @param oldPassword
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("check_st_old_password")
+    public String check_st_old_password(String oldPassword) {
+
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+
+        //根据Session的账号和密码获得学生所有信息
+        List<Student> student = this.studentService.select_one_login(user.getEmail(), user.getPassword());
+        System.out.println(student.get(0));
+
+
+        //检查获取的密码是否与旧密码相同
+        //不相同，返回0
+        //相同，返回1
+        if (student.get(0).getStudentPassword().equals(oldPassword)) {
+            return "1";
+        } else {
+            return "0";
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     /***API
      * 学生注册测试模块
      * http://localhost:8080/student/register_student?studentEmail=1@qq.com&studentPassword=123456
@@ -99,7 +146,7 @@ public class StudentController {
 
     @ResponseBody
     @PostMapping("student_update")
-    public int student_update(Student student){
+    public int student_update(Student student) {
 
         //获得电子邮箱 StudentEmail
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -111,11 +158,13 @@ public class StudentController {
         System.out.println(student);
 
 
-
-
         return this.studentService.update(student);
 
     }
+
+
+
+
 
 
 
@@ -133,7 +182,6 @@ public class StudentController {
         System.out.println(studentEmail);
         return this.studentService.student_queryByEmail(studentEmail);
     }
-
 
 
     //-----------------------------------------------分界线

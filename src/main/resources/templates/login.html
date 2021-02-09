@@ -31,7 +31,9 @@
                         </div>
 
 
-                        <form action="#" method="post" th:action="@{/Postlogin}">
+                        <form action="#" method="post" th:action="@{/Postlogin}" onsubmit="return toVaild()">
+
+
                             <label style="color: red" th:text="${msg}"></label>
                             <!--输入账号-->
                             <div class="form-group">
@@ -60,7 +62,7 @@
                             <!-- 选择身份 -->
                             <div class="form-group">
                                 <label for="shenfen">身份</label>
-                                <div class="text-dark-50 text-center mt-0 font-weight-bold" name="Shenfen" id="shenfen">
+                                <div class="text-dark-50 text-center mt-0 font-weight-bold" name="shenfen" id="shenfen">
                                     <label><input type="radio" name="shenfen" value="teacher">教师</label>
                                     <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                                     <label><input type="radio" name="shenfen" value="student">学生</label>
@@ -85,6 +87,7 @@
                     </div>
                 </div>
 
+
                 <div class="row mt-3">
                     <div class="col-12 text-center">
                         <p class="text-muted">Don't have an account?
@@ -106,5 +109,8 @@
 <div th:replace="Page_Component/Footer_Component.html ::footer_component_login_register"></div>
 
 <script src="assets/js/app.min.js"></script>
+<script src="login.js"></script>
+<script src="jquery.js"></script>
+
 </body>
 </html>

@@ -103,9 +103,9 @@ public class TeacherServiceImpl implements TeacherService {
      * @return 实例对象
      */
     @Override
-    public Teacher update(Teacher teacher) {
-        this.teacherDao.update(teacher);
-        return this.queryById(teacher.getTeacherId());
+    public int update(Teacher teacher) {
+
+        return this.teacherDao.update(teacher);
     }
 
     /**

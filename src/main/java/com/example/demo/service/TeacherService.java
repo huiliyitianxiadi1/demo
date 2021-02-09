@@ -79,7 +79,7 @@ public interface TeacherService {
      * @param teacher 实例对象
      * @return 实例对象
      */
-    Teacher update(Teacher teacher);
+    int update(Teacher teacher);
 
     /**
      * 通过主键删除数据

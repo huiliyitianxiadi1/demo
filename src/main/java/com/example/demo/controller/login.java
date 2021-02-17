@@ -30,11 +30,8 @@ import java.util.List;
 @Controller
 public class login {
 
-    /**
-     * 首先可以通过注解的方式  获取一个 request
-     */
-    @Autowired
-    HttpServletRequest request;
+ 
+
     /**
      * 服务对象
      */

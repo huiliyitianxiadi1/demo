@@ -38,14 +38,14 @@ function SignUpButton() {
 
         success: function (data) {
 
-            if (data == '2000') {
+            if (data === '2000') {
                 alert("注册成功" + data + ",页面即将跳转到登录界面");
                  window.location.href = "/login.html";
                 // window.location.reload();
-            } else if (data == '2002') {
+            } else if (data === '2002') {
                 alert("注册失败" + data);
                 //待补充
-            } else if (data == '2004') {
+            } else if (data === '2004') {
                 alert("出现异常错误;");
             }
         },

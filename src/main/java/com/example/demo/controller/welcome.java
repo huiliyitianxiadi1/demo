@@ -26,14 +26,13 @@ public class welcome {
      * 首先可以通过注解的方式  获取一个 request
      */
     @Autowired
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
     @RequestMapping({"/welcome.html", "/", "/welcome"})
     public String welcome(Model model) {
 
         //获得Session 中存储的shenfen存储的user对象
         User SHENFEN = (User) request.getSession().getAttribute("shenfen");
-
 
 
         //SHENFEN不为空则根据身份创建相应的学生，教师，管理员对象

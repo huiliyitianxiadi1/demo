@@ -196,7 +196,10 @@ $("#showFile").on("click", function () {
         processData: false,
         contentType: false,
         success: function (res) {
-            console.log(res);
+            if (res == '1') {
+
+                $("#yincang").html(" <H1 >审核中</H1>");
+            }
         },
         error: function () {
             console.log("Hello Error!");
@@ -204,3 +207,8 @@ $("#showFile").on("click", function () {
     })
 
 })
+
+
+function jinzhidinaji() {
+    alert("图片审核时禁止重新上传照片");
+}

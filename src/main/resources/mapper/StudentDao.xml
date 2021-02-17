@@ -45,6 +45,10 @@
                 student_phone = #{studentPhone},
             </if>
 
+            <if test="studentStatus != null and studentStatus != ''">
+                studentstatus = #{studentStatus},
+            </if>
+
             <if test="photo != null and photo != ''">
                 photo = #{photo},
             </if>

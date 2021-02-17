@@ -49,7 +49,7 @@
                     <div class="col-12">
                         <div class="page-title-box">
 
-                            <h4 class="page-title">Checkout</h4>
+                            <h4 class="page-title">信息修改</h4>
                         </div>
                     </div>
                 </div>
@@ -247,7 +247,7 @@
                                             <!--学生证信息-->
                                             <div class="col-lg-4">
                                                 <div class="border p-3 mt-4 mt-lg-0 rounded">
-                                                    <h4 class="header-title mb-3">状态</h4>
+                                                    <h4 class="header-title mb-3">学生证信息</h4>
                                                     <div class="table-responsive">
                                                         <table class="table table-centered mb-0">
                                                             <tbody>
@@ -263,10 +263,19 @@
                                                                                         <!-- -text-cente  bootstrap子元素居中--->
                                                                                         <span id="myImg">
                                                                                             <!--预览图片位置，默认图片-->
-                                                                                            <img src="img/upload.png"
-                                                                                                 width="50px"
-                                                                                                 height="50px"
-                                                                                                 class="img-circle">
+                                                                                            <img
+                                                                                                    th:if="${session.loginUser.photo} ==null"
+                                                                                                    src="img/upload.png"
+                                                                                                    width="50px"
+                                                                                                    height="50px"
+                                                                                                    class="img-circle">
+
+
+                                                                                            <img
+                                                                                                    th:if="${session.loginUser.photo} !=null"
+                                                                                                    src="/getImgById?id=1">
+
+
                                                                                         </span>
 
                                                                                     </div>
@@ -278,27 +287,53 @@
                                                                                                name="file"
                                                                                                style="display: none">
 
-                                                                                        <button type="button"
+                                                                                        <button th:if="${session.loginUser.studentStatus} !=2"
+                                                                                                type="button"
                                                                                                 class="btn btn-default"
                                                                                                 onclick="$('#file').click();">
                                                                                             浏览
                                                                                         </button>
-                                                                                        <button class="btn btn-default"
+                                                                                        <button th:if="${session.loginUser.studentStatus} !=2"
+                                                                                                class="btn btn-default"
                                                                                                 id="showFile">
                                                                                             上传
                                                                                         </button>
 
+
+                                                                                        <button th:if="${session.loginUser.studentStatus} ==2"
+                                                                                                type="button"
+                                                                                                class="btn btn-default"
+                                                                                                onclick="jinzhidinaji()">
+                                                                                            浏览
+                                                                                        </button>
+                                                                                        <button th:if="${session.loginUser.studentStatus} ==2"
+                                                                                                class="btn btn-default"
+                                                                                                onclick="jinzhidinaji()">
+                                                                                            上传
+                                                                                        </button>
+
+
                                                                                     </div>
 
-
                                                                                 </div>
+
+                                                                                <div class="modal-body text-center"
+                                                                                     id="yincang">
+                                                                                    <H1 th:if="${session.loginUser.studentStatus} ==2">
+                                                                                        审核中</H1>
+                                                                                    <H1 th:if="${session.loginUser.studentStatus} ==1">
+                                                                                        审核已通过</H1>
+                                                                                    <H1 th:if="${session.loginUser.studentStatus} ==3">
+                                                                                        请上传照片进行审核</H1>
+                                                                                </div>
+
 
                                                                             </div>
 
                                                                         </div>
 
+
                                                                     </div>
-                                                                    <p>已通过/未通过/审核中</p>
 
 
                                                                 </td>

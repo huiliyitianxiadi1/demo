@@ -18,13 +18,22 @@ import com.example.demo.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 完善-填写个人信息
@@ -76,11 +85,6 @@ public class MyInformation {
     }
 
 
-
-
-
-
-
     /**
      * //访问完善信息页面
      * //教师
@@ -104,7 +108,7 @@ public class MyInformation {
         //根据Session的账号和密码获得学生所有信息
         //信息存入Session的loginUser中
         List<Teacher> teachers = this.teacherService.select_teacher_login(user.getEmail(), user.getPassword());
-        System.out.println("根据Session的账号和密码获得学生所有信息"+teachers.get(0));
+        System.out.println("根据Session的账号和密码获得学生所有信息" + teachers.get(0));
 
         Teacher teacher = new Teacher();
         teacher = teachers.get(0);
@@ -114,6 +118,93 @@ public class MyInformation {
         return "teacherInformation";
     }
 
+
+    /***
+     * 学生端
+     * 上传学生证
+     *
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/addImg", method = RequestMethod.POST)
+    @ResponseBody
+    public String addImg(@RequestParam("file") MultipartFile file) {
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println("---获得当前Session的账号密码---begin");
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println("---获得当前Session的账号密码---end");
+
+
+        Student student = new Student();
+        student.setStudentEmail(user.getEmail());
+        student.setStudentStatus("2");
+
+
+        try {
+            byte[] data;
+            data = file.getBytes();
+
+
+            student.setPhoto(data);
+            //插入数据库
+            int tag = studentService.update(student);
+            if (tag == 1) {
+                return "1";
+            } else {
+                return "0";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "0";
+    }
+
+
+    /**
+     * 学生端
+     * 显示学生证
+     *
+     * @param response
+     */
+    @RequestMapping(value = "/getImgById", method = RequestMethod.GET)
+    public void getImgById(HttpServletResponse response) {
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println("---获得当前Session的账号密码---begin");
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println("---获得当前Session的账号密码---end");
+
+        try {
+            List<Student> students = studentService.select_one_login(user.getEmail(), user.getPassword());
+
+
+            Student student = new Student();
+
+            student = students.get(0);
+
+
+
+            byte[] data = student.getPhoto();
+            response.setContentType("image/jpeg");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream outputSream = response.getOutputStream();
+            outputSream.write(data);
+            outputSream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

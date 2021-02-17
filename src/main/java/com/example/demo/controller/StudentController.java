@@ -70,8 +70,10 @@ public class StudentController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         User user = (User) request.getSession().getAttribute("shenfen");
 
+        System.out.println("---获得当前Session的账号密码---begin");
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
+        System.out.println("---获得当前Session的账号密码---end");
 
         //根据Session的账号和密码获得学生所有信息
         List<Student> student = this.studentService.select_one_login(user.getEmail(), user.getPassword());
@@ -89,15 +91,6 @@ public class StudentController {
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
     /***API
@@ -161,12 +154,6 @@ public class StudentController {
         return this.studentService.update(student);
 
     }
-
-
-
-
-
-
 
 
     /***API

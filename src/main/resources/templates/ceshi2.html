@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>预览头像</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        /*预览图片大小*/
+        #myImg img {
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-body text-center">
+            <!-- -text-cente  bootstrap子元素居中--->
+            <span id="myImg">
+                   <!--预览图片位置，默认图片-->
+                    <img src="./img/notlogin.jpg" class="img-circle">
+                </span>
+
+        </div>
+        <div class="modal-footer">
+            <!--点击选择文件-->
+            <input type="file" id="myFile" name="myFile" style="display: none" >
+
+            <button type="button" class="btn btn-default" onclick="$('#myFile').click();">浏览</button>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+
+<script type="text/javascript">
+
+    //第二种实现--------------------------------------------------------------------------------------------
+
+    //  JQ 预览
+    $("#myFile").change(function () {//上传文件表单
+        var file = this.files[0];  // 获取input上传的图片数据;
+        var url = window.URL.createObjectURL(file);  // 得到file对象路径，可当成普通的文件路径一样使用，赋值给src;
+        $("#myImg").html("<img src='" + url + "' class='img-circle'/>");
+
+
+    });
+
+</script>
+
+</html>

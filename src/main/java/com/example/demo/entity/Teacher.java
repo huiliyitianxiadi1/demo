@@ -52,4 +52,5 @@ public class Teacher {
     private String teacherStatus;
 
 
+    private String photo;
 }

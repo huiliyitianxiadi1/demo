@@ -13,6 +13,8 @@
         <result property="subject" column="subject" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+        <result property="photo" column="photo" jdbcType="VARCHAR"/>
+
     </resultMap>
 
 

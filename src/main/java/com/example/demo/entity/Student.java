@@ -51,5 +51,5 @@ public class Student {
     private String studentStatus;
 
 
-    private byte[] photo;
+    private byte[]  photo;
 }

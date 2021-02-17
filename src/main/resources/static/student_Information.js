@@ -172,3 +172,35 @@ function XiugaiButton() {
     qiyong();
 
 }
+
+
+//  JQ 预览图片
+$("#file").change(function () {//上传文件表单
+    var file = this.files[0];  // 获取input上传的图片数据;
+    var url = window.URL.createObjectURL(file);  // 得到file对象路径，可当成普通的文件路径一样使用，赋值给src;
+    $("#myImg").html("<img src='" + url + "' class='img-circle'/>");
+});
+
+//上传图片
+$("#showFile").on("click", function () {
+    var file = $("#file")[0].files[0];
+    console.log(file);
+
+    var formData = new FormData();
+    formData.append("file", file);
+
+    $.ajax({
+        url: "/addImg",
+        data: formData,
+        type: "post",
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            console.log(res);
+        },
+        error: function () {
+            console.log("Hello Error!");
+        }
+    })
+
+})

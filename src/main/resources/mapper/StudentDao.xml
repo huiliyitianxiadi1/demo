@@ -64,7 +64,8 @@
                student_sex,
                student_school,
                student_phone,
-               studentStatus
+               studentStatus,
+               photo
         from graduation.student
         where student_email = #{studentEmail}
           and student_password = #{studentPassword}

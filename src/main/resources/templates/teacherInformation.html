@@ -35,7 +35,6 @@
             <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
 
 
-
             <div class="container-fluid">
 
                 <div class="row">
@@ -228,8 +227,6 @@
                                                     </div>
 
 
-
-
                                                     <!--按钮-->
                                                     <div class="row mt-4">
 
@@ -253,15 +250,96 @@
                                             </div>
 
 
+                                            <!--教师工作证信息-->
                                             <div class="col-lg-4">
                                                 <div class="border p-3 mt-4 mt-lg-0 rounded">
-                                                    <h4 class="header-title mb-3">状态</h4>
+                                                    <h4 class="header-title mb-3">工作证信息</h4>
                                                     <div class="table-responsive">
                                                         <table class="table table-centered mb-0">
                                                             <tbody>
                                                             <tr>
                                                                 <td>
-                                                                    <p>已通过/未通过/审核中</p>
+
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+
+                                                                                    <div class="modal-body text-center">
+                                                                                        <!-- -text-cente  bootstrap子元素居中--->
+                                                                                        <span id="myImg">
+                                                                                            <!--预览图片位置，默认图片-->
+                                                                                            <img
+                                                                                                    th:if="${session.loginUser.photo} ==null"
+                                                                                                    src="img/upload.png"
+                                                                                                    width="50px"
+                                                                                                    height="50px"
+                                                                                                    class="img-circle">
+
+
+                                                                                            <img
+                                                                                                    th:if="${session.loginUser.photo} !=null"
+                                                                                                    src="/getImgById_tea">
+
+
+                                                                                        </span>
+
+                                                                                    </div>
+
+                                                                                    <div class="modal-footer">
+                                                                                        <!--点击选择文件-->
+                                                                                        <input type="file"
+                                                                                               id="file"
+                                                                                               name="file"
+                                                                                               style="display: none">
+
+                                                                                        <button th:if="${session.loginUser.teacherStatus} !=2"
+                                                                                                type="button"
+                                                                                                class="btn btn-default"
+                                                                                                onclick="$('#file').click();">
+                                                                                            浏览
+                                                                                        </button>
+                                                                                        <button th:if="${session.loginUser.teacherStatus} !=2"
+                                                                                                class="btn btn-default"
+                                                                                                id="showFile">
+                                                                                            上传
+                                                                                        </button>
+
+
+                                                                                        <button th:if="${session.loginUser.teacherStatus} ==2"
+                                                                                                type="button"
+                                                                                                class="btn btn-default"
+                                                                                                onclick="jinzhidinaji()">
+                                                                                            浏览
+                                                                                        </button>
+                                                                                        <button th:if="${session.loginUser.teacherStatus} ==2"
+                                                                                                class="btn btn-default"
+                                                                                                onclick="jinzhidinaji()">
+                                                                                            上传
+                                                                                        </button>
+
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div class="modal-body text-center"
+                                                                                     id="yincang">
+                                                                                    <H1 th:if="${session.loginUser.teacherStatus} ==2">
+                                                                                        审核中</H1>
+                                                                                    <H1 th:if="${session.loginUser.teacherStatus} ==1">
+                                                                                        审核已通过</H1>
+                                                                                    <H1 th:if="${session.loginUser.teacherStatus} ==3">
+                                                                                        请上传照片进行审核</H1>
+                                                                                </div>
+
+
+                                                                            </div>
+
+                                                                        </div>
+
+
+                                                                    </div>
 
 
                                                                 </td>
@@ -585,8 +663,6 @@
 
 <!--修改密码model框-->
 <span th:replace="Model/PasswordModification.html :: xiugai_teacher"></span>
-
-
 
 
 <script src="jquery.js"></script>

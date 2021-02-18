@@ -1,63 +1,89 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>预览头像</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        /*预览图片大小*/
-        #myImg img {
-            width: 250px;
-            height: 250px;
-        }
-    </style>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
 </head>
-
 <body>
+<table>
+    <thead>
+    <tr>
+        <td>
+            <input type="checkbox" name="checkall" onclick="selectAll(this.checked)"/>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <input type="checkbox" name="check"/>x1
+        </td>
+        <td>
+            <div>
+                x11
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="check"/>x2
+        </td>
+        <td>
+            <div>
+                x22
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="check"/>x3
+        </td>
+        <td>
+            <div>
+                x33
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button id="btnDelSpell">x</button>
 
+<script>
+    function selectAll(selectStatus) {//传入参数（全选框的选中状态）
+        //根据name属性获取到单选框的input，使用each方法循环设置所有单选框的选中状态
+        if (selectStatus) {
+            $("input[name='check']").each(function (i, n) {
+                n.checked = true;
+            });
+        } else {
+            $("input[name='check']").each(function (i, n) {
+                n.checked = false;
+            });
+        }
+    }
 
-
-
-<div class="modal-dialog">
-    <div class="modal-content">
-
-        <div class="modal-body text-center">
-            <!-- -text-cente  bootstrap子元素居中--->
-            <span id="myImg">
-                   <!--预览图片位置，默认图片-->
-                    <img src="./img/notlogin.jpg" class="img-circle">
-                </span>
-
-        </div>
-        <div class="modal-footer">
-            <!--点击选择文件-->
-            <input type="file" id="myFile" name="myFile" style="display: none" >
-
-            <button type="button" class="btn btn-default" onclick="$('#myFile').click();">浏览</button>
-
-
-        </div>
-    </div>
-</div>
-
-
-</body>
-
-
-<script type="text/javascript">
-
-    //第二种实现--------------------------------------------------------------------------------------------
-
-    //  JQ 预览
-    $("#myFile").change(function () {//上传文件表单
-        var file = this.files[0];  // 获取input上传的图片数据;
-        var url = window.URL.createObjectURL(file);  // 得到file对象路径，可当成普通的文件路径一样使用，赋值给src;
-        $("#myImg").html("<img src='" + url + "' class='img-circle'/>");
-
-
+    $("#btnDelSpell").click(function () {
+        var checkLength = $("input:checkbox[name='check']:checked").length;
+        if (checkLength == 0) {
+            alert("请至少选择一条咒语！");
+            return;
+        }
+        $("input[type='checkbox']").each(function () { //遍历checkbox的选择状态
+            if ($(this).prop("checked")) { //如果值为checked表明选中了，
+                if (($(this).attr("name")) == ("check")) {//且name值为check
+                    alert($(this).closest('tr').find('td').eq(1).text() + "   " + $(this).attr("name")); //获取eq为1的那一列数据
+                }
+            }
+        });
     });
+
 
 </script>
 
+</body>
 </html>
+

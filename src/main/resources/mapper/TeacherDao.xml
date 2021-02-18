@@ -21,11 +21,10 @@
     <!--学生注册，添加一条信息-->
     <insert id="register_teacher" keyProperty="teacherId" useGeneratedKeys="true">
         insert
-        ignore into graduation.teacher(  teacher_email, teacher_password)
-    values (
-        #{teacherEmail},
-        #{teacherPassword}
-        )
+            ignore
+        into graduation.teacher(teacher_email, teacher_password)
+        values (#{teacherEmail},
+                #{teacherPassword})
     </insert>
 
     <!--根据email，password查询单个==实现登录功能-->
@@ -39,7 +38,8 @@
                school,
                subject,
                title,
-               teacherStatus
+               teacherStatus,
+               photo
         from graduation.teacher
         where teacher_email = #{teacherEmail}
           and teacher_password = #{teacherPassword}
@@ -89,7 +89,8 @@
                school,
                subject,
                title
-        from graduation.teacher limit #{offset}, #{limit}
+        from graduation.teacher
+        limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
@@ -161,6 +162,16 @@
             <if test="title != null and title != ''">
                 title = #{title},
             </if>
+
+            <if test="teacherStatus != null and teacherStatus != ''">
+                teacherstatus = #{teacherStatus},
+            </if>
+
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+
+
         </set>
         where teacher_email = #{teacherEmail}
     </update>

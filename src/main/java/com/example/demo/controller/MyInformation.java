@@ -135,9 +135,12 @@ public class MyInformation {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         User user = (User) request.getSession().getAttribute("shenfen");
 
+
+        System.out.println("---addImg--- ");
         System.out.println("---获得当前Session的账号密码---begin");
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
+        System.out.println(user.getShenfen());
         System.out.println("---获得当前Session的账号密码---end");
 
 
@@ -180,9 +183,12 @@ public class MyInformation {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         User user = (User) request.getSession().getAttribute("shenfen");
 
+
+        System.out.println("---getImgById--- ");
         System.out.println("---获得当前Session的账号密码---begin");
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
+        System.out.println(user.getShenfen());
         System.out.println("---获得当前Session的账号密码---end");
 
         try {
@@ -194,8 +200,101 @@ public class MyInformation {
             student = students.get(0);
 
 
-
             byte[] data = student.getPhoto();
+            response.setContentType("image/jpeg");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream outputSream = response.getOutputStream();
+            outputSream.write(data);
+            outputSream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    /***
+     * 教师端
+     * 上传职工证
+     *
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/addImg_tea", method = RequestMethod.POST)
+    @ResponseBody
+    public String addImg_tea(@RequestParam("file") MultipartFile file) {
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println("---addImg_tea--- ");
+        System.out.println("---获得当前Session的账号密码---begin");
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println(user.getShenfen());
+        System.out.println("---获得当前Session的账号密码---end");
+
+
+        Teacher teacher = new Teacher();
+        teacher.setTeacherEmail(user.getEmail());
+        teacher.setTeacherStatus("2");
+
+
+        try {
+            byte[] data;
+            data = file.getBytes();
+
+
+            teacher.setPhoto(data);
+            //插入数据库
+            int tag = teacherService.update(teacher);
+            if (tag == 1) {
+                return "1";
+            } else {
+                return "0";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "0";
+    }
+
+
+    /**
+     * 教师端
+     * 显示职工证
+     *
+     * @param response
+     */
+    @RequestMapping(value = "/getImgById_tea", method = RequestMethod.GET)
+    public void getImgById_tea(HttpServletResponse response) {
+
+        //刷新
+        //获得当前Session的账号密码
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        User user = (User) request.getSession().getAttribute("shenfen");
+
+        System.out.println("---getImgById_tea---");
+        System.out.println("---获得当前Session的账号密码---begin");
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println(user.getShenfen());
+        System.out.println("---获得当前Session的账号密码---end");
+
+        try {
+            List<Teacher> teachers = teacherService.select_teacher_login(user.getEmail(), user.getPassword());
+
+
+            Teacher teacher = new Teacher();
+
+            teacher = teachers.get(0);
+
+
+            byte[] data = teacher.getPhoto();
             response.setContentType("image/jpeg");
             response.setCharacterEncoding("UTF-8");
             OutputStream outputSream = response.getOutputStream();

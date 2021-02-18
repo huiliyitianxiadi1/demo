@@ -1,8 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.R;
 import com.example.demo.entity.Student;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Student)表服务接口
@@ -42,6 +45,25 @@ public interface StudentService {
      * @return
      */
     public Student student_queryByEmail(String studentEmail);
+
+
+    /**
+     * 无条件查询全部
+     */
+    public List<Student> queryAll_student();
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+    R getPageUserList(Student student);
+
+
+    //-------------------------------测试部分end---------------------------//
+
+
+
+
+
     //-------------------------------分割线---------------------------//
 
     /**

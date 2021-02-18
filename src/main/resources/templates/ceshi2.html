@@ -1,89 +1,501 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="DatatablesDemo/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="DatatablesDemo/DataTables/DataTables-1.10.18/css/dataTables.bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="DatatablesDemo/css/daterangepicker-bs3.css"/>
+    <script type="text/javascript" src="DatatablesDemo/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript"
+            src="DatatablesDemo/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"
+            src="DatatablesDemo/DataTables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="DatatablesDemo/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="DatatablesDemo/js/moment.js"></script>
+    <script type="text/javascript" src="DatatablesDemo/js/daterangepicker.js"></script>
 
 
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <td>
-            <input type="checkbox" name="checkall" onclick="selectAll(this.checked)"/>
-        </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <input type="checkbox" name="check"/>x1
-        </td>
-        <td>
-            <div>
-                x11
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="checkbox" name="check"/>x2
-        </td>
-        <td>
-            <div>
-                x22
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="checkbox" name="check"/>x3
-        </td>
-        <td>
-            <div>
-                x33
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<button id="btnDelSpell">x</button>
+<div class="row" style="margin-top:20px;">
+    <div class="col-lg-12 col-lg-offset-1">
+        <form class="form-inline">
 
-<script>
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentName" placeholder="用户名">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentEmail" placeholder="用户地址">
+            </div>
+
+            <div class="form-group">
+                <select id="StudentPassword" class="form-control">
+                    <option value="-1">状态</option>
+                    <option value="1">通过</option>
+                    <option value="0">驳回</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select id="StudentNumber" class="form-control">
+                    <option value="-1">角色</option>
+                    <option value="1">普通用户</option>
+                    <option value="2">管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <div class="input-prepend input-group">
+                        <span class="add-on input-group-addon"><i
+                                class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                        <input type="text" readonly style="width: 200px" name="reservation" id="StudentSex"
+                               class="form-control" value=""/>
+                    </div>
+                </div>
+            </div>
+
+
+            <button type=button class="btn btn-success" id="searchButton"> 条 件 查 询</button>
+            <button type=button class="btn btn-warning" id="clearSearchButton"> 清 空 条 件</button>
+            <button type=button class="btn btn-primary" id="addButton">添加用户</button>
+        </form>
+
+
+    </div>
+
+    <div class="table-responsive col-lg-10 col-lg-offset-1">
+        <table id="datatable-buttons" class="table table-bordered table-hover">
+
+            <thead>
+            <tr>
+                <th width="75px"><input id="cb0" type="checkbox" onclick="selectAll(this.checked)">全选</th>
+                <th>序号</th>
+                <th>编号ID</th>
+                <th>名字</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>学号</th>
+                <th>性别</th>
+                <th>大学</th>
+                <th>手机号</th>
+                <th>状态</th>
+                <th>学生证照片</th>
+                <th>操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 添加模态框 -->
+<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="addUserName" placeholder="用户名">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="addUserAddr" placeholder="用户地址">
+                </div>
+
+                <div class="form-group">
+                    <select id="addStatus" class="form-control">
+                        <option value="-1">请选择状态</option>
+                        <option value="1">通过</option>
+                        <option value="0">驳回</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select id="addRole" class="form-control">
+                        <option value="-1">请选择角色</option>
+                        <option value="1">普通用户</option>
+                        <option value="2">管理员</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addUser()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改模态框 -->
+<div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">修改用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="updateUserName" placeholder="用户名">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="updateUserAddr" placeholder="用户地址">
+                </div>
+
+                <div class="form-group">
+                    <select id="updateStatus" class="form-control">
+                        <option value="-1">请选择状态</option>
+                        <option value="1">通过</option>
+                        <option value="0">驳回</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select id="updateRole" class="form-control">
+                        <option value="-1">请选择角色</option>
+                        <option value="1">普通用户</option>
+                        <option value="2">管理员</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateUser()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var datatables_options = {
+        language: {
+            "lengthMenu": '每页显示<select class="form-control input-xsmall">' + '<option value="10">10</option>'
+                + '<option value="20">20</option>'
+                + '<option value="30">30</option>'
+                + '<option value="40">40</option>'
+                + '<option value="50">50</option>' + '</select>条',
+            "paginate": {
+                "first": "首页",
+                "last": "尾页",
+                "previous": "上一页",
+                "next": "下一页"
+            },
+            "processing": "加载中...",  //DataTables载入数据时，是否显示‘进度’提示
+            "emptyTable": "暂无数据",
+            "info": "共 _PAGES_ 页  _TOTAL_ 条数据  ",
+            "infoEmpty": "暂无数据",
+            "emptyTable": "暂无要处理的数据...",  //表格中无数据
+            "search": "搜索:",
+            "infoFiltered": " —— 从  _MAX_ 条数据中筛选",
+            "zeroRecords": "没有找到记录"
+
+        },
+        ordering: false,//排序显示控制
+        searching: false,
+        paging: true,//开启分页
+        processing: true,
+        serverSide: true,//是否开启服务器模式
+
+        ajax: {
+            url: '/student/list',
+            type: 'post',
+            cache: false,
+            data: function (d) {
+                var user = {};
+                //  user.userId = $("#StudentId").val();
+                // user.userName = $("#StudentName").val();
+                //user.userEmail = $("#StudentEmail").val();
+                //user.userPassword = $("#StudentPassword").val();
+                //user.userNumber = $("#StudentNumber").val();
+
+                //user.userSex = $("#StudentSex").val();
+                //   user.userSchool = $("#studentSchool").val();
+                //  user.userPhone = $("#studentPhone").val();
+
+
+                //   user.userStatus = $("#studentStatus").val();
+
+
+                user.pageSize = d.length;
+                user.draw = d.draw;
+                user.offset = d.start;
+                return user;
+            },
+
+            dataFilter: function (json) {
+
+                json = JSON.parse(json);
+
+                var returnData = {};
+                returnData.draw = json.draw;
+                returnData.recordsTotal = json.recordsTotal;  //返回数据全部记录
+                returnData.recordsFiltered = json.recordsFiltered;  //后台不实现过滤功能，每次查询均视作全部结果
+                returnData.data = json.data;  //返回的数据列表
+                return JSON.stringify(returnData); //这几个参数都是datatable需要的，必须要
+
+
+            }
+        },
+
+        columns: [
+
+            {
+                "orderable": false,
+                "data": null,
+                "sWidth": "75px",
+                'sClass': "text-center",
+                "render": function (data, type, row, meta) {
+                    var id = row.studentId;
+                    var html = "";
+                    html += "<input type=\"checkbox\" name=\"cb\" id=cb" + id + " '  > "
+                    return html;
+                }
+            },
+            {
+                sTitle: '序号',
+                data: null,
+                className: 'text-center whiteSpace',
+                render: function (data, type, row, meta) {
+                    return meta.row + 1 +
+                        meta.settings._iDisplayStart;
+                }
+            },
+            {
+                "data": "studentId",
+                "name": "id",
+                "orderable": true,
+                "sDefaultContent": "",  //默认空字符串
+                "sClass": "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentName",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentEmail",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentPassword",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentNumber",
+                'sClass': "text-center"
+            },
+
+            {
+                "orderable": false,
+                "data": "studentSex",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentSchool",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": true,
+                "data": "studentPhone",
+                'sClass': "text-center"
+            },
+            {
+                "orderable": false,
+                "data": "studentStatus",
+                'sClass': "text-center",
+                'render': function (data, type, row, meta) {
+                    var status = row.studentStatus
+                    var str = ''
+                    if (status === '1') {
+                        str = '已确认'
+                    }
+                    if (status === '2') {
+                        str = '待确认'
+                    }
+                    if (status === '3') {
+                        str = '未确认'
+                    }
+                    return str
+
+                }
+            },
+
+            {
+                "orderable": false,
+                "targets": 2,//操作按钮目标列
+                "data": null,
+                "sWidth": "250px",
+
+                "render": function (data, type, row, meta) {
+                    var id = row.studentId;
+                    var html = "";
+
+
+                    if (row.photo != null) {
+                        html += "<img  src='/getImgByIdAdmin?id=" + id + " '  > "
+                    } else {
+                        html = "空";
+                    }
+                    return html;
+                }
+            },
+
+
+            {
+                "orderable": false,
+                "targets": 2,//操作按钮目标列
+                "data": null,
+                "sWidth": "250px",
+                'sClass': "text-center",
+                "render": function (data, type, row, meta) {
+                    var id = '"' + row.userId + '"';
+                    var html = "";
+                    html += "<button onclick='edit(" + id + ")'  style='margin-right:10px;' class='up btn btn-warning '>编辑</button>"
+                    html += "<a href='javascript:void(0);'   onclick='deleteData(" + id + ")'  class='down btn btn-danger '> 删除</a>"
+                    return html;
+                }
+            }
+
+        ],
+
+
+    };
+
+
+    var firstTable;
+    firstTable = $('#datatable-buttons').DataTable(datatables_options);
+
+    //添加点击事件
+    //点击行即可触发全选按钮
+    $('#datatable-buttons').on('click', 'tr', function () {
+        var data = firstTable.row(this).data(); //获取单击那一行的数据
+        var hkid = +data.studentId;
+
+        if ($("#cb" + hkid).prop("checked") == true) { //如果值为checked表明选中了，
+            //选中了
+            $("#cb" + hkid).attr("checked", false);
+        } else {
+            //没选中
+            $("#cb" + hkid).attr("checked", true);
+
+        }
+
+    });
+
+
+    /*
+        $("#addButton").click(function () {
+            $("#addModal").modal()
+        })
+
+
+        function clearAddData() {
+            $("#addUserName").val('')
+            $("#addUserAddr").val('')
+            $("#addStatus").val(-1)
+            $("#addRole").val(-1)
+        }
+    */
+
+    /*
+    //全局用户id
+    var userId;
+
+    function edit(id) {
+        $.ajax({
+            type: "get",
+            url: "/student/get",
+            async: true,
+            data: {
+                userId: id
+            },
+            success: function (res) {
+                //设置回显用户数据
+                userId = res.userId //赋值给全局id，方便修改后使用
+                /*  $("#updateuserName").val(res.userName)
+                  $("#updateuserEmail").val(res.userEmail)
+                  $("#updateuserPassword").val(res.userPassword)
+                  $("#updateuserNumber").val(res.userNumber)
+
+                  $("#updateuserSex").val(res.userSex)
+                  $("#updateuserSchool").val(res.userSchool)
+                  $("#updateuserPhone").val(res.userPhone)
+                  $("#updateuserStatus").val(res.userStatus)
+
+                $("#updateModal").modal()
+            }
+        });
+    }
+ */
+    /*
+        $("#searchButton").click(function () {
+            firstTable.ajax.reload(null, false);
+            firstTable.draw(false);
+
+        });
+
+        $("#clearSearchButton").click(function () {
+            $("#userName").val('');
+            $("#userAddr").val('');
+            $("#status").val(-1);
+            $("#roleId").val(-1);
+            $("#reservation").val('')
+        });
+
+
+    */
+
+    //点击行触发选中单选按钮
+    function dianji(hkid) {
+        //  alert($("#cb" + hkid).checked )
+
+        if ($("#cb" + hkid).prop("checked") == true) { //如果值为checked表明选中了，
+            //选中了
+            $("#cb" + hkid).attr("checked", false);
+        } else {
+            //没选中
+            $("#cb" + hkid).attr("checked", true);
+
+        }
+    }
+
+    // 全选控制
     function selectAll(selectStatus) {//传入参数（全选框的选中状态）
         //根据name属性获取到单选框的input，使用each方法循环设置所有单选框的选中状态
         if (selectStatus) {
-            $("input[name='check']").each(function (i, n) {
-                n.checked = true;
+            $("input[name='cb']").each(function (i, n) {
+
+                $(this).attr("checked", true);
+
             });
         } else {
-            $("input[name='check']").each(function (i, n) {
-                n.checked = false;
+            $("input[name='cb']").each(function (i, n) {
+                $(this).attr("checked", false);
+
             });
         }
     }
 
-    $("#btnDelSpell").click(function () {
-        var checkLength = $("input:checkbox[name='check']:checked").length;
-        if (checkLength == 0) {
-            alert("请至少选择一条咒语！");
-            return;
-        }
-        $("input[type='checkbox']").each(function () { //遍历checkbox的选择状态
-            if ($(this).prop("checked")) { //如果值为checked表明选中了，
-                if (($(this).attr("name")) == ("check")) {//且name值为check
-                    alert($(this).closest('tr').find('td').eq(1).text() + "   " + $(this).attr("name")); //获取eq为1的那一列数据
-                }
-            }
-        });
-    });
-
 
 </script>
 
+
 </body>
 </html>
-

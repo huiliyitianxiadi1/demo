@@ -4,8 +4,10 @@ import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Student)表数据库访问层
@@ -43,6 +45,42 @@ public interface StudentDao {
      * @return
      */
     Student student_queryByEmail(String studentEmail);
+
+
+    /**
+     * 无条件查询全部
+     */
+    List<Student> selectALL();
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+    //查询分页数据
+
+    /**
+     *
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<Student> getUserList(RowBounds rowBounds, Map<String, Object> map);
+
+    //查询数据总条数
+
+    /**
+     *
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCount(RowBounds rowBounds, Map<String, Object> map);
+
+
+    //-------------------------------测试部分end---------------------------//
+
+
+
+
 
 
     //-------------------------------分割线---------------------------//

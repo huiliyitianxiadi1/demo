@@ -47,4 +47,11 @@ public class ceshi {
         return "ceshi2";
     }
 
+
+    @RequestMapping({"/ceshi3.html", "/ceshi3"})//
+    public String ceshi3() {
+        return "ceshi3";
+    }
+
+
 }

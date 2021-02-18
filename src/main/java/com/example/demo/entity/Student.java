@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @since 2021-01-27 18:48:52
  */
 @Data
-public class Student {
+public class Student extends Page {
 
     /**
      * 学生-id编号
@@ -51,5 +51,5 @@ public class Student {
     private String studentStatus;
 
 
-    private byte[]  photo;
+    private byte[] photo;
 }

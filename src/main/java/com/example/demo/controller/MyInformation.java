@@ -211,8 +211,29 @@ public class MyInformation {
         }
     }
 
+    /**
+     * 管理员端
+     * 显示学生证
+     */
+    @RequestMapping(value = "/getImgByIdAdmin", method = RequestMethod.GET)
+    public void getImgByIdAdmin(HttpServletResponse response, Integer id) {
 
 
+        System.out.println("getImgByIdAdmin"+id);
+
+        try {
+            Student student = studentService.queryById(id);
+
+            byte[] data = student.getPhoto();
+            response.setContentType("image/jpeg");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream outputSream = response.getOutputStream();
+            outputSream.write(data);
+            outputSream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /***

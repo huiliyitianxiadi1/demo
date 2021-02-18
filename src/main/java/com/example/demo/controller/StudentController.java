@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+
+import com.example.demo.entity.R;
 import com.example.demo.entity.Student;
 
 import com.example.demo.entity.User;
@@ -171,7 +173,40 @@ public class StudentController {
     }
 
 
-    //-----------------------------------------------分界线
+    /**
+     * 无条件查询全部
+     */
+    @ResponseBody
+    @GetMapping("queryAll_student")
+    public List<Student> queryAll_student() {
+        return this.studentService.queryAll_student();
+    }
+
+
+    //-----------------------------------------------分界线--------------------------------------------
+
+
+    //==============================测试部分begin==============================-->
+
+
+    @PostMapping("/list")
+    public R list(Student student) {
+
+
+        System.out.println("student/list测试:" + student);
+
+
+        R r = studentService.getPageUserList(student);
+        return r;
+    }
+
+
+    @GetMapping("/get")
+    public Student getById(Integer userId) {
+        return studentService.queryById(userId);
+    }
+    //--==============================分界线==============================-->
+
 
     /**
      * 通过主键查询单条数据

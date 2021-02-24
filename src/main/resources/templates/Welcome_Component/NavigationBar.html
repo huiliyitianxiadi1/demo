@@ -182,10 +182,13 @@
                     </a>
 
 
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!--我的信息，教师-->
+                    <a href="AdminSpace.html" class="dropdown-item notify-item"
+                       th:if="${session.shenfen.Shenfen}  eq admin">
                         <i class="mdi mdi-account-circle mr-1"></i>
-                        <span>修改密码</span>
+                        <span>(admin)管理员空间</span>
                     </a>
+
 
                     <a href="javascript:void(0);" class="dropdown-item notify-item" data-target="#top-modal"
                        data-toggle="modal">

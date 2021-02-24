@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="row"  th:fragment="student_table" >
+    <div class="card-body">
+        <form class="form-inline">
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentName" placeholder="名字">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentEmail" placeholder="账号">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentNumber" placeholder="学号">
+            </div>
+
+
+            <div class="form-group">
+                <select id="StudentSex" class="form-control">
+                    <option value="-1">性别</option>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select id="StudentSchool" class="form-control">
+                    <option value="-1">大学</option>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="StudentPhone" placeholder="手机号">
+            </div>
+
+            <div class="form-group">
+                <select id="StudentStatus" class="form-control">
+                    <option value="-1">状态</option>
+                    <option value="1">待确认</option>
+                    <option value="2">已确认</option>
+                    <option value="3">未上传</option>
+
+                </select>
+            </div>
+
+
+            <button type=button class="btn btn-success" id="searchButton"> 条 件 查 询</button>
+            <button type=button class="btn btn-warning" id="clearSearchButton"> 清 空 条 件</button>
+            <button type=button class="btn btn-primary" id="addButton">添加用户</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <button type=button class="btn btn-success" id="oneOk">一键通过</button>
+        <button type=button class="btn btn-success" id="oneNo">一键否决</button>
+
+    </div>
+    <div class="card-body">
+        <table id="datatable_buttons"  class="table table-hover table-centered mb-0">
+
+            <thead>
+            <tr>
+                <th width="75px"><input id="all" type="checkbox">全选</th>
+                <th>序号</th>
+                <th>编号ID</th>
+                <th>名字</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>学号</th>
+                <th width="50px">性别</th>
+                <th>大学</th>
+                <th>手机号</th>
+                <th>状态</th>
+                <th>学生证照片</th>
+                <th width="60px">操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

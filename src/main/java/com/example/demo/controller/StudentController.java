@@ -149,13 +149,18 @@ public class StudentController {
 
         student.setStudentEmail(user.getEmail());
 
-
         System.out.println(student);
-
-
         return this.studentService.update(student);
-
     }
+
+    @ResponseBody
+    @PostMapping("studentUpdate")
+    public int studentUpdate(Student student) {
+
+        System.out.println("studentUpdate:" + student);
+        return this.studentService.update(student);
+    }
+
 
 
     /***API
@@ -203,6 +208,8 @@ public class StudentController {
 
     @GetMapping("/get")
     public Student getById(Integer userId) {
+
+        System.out.println("student/getById:" + userId);
         return studentService.queryById(userId);
     }
     //--==============================分界线==============================-->
@@ -219,5 +226,16 @@ public class StudentController {
         System.out.println(id);
         return this.studentService.queryById(id);
     }
+
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("del")
+    public Boolean del(Integer id) {
+        System.out.println(id);
+        return this.studentService.deleteById(id);
+    }
+
 
 }

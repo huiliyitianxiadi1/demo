@@ -110,32 +110,29 @@
         from graduation.student
         where 1=1
 
-        <if test="studentId != null">
-            and student_id = #{studentId}
-        </if>
         <if test="studentName != null and studentName != ''">
-            and student_name = #{studentName}
+            and INSTR( student_name , #{studentName} )&gt; 0
         </if>
         <if test="studentEmail != null and studentEmail != ''">
-            and student_email = #{studentEmail}
+            and INSTR(student_email , #{studentEmail}) &gt; 0
         </if>
         <if test="studentPassword != null and studentPassword != ''">
-            and student_password = #{studentPassword}
+            and INSTR(student_password , #{studentPassword}) &gt; 0
         </if>
         <if test="studentNumber != null and studentNumber != ''">
-            and student_number = #{studentNumber}
+            and INSTR(student_number , #{studentNumber} )&gt; 0
         </if>
         <if test="studentSex != null and studentSex != ''">
             and student_sex = #{studentSex}
         </if>
         <if test="studentSchool != null and studentSchool != ''">
-            and student_school = #{studentSchool}
+            and INSTR(student_school , #{studentSchool} )&gt; 0
         </if>
         <if test="studentPhone != null and studentPhone != ''">
-            and student_phone = #{studentPhone}
+            and INSTR(student_phone ,#{studentPhone} )&gt; 0
         </if>
         <if test="studentStatus != null and studentStatus != ''">
-            and studentStatus = #{studentStatus}
+            and  studentstatus= #{studentStatus}
         </if>
 
     </select>
@@ -159,7 +156,7 @@
             and INSTR(student_number , #{studentNumber} )&gt; 0
         </if>
         <if test="studentSex != null and studentSex != ''">
-            and INSTR(student_sex , #{studentSex} )&gt; 0
+            and student_sex = #{studentSex}
         </if>
         <if test="studentSchool != null and studentSchool != ''">
             and INSTR(student_school , #{studentSchool} )&gt; 0
@@ -168,7 +165,7 @@
             and INSTR(student_phone ,#{studentPhone} )&gt; 0
         </if>
         <if test="studentStatus != null and studentStatus != ''">
-            and INSTR(studentStatus , #{studentStatus}) &gt; 0
+            and studentStatus= #{studentStatus})
         </if>
 
 

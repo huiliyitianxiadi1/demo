@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+
+<!--点击修改信息，表单变为可编辑，按钮变为提交按钮-->
+
+
+<body>
+
+<!--model-->
+
+
+<div class="wrapper">
+
+    <!--左侧栏==-->
+    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_admin"></div>
+
+
+    <div class="content-page">
+        <div class="content">
+
+
+            <!--导航1(个人)-->
+            <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
+
+
+
+        </div>
+    </div>
+
+    <!--底部信息-->
+    <div th:replace="Page_Component/Footer_Component.html ::footer_component_welcome"></div>
+
+
+</div>
+
+<!--退出model框-->
+<span th:replace="Model/Logout.html :: LogOutModel"></span>
+
+
+<script src="jquery.js"></script>
+<script src="assets/js/app.min.js"></script>
+
+
+<script src="jquerysession.js"></script>
+
+
+<script src="student_Information.js"></script>
+
+</body>
+</html>

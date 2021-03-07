@@ -440,15 +440,56 @@ function OnUpdate(id) {
             $("#updatePassword").val(res.studentPassword)
             $("#updateSchool").val(res.studentSchool)
             $("#updatePhone").val(res.studentPhone)
+
             $("#updateStatus").val(res.studentStatus)
 
-            $("#Upphoto").html("<img src='/getImgByIdAdmin?id=" + id + "'></img>")
+            if (res.photo != null) {
 
+                $("#Upphoto").html("<img src='/getImgByIdAdmin?id=" + id + "'></img>")
+
+            } else {
+                $("#Upphoto").html("空")
+            }
             $("#UpdataModal").modal()
         }
     });
 
 }
+
+
+function save_student_smoke() {
+
+    //获得model对应的id值
+    var ID = $("#updateID").val();
+
+    var msg = $("#form_update_student").serialize();
+
+
+    $.ajax({
+        cache: false,//每次读取的是最新的数据。
+        type: "POST",
+        dataType: "json",//预期服务器返回的数据类型
+        url: "/student/studentUpdate",
+        data: msg,    //获取模态对话框的全部输入数据
+        async: true,  //必须要为false,必须必须//同步
+        clearForm: true,        // 成功提交后，清除所有的表单元素的值.
+
+        success: function (data) {
+
+            if (data == '1') {
+                alert("修改成功" + data);
+
+            } else {
+                alert("失败" + data);
+                //待补充
+            }
+        },
+        error: function (e) {
+            alert("error");
+        }
+    });
+}
+
 
 //唤起删除model
 function deleteData(id) {
@@ -511,7 +552,9 @@ $("input[name='cb']").on('click', function () {
     $("#all").prop("checked", $subs.length == $subs.filter(":checked").length ? true : false);
 });
 
+
 //一键同意
+//未写
 $("#oneOk").click(function () {
     var checkLength = $("input:checkbox[name='cb']:checked").length;
     if (checkLength == 0) {
@@ -521,8 +564,13 @@ $("#oneOk").click(function () {
     $("input[type='checkbox']").each(function () { //遍历checkbox的选择状态
         if ($(this).prop("checked")) { //如果值为checked表明选中了，
             if (($(this).attr("name")) == ("cb")) {//且name值为check
-                var id=$(this).closest('tr').find('td').eq(2).text();
-                alert(  id); //获取eq为1的那一列数据
+                var id = $(this).closest('tr').find('td').eq(2).text();
+                alert(id); //获取eq为1的那一列数据
+
+
+
+
+
 
             }
         }
@@ -531,6 +579,8 @@ $("#oneOk").click(function () {
 
 
 //一键否决
+//未写
+
 $("#oneNo").click(function () {
     var checkLength = $("input:checkbox[name='cb']:checked").length;
     if (checkLength == 0) {
@@ -540,10 +590,37 @@ $("#oneNo").click(function () {
     $("input[type='checkbox']").each(function () { //遍历checkbox的选择状态
         if ($(this).prop("checked")) { //如果值为checked表明选中了，
             if (($(this).attr("name")) == ("cb")) {//且name值为check
-                var id=$(this).closest('tr').find('td').eq(2).text();
-                alert(  id); //获取eq为1的那一列数据
+                var id = $(this).closest('tr').find('td').eq(2).text();
+                alert(id); //获取eq为1的那一列数据
 
             }
         }
     });
 });
+
+
+/*
+  $.ajax({
+        cache: false,//每次读取的是最新的数据。
+        type: "POST",
+        dataType: "json",//预期服务器返回的数据类型
+        url: "/student/studentUpdate",
+        data: msg,    //获取模态对话框的全部输入数据
+        async: true,  //必须要为false,必须必须//同步
+        clearForm: true,        // 成功提交后，清除所有的表单元素的值.
+
+        success: function (data) {
+
+            if (data == '1') {
+                alert("修改成功" + data);
+
+            } else {
+                alert("失败" + data);
+                //待补充
+            }
+        },
+        error: function (e) {
+            alert("error");
+        }
+    });
+* */

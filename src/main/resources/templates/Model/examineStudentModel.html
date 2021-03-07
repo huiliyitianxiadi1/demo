@@ -187,18 +187,20 @@
 
                         <div class="modal-body">
                             ID:
-                            <input class="form-control"
-                                   name="id"
-                                   id="updateID"
-                                   autocomplete="off"
-                                   type="text"
-                                   data-provide="typeahead">
+                            <input
+                                    onfocus="this.blur();"
+                                    class="form-control"
+                                    name="studentId"
+                                    id="updateID"
+                                    autocomplete="off"
+                                    type="text"
+                                    data-provide="typeahead">
                         </div>
 
                         <div class="modal-body">
                             学号:
                             <input class="form-control"
-                                   name="updateNumber"
+                                   name="studentNumber"
                                    id="updateNumber"
                                    autocomplete="off"
                                    type="text"
@@ -207,7 +209,7 @@
                         <div class="modal-body">
                             名字:
                             <input class="form-control"
-                                   name="updateName"
+                                   name="studentName"
                                    id="updateName"
                                    autocomplete="off"
                                    type="text"
@@ -216,7 +218,7 @@
                         <div class="modal-body">
                             账号:
                             <input class="form-control"
-                                   name="updateEmail"
+                                   name="studentEmail"
                                    id="updateEmail"
                                    autocomplete="off"
                                    type="text"
@@ -226,7 +228,7 @@
                         <div class="modal-body">
                             密码:
                             <input class="form-control"
-                                   name="updatePassword"
+                                   name="studentPassword"
                                    id="updatePassword"
                                    autocomplete="off"
                                    type="text"
@@ -235,7 +237,7 @@
                         <div class="modal-body">
                             大学:
                             <input class="form-control"
-                                   name="updateSchool"
+                                   name="studentSchool"
                                    id="updateSchool"
                                    autocomplete="off"
                                    type="text"
@@ -247,19 +249,19 @@
 
                         <div class="modal-body">
                             性别:
-                            <select name="updateSex"
+                            <select name="studentSex"
                                     id="updateSex"
                                     class="form-control">
                                 <option>未知</option>
-                                <option>男</option>
-                                <option>女</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
                             </select>
 
                         </div>
                         <div class="modal-body">
                             手机号:
                             <input class="form-control"
-                                   name="updatePhone"
+                                   name="studentPhone"
                                    id="updatePhone"
                                    autocomplete="off"
                                    type="text"
@@ -269,13 +271,18 @@
 
                         <div class="modal-body">
                             状态:
-                            <input class="form-control"
-                                   name="updateStatus"
-                                   id="updateStatus"
-                                   autocomplete="off"
-                                   type="text"
-                                   data-provide="typeahead">
+                            <select name="studentStatus"
+                                    id="updateStatus"
+                                    class="form-control">
+                                <option value="-1">空</option>
+                                <option value="1">已确认</option>
+                                <option value="2">待确认</option>
+                                <option value="3">为空</option>
+
+                            </select>
                         </div>
+
+
 
 
                         <div class="modal-body">
@@ -304,7 +311,7 @@
     </div><!-- /.modal -->
 </div>
 
-<!--退出model-->
+<!--删除model-->
 <div id="DelModel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" th:fragment="DelModel">
     <div class="modal-dialog modal-top">
         <div class="modal-content">

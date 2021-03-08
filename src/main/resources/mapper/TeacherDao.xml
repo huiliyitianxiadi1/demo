@@ -29,17 +29,7 @@
 
     <!--根据email，password查询单个==实现登录功能-->
     <select id="select_teacher_login" resultMap="TeacherMap">
-        select teacher_id,
-               teacher_name,
-               teacher_email,
-               teacher_password,
-               teacher_number,
-               teacher_sex,
-               school,
-               subject,
-               title,
-               teacherStatus,
-               photo
+        select *
         from graduation.teacher
         where teacher_email = #{teacherEmail}
           and teacher_password = #{teacherPassword}
@@ -47,16 +37,7 @@
 
     <!--查询单个-->
     <select id="teacher_queryByEmail" resultMap="TeacherMap">
-        select teacher_id,
-               teacher_name,
-               teacher_email,
-               teacher_password,
-               teacher_number,
-               teacher_sex,
-               school,
-               subject,
-               title,
-               teacherStatus
+        select *
         from graduation.teacher
         where teacher_email = #{teacherEmail}
     </select>
@@ -65,15 +46,7 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="TeacherMap">
-        select teacher_id,
-               teacher_name,
-               teacher_email,
-               teacher_password,
-               teacher_number,
-               teacher_sex,
-               school,
-               subject,
-               title
+        select *
         from graduation.teacher
         where teacher_id = #{teacherId}
     </select>
@@ -182,5 +155,95 @@
         from graduation.teacher
         where teacher_id = #{teacherId}
     </delete>
+
+
+    <!--==============================测试部分begin==============================-->
+    <!-- 查询分页数据 -->
+    <!--前：数据库，后：实体类-->
+    <select id="getUserList" parameterType="com.example.demo.entity.Teacher" resultMap="TeacherMap">
+        select *
+        from graduation.teacher
+        where 1=1
+
+        <if test="teacherName != null and teacherName != ''">
+            and INSTR( teacher_name , #{teacherName} )&gt; 0
+        </if>
+        <if test="teacherEmail != null and teacherEmail != ''">
+            and INSTR(teacher_email , #{teacherEmail}) &gt; 0
+        </if>
+        <if test="teacherPassword != null and teacherPassword != ''">
+            and INSTR(teacher_password , #{teacherPassword}) &gt; 0
+        </if>
+        <if test="teacherNumber != null and teacherNumber != ''">
+            and INSTR(teacher_number , #{teacherNumber} )&gt; 0
+        </if>
+        <if test="teacherSex != null and teacherSex != ''">
+            and teacher_sex = #{teacherSex}
+        </if>
+
+        <if test="school != null and school != ''">
+            and INSTR(school ,#{school} )&gt; 0
+        </if>
+
+        <if test="subject != null and subject != ''">
+            and INSTR(subject ,#{subject} )&gt; 0
+        </if>
+
+        <if test="title != null and title != ''">
+            and INSTR(title ,#{title} )&gt; 0
+        </if>
+
+
+        <if test="teacherStatus != null and teacherStatus != ''">
+            and teacherstatus= #{teacherStatus}
+        </if>
+
+
+    </select>
+
+    <!-- 查询数据总条数 -->
+    <select id="getUserListCount" resultType="int">
+        select count(*)
+        from graduation.teacher
+        where 1=1
+
+
+        <if test="teacherName != null and teacherName != ''">
+            and INSTR( teacher_name , #{teacherName} )&gt; 0
+        </if>
+        <if test="teacherEmail != null and teacherEmail != ''">
+            and INSTR(teacher_email , #{teacherEmail}) &gt; 0
+        </if>
+        <if test="teacherPassword != null and teacherPassword != ''">
+            and INSTR(teacher_password , #{teacherPassword}) &gt; 0
+        </if>
+        <if test="teacherNumber != null and teacherNumber != ''">
+            and INSTR(teacher_number , #{teacherNumber} )&gt; 0
+        </if>
+        <if test="teacherSex != null and teacherSex != ''">
+            and teacher_sex = #{teacherSex}
+        </if>
+
+        <if test="school != null and school != ''">
+            and INSTR(school ,#{school} )&gt; 0
+        </if>
+
+        <if test="subject != null and subject != ''">
+            and INSTR(subject ,#{subject} )&gt; 0
+        </if>
+
+        <if test="title != null and title != ''">
+            and INSTR(title ,#{title} )&gt; 0
+        </if>
+
+
+        <if test="teacherStatus != null and teacherStatus != ''">
+            and teacherstatus= #{teacherStatus}
+        </if>
+
+    </select>
+
+    <!--==============================测试部分end==============================-->
+
 
 </mapper>

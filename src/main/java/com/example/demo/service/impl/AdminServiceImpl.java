@@ -29,6 +29,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public List<Admin> select_admin_login(String adminEmail, String adminPassword) {
+
         return this.adminDao.select_admin_login(adminEmail, adminPassword);
     }
 

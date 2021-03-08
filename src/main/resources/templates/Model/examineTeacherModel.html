@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 查看model模态框 -->
+<div id="selectModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     th:fragment="selectModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:800px;">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    查看信息
+                </h4>
+                <button id="guanbi_ONE"
+                        type="button" class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <form id="form_Select_tea">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="modal-body">
+                            ID:
+                            <input class="form-control"
+                                   name="teacherId"
+                                   id="selectID"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+                        <div class="modal-body">
+                            工号:
+                            <input class="form-control"
+                                   name="teacherNumber"
+                                   id="selectNumber"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            名字:
+                            <input class="form-control"
+                                   name="teacherName"
+                                   id="selectName"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            账号:
+                            <input class="form-control"
+                                   name="teacherEmail"
+                                   id="selectEmail"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+                        <div class="modal-body">
+                            密码:
+                            <input class="form-control"
+                                   name="teacherPassword"
+                                   id="selectPassword"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            所属大学:
+                            <input class="form-control"
+                                   name="school"
+                                   id="selectSchool"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+
+                        <div class="modal-body">
+                            性别:
+                            <select name="teacherSex"
+                                    id="selectSex"
+                                    class="form-control">
+                                <option value="">未知</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+
+                        </div>
+                        <div class="modal-body">
+                           所授科目:
+                            <input class="form-control"
+                                   name="subject"
+                                   id="subject"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            职称:
+                            <input class="form-control"
+                                   name="title"
+                                   id="title"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+
+                        <div class="modal-body">
+                            状态:
+                            <select name="teacherStatus"
+                                    id="selectStatus"
+                                    class="form-control">
+                                <option value="-1">空</option>
+                                <option value="1">已确认</option>
+                                <option value="2">待确认</option>
+                                <option value="3">为空</option>
+
+                            </select>
+                        </div>
+
+
+                        <div class="modal-body">
+                            照片:
+                            <span id="photo"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary"
+                            id="selectBaoCun"
+                            onclick="selectbaocun()"
+                            type="button">
+                        保存
+                    </button>
+                    <button class="btn btn-primary"
+                            id="selectUp"
+                            onclick="selectUpd()"
+                            type="button">
+                        修改
+                    </button>
+                    <button type="button"
+                            id="selectDel"
+                            onclick="seldelButton()"
+                            class="btn btn-default">
+                        删除
+                    </button>
+
+                    <button type="button"
+                            id="xxx"
+                            class="btn btn-light"
+                            data-dismiss="modal">
+                        离开
+                    </button>
+
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 修改model模态框 -->
+<div id="UpdataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     th:fragment="UpdataModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:800px;">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    修改信息
+                </h4>
+                <button id="guanbi"
+                        type="button" class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <form id="form_update_teacher">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="modal-body">
+                            ID:
+                            <input
+                                    onfocus="this.blur();"
+                                    class="form-control"
+                                    name="teacherId"
+                                    id="updateID"
+                                    autocomplete="off"
+                                    type="text"
+                                    data-provide="typeahead">
+                        </div>
+
+                        <div class="modal-body">
+                            学号:
+                            <input class="form-control"
+                                   name="teacherNumber"
+                                   id="updateNumber"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            名字:
+                            <input class="form-control"
+                                   name="teacherName"
+                                   id="updateName"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            账号:
+                            <input class="form-control"
+                                   name="teacherEmail"
+                                   id="updateEmail"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+                        <div class="modal-body">
+                            密码:
+                            <input class="form-control"
+                                   name="teacherPassword"
+                                   id="updatePassword"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                        <div class="modal-body">
+                            在职大学:
+                            <input class="form-control"
+                                   name="school"
+                                   id="updateSchool"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+
+                        <div class="modal-body">
+                            性别:
+                            <select name="teacherSex"
+                                    id="updateSex"
+                                    class="form-control">
+                                <option>未知</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+
+                        </div>
+                        <div class="modal-body">
+                            职称:
+                            <input class="form-control"
+                                   name="title"
+                                   id="updateTitle"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+                        <div class="modal-body">
+                            教授科目:
+                            <input class="form-control"
+                                   name="subject"
+                                   id="updateSubject"
+                                   autocomplete="off"
+                                   type="text"
+                                   data-provide="typeahead">
+                        </div>
+
+
+                        <div class="modal-body">
+                            状态:
+                            <select name="teacherStatus"
+                                    id="updateStatus"
+                                    class="form-control">
+                                <option value="-1">空</option>
+                                <option value="1">已确认</option>
+                                <option value="2">待确认</option>
+                                <option value="3">为空</option>
+
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="modal-body">
+                            照片:
+                            <span id="Upphoto"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button"
+                            id="resetForm_studnt"
+                            class="btn btn-default">
+                        重置
+                    </button>
+                    <button class="btn btn-primary"
+                            id="save_stuent"
+                            type="button" onclick="save_teacher_smoke()">
+                        提交
+                    </button>
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--删除model-->
+<div id="DelModel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" th:fragment="DelModel">
+    <div class="modal-dialog modal-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">是否删除id为<span id="zhi"></span>的信息</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">取消
+                </button>
+                <button onclick="delOk()" class="btn btn-sm btn-primary">确定删除</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

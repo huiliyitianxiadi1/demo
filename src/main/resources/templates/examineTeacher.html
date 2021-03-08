@@ -9,11 +9,21 @@
 
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+    <link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vendor/buttons.bootstrap4.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vendor/select.bootstrap4.css" rel="stylesheet" type="text/css"/>
+
+
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
+<!--管理员界面-->
+<!--验证教师身份-->
+
+
 
 <!--点击修改信息，表单变为可编辑，按钮变为提交按钮-->
 
@@ -36,6 +46,17 @@
             <!--导航1(个人)-->
             <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
 
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div th:replace="table/idVerification.html ::teacher_table"></div>
+
+
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -50,15 +71,33 @@
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
+<!--修改model-->
+<span th:replace="Model/examineTeacherModel.html :: UpdataModal"></span>
+
+<!--查看model-->
+<span th:replace="Model/examineTeacherModel.html :: selectModel"></span>
+
+<!--删除model-->
+<span th:replace="Model/examineTeacherModel.html :: DelModel"></span>
+
+
+
 
 <script src="jquery.js"></script>
 <script src="assets/js/app.min.js"></script>
 
+<script src="assets/js/vendor/jquery.dataTables.min.js"></script>
+<script src="assets/js/vendor/dataTables.responsive.min.js"></script>
+<script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
 
-<script src="jquerysession.js"></script>
 
 
-<script src="student_Information.js"></script>
+<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
+<!--分页-->
+<script src="assets/js/pages/demo.products.js"></script>
+
+<script src="idVerification_te.js"></script>
+
 
 </body>
 </html>

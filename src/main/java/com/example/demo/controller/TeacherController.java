@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Student;
+import com.example.demo.entity.*;
 import com.example.demo.entity.Teacher;
-import com.example.demo.entity.User;
 import com.example.demo.service.TeacherService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
@@ -116,13 +115,10 @@ public class TeacherController {
     }
 
 
-
-
-
-
     /**
      * 教师-检查旧密码模块
-     *可优化（懒得改）
+     * 可优化（懒得改）
+     *
      * @param oldPassword
      * @return
      */
@@ -159,11 +155,6 @@ public class TeacherController {
     }
 
 
-
-
-
-
-
     /***API
      * 通过teacherEmail修改数据
      * @param
@@ -184,7 +175,7 @@ public class TeacherController {
         teacher.setTeacherEmail(user.getEmail());
 
 
-        System.out.println("teacher_update测试点:"+teacher);
+        System.out.println("teacher_update测试点:" + teacher);
 
 
         return this.teacherService.update(teacher);
@@ -192,9 +183,45 @@ public class TeacherController {
     }
 
 
+    @ResponseBody
+    @PostMapping("teacherUpdate")
+    public int teacherUpdate(Teacher teacher) {
+
+        System.out.println("teacherUpdate:" + teacher);
+        return this.teacherService.update(teacher);
+    }
 
 
+    //==============================测试部分begin==============================-->
 
 
+    @PostMapping("/list")
+    public R list(Teacher teacher) {
 
+
+        System.out.println("teacher/list测试:" + teacher);
+
+
+        R r = teacherService.getPageUserList(teacher);
+        return r;
+    }
+
+
+    @GetMapping("/get")
+    public Teacher getById(Integer userId) {
+
+        System.out.println("teacher/getById:" + userId);
+        return teacherService.queryById(userId);
+    }
+    //--==============================分界线==============================-->
+
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("del")
+    public Boolean del(Integer id) {
+        System.out.println(id);
+        return this.teacherService.deleteById(id);
+    }
 }

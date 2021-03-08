@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.entity.R;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
 
@@ -88,5 +89,16 @@ public interface TeacherService {
      * @return 是否成功
      */
     boolean deleteById(Integer teacherId);
+
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+    R getPageUserList(Teacher teacher);
+
+
+    //-------------------------------测试部分end---------------------------//
+
+
 
 }

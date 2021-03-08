@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import lombok.Data;
+import net.sf.json.util.JSONUtils;
 
 import java.io.Serializable;
 
@@ -17,4 +18,5 @@ public class User {
     private String Password;
     public String Shenfen;
 
+    
 }

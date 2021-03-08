@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2021-01-25 15:06:18
  */
 @Data
-public class Teacher {
+public class Teacher  extends Page{
 
 
     private Integer teacherId;

@@ -211,30 +211,6 @@ public class MyInformation {
         }
     }
 
-    /**
-     * 管理员端
-     * 显示学生证
-     */
-    @RequestMapping(value = "/getImgByIdAdmin", method = RequestMethod.GET)
-    public void getImgByIdAdmin(HttpServletResponse response, Integer id) {
-
-
-        System.out.println("getImgByIdAdmin"+id);
-
-        try {
-            Student student = studentService.queryById(id);
-
-            byte[] data = student.getPhoto();
-            response.setContentType("image/jpeg");
-            response.setCharacterEncoding("UTF-8");
-            OutputStream outputSream = response.getOutputStream();
-            outputSream.write(data);
-            outputSream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     /***
      * 教师端
@@ -326,5 +302,57 @@ public class MyInformation {
         }
     }
 
+
+
+    /**
+     * 管理员端
+     * 显示学生证
+     */
+    @RequestMapping(value = "/getImgByIdAdmin", method = RequestMethod.GET)
+    public void getImgByIdAdmin(HttpServletResponse response, Integer id) {
+
+
+        System.out.println("getImgByIdAdmin"+id);
+
+        try {
+            Student student = studentService.queryById(id);
+
+            byte[] data = student.getPhoto();
+            response.setContentType("image/jpeg");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream outputSream = response.getOutputStream();
+            outputSream.write(data);
+            outputSream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     * http://localhost:8080/getImgByIdAdmin_tea?id=1http://localhost:8080/getImgByIdAdmin_tea?id=1
+     * 管理员端
+     * 显示工作证
+     */
+    @RequestMapping(value = "/getImgByIdAdmin_tea", method = RequestMethod.GET)
+    public void getImgByIdAdmin_tea(HttpServletResponse response, Integer id) {
+
+
+        System.out.println("getImgByIdAdmin_tea"+id);
+
+        try {
+            Teacher teacher = teacherService.queryById(id);
+
+            byte[] data = teacher.getPhoto();
+            response.setContentType("image/jpeg");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream outputSream = response.getOutputStream();
+            outputSream.write(data);
+            outputSream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

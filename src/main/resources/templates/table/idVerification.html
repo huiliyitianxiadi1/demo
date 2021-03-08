@@ -7,7 +7,7 @@
 <body>
 
 
-<div class="row"  th:fragment="student_table" >
+<div class="row" th:fragment="student_table">
     <div class="card-body">
         <form class="form-inline">
 
@@ -66,7 +66,7 @@
 
     </div>
     <div class="card-body">
-        <table id="datatable_buttons"  class="table table-hover table-centered mb-0">
+        <table id="datatable_buttons" class="table table-hover table-centered mb-0">
 
             <thead>
             <tr>
@@ -91,6 +91,95 @@
         </table>
     </div>
 </div>
+
+
+
+
+<div class="card" th:fragment="teacher_table">
+
+    <div class="card-body">
+        <form class="form-inline">
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="TeacherName" placeholder="名字">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="TeacherEmail" placeholder="账号">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="TeacherNumber" placeholder="工号">
+            </div>
+
+
+            <div class="form-group">
+                <select id="TeacherSex" class="form-control">
+                    <option value="-1">性别</option>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="TeacherSchool" placeholder="任职学校">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="TeacherSubject" placeholder="所教科目">
+            </div>
+
+            <div class="form-group">
+                <select id="TeacherStatus" class="form-control">
+                    <option value="-1">状态</option>
+                    <option value="2">待确认</option>
+                    <option value="1">已确认</option>
+                    <option value="3">未上传</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type=button class="btn btn-success" id="searchButton_t"> 条 件 查 询</button>
+                <button type=button class="btn btn-warning" id="clearSearchButton_t"> 清 空 条 件</button>
+                <button type=button class="btn btn-primary" id="addButton_t">添加用户</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-body">
+        <button type=button class="btn btn-success" id="oneOk_t">一键通过</button>
+        <button type=button class="btn btn-success" id="oneNo_t">一键否决</button>
+    </div>
+
+    <div class="card-body">
+        <table id="datatable_buttons_t" class="table table-hover table-centered mb-0">
+
+            <thead>
+            <tr>
+                <th width="75px"><input id="all_t" type="checkbox">全选</th>
+                <th>序号</th>
+                <th>编号ID</th>
+                <th>名字</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>工号</th>
+                <th width="50px">性别</th>
+                <th>在职学校</th>
+                <th>所授科目</th>
+                <th>职称</th>
+                <th>状态</th>
+                <th>工作证照片</th>
+                <th width="60px">操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,54 +10,37 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-03-09 13:58:27
  */
-public class BankSubjective implements Serializable {
-    private static final long serialVersionUID = -40900032507577794L;
-    
+@Data
+public class BankSubjective  extends Page {
+
     private Integer id;
     /**
-    * 科目
-    */
-    private String subject;
+     * 科目
+     */
+    private String kemu;
     /**
-    * 题目
-    */
-    private String title;
+     * 题目
+     */
+    private String timu;
     /**
-    * 参考答案
-    */
+     * 参考答案
+     */
     private String referenceanswer;
 
 
-    public Integer getId() {
-        return id;
-    }
+    /**
+     * 出题人id
+     */
+    private Integer teacherid;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /**
+     * 分值
+     */
+    private Integer fenzhi;
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getReferenceanswer() {
-        return referenceanswer;
-    }
-
-    public void setReferenceanswer(String referenceanswer) {
-        this.referenceanswer = referenceanswer;
-    }
+    /**
+     * 引入teacher
+     */
+    private  Teacher teacher;
 
 }

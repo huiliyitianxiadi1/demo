@@ -3,6 +3,9 @@ package com.example.demo.service;
 
 
 import com.example.demo.entity.BankChoice;
+import com.example.demo.entity.R;
+import com.example.demo.entity.Student;
+
 import java.util.List;
 
 /**
@@ -53,5 +56,14 @@ public interface BankChoiceService {
      * @return 是否成功
      */
     boolean deleteById(Integer id);
+
+
+    //-------------------------------测试部分begin---------------------------//
+    /**
+     *
+     * @param bankChoice
+     * @return
+     */
+    R select_all(BankChoice bankChoice);
 
 }

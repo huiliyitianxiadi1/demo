@@ -197,7 +197,6 @@ public class StudentController {
     @PostMapping("/list")
     public R list(Student student) {
 
-
         System.out.println("student/list测试:" + student);
 
 

@@ -113,6 +113,7 @@
         <if test="studentName != null and studentName != ''">
             and INSTR( student_name , #{studentName} )&gt; 0
         </if>
+
         <if test="studentEmail != null and studentEmail != ''">
             and INSTR(student_email , #{studentEmail}) &gt; 0
         </if>

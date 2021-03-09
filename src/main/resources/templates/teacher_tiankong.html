@@ -2,9 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>验证教师身份</title>
+    <title>教师空间</title>
 
-    <meta content="Coderthemes" name="author"/>
 
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -19,10 +18,9 @@
 
 
 </head>
-<!--管理员界面-->
-<!--验证教师身份-->
 
 
+<!--此处页面为教师个人空间-->
 
 <!--点击修改信息，表单变为可编辑，按钮变为提交按钮-->
 
@@ -35,7 +33,7 @@
 <div class="wrapper">
 
     <!--左侧栏==-->
-    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_admin"></div>
+    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_te"></div>
 
 
     <div class="content-page">
@@ -45,17 +43,10 @@
             <!--导航1(个人)-->
             <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
 
-            <div class="container-fluid">
 
-                <div class="row">
-
-                    <div class="col-12">
-                        <div th:replace="table/idVerification.html ::teacher_table"></div>
-
-
-                    </div>
-                </div>
-            </div>
+            <!--出题部分-->
+            <!--填空题-->
+            <div th:replace="Teacher/title/tiankong.html ::tiankongti"></div>
 
 
         </div>
@@ -70,33 +61,26 @@
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
-<!--修改model-->
-<span th:replace="Model/examineTeacherModel.html :: UpdataModal"></span>
-
-<!--查看model-->
-<span th:replace="Model/examineTeacherModel.html :: selectModel"></span>
-
-<!--删除model-->
-<span th:replace="Model/examineTeacherModel.html :: DelModel"></span>
 
 
-
-
-<script src="jquery.js"></script>
 <script src="assets/js/app.min.js"></script>
 
 <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
+<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
 <script src="assets/js/vendor/dataTables.responsive.min.js"></script>
 <script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
+<script src="assets/js/vendor/dataTables.buttons.min.js"></script>
+<script src="assets/js/vendor/buttons.bootstrap4.min.js"></script>
+<script src="assets/js/vendor/buttons.html5.min.js"></script>
+<script src="assets/js/vendor/buttons.flash.min.js"></script>
+<script src="assets/js/vendor/buttons.print.min.js"></script>
+<script src="assets/js/vendor/dataTables.keyTable.min.js"></script>
+<script src="assets/js/vendor/dataTables.select.min.js"></script>
 
 
+<script src="assets/js/pages/demo.datatable-init.js"></script>
 
-<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
-<!--分页-->
-<script src="assets/js/pages/demo.products.js"></script>
-
-<script src="idVerification_te.js"></script>
-
+<script src="teacher_tiankong.js"></script>
 
 </body>
 </html>

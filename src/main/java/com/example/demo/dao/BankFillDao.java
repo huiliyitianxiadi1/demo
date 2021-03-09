@@ -1,10 +1,14 @@
 package com.example.demo.dao;
 
 
+import com.example.demo.entity.BankChoice;
 import com.example.demo.entity.BankFill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 提空题题库(BankFill)表数据库访问层
@@ -27,7 +31,7 @@ public interface BankFillDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<BankFill> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -64,5 +68,27 @@ public interface BankFillDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+
+    //查询分页数据
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<BankFill> getUserList(RowBounds rowBounds, Map<String, Object> map);
+
+    //查询数据总条数
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCount(RowBounds rowBounds, Map<String, Object> map);
 
 }

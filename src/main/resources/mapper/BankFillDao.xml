@@ -5,26 +5,41 @@
     <resultMap id="BaseResultMap" type="com.example.demo.entity.BankFill">
         <!--@Table bank_fill-->
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="subject" column="subject" jdbcType="VARCHAR"/>
-        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="timu" column="timu" jdbcType="VARCHAR"/>
+        <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
         <result property="answer1" column="answer1" jdbcType="VARCHAR"/>
         <result property="answer2" column="answer2" jdbcType="VARCHAR"/>
         <result property="answer3" column="answer3" jdbcType="VARCHAR"/>
         <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+        <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+
+        <!--教师表的关联-->
+        <association javaType="com.example.demo.entity.Teacher" property="teacher">
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+            <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+            <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+            <result property="teacherSex" column="teacher_sex" jdbcType="VARCHAR"/>
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="subject" column="subject" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+            <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        </association>
+
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, subject, title, answer1, answer2, answer3, teacherid
+        select *
         from graduation.bank_fill
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, subject, title, answer1, answer2, answer3, teacherid
+        select *
         from graduation.bank_fill
         limit #{offset}, #{limit}
     </select>
@@ -32,17 +47,17 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, subject, title, answer1, answer2, answer3, teacherid
+        id, timu, kemu, answer1, answer2, answer3, teacherid
         from graduation.bank_fill
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="subject != null and subject != ''">
-                and subject = #{subject}
+            <if test="timu != null and timu != ''">
+                and timu = #{timu}
             </if>
-            <if test="title != null and title != ''">
-                and title = #{title}
+            <if test="kemu != null and kemu != ''">
+                and kemu = #{kemu}
             </if>
             <if test="answer1 != null and answer1 != ''">
                 and answer1 = #{answer1}
@@ -61,19 +76,19 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into graduation.bank_fill(subject, title, answer1, answer2, answer3)
-        values (#{subject}, #{title}, #{answer1}, #{answer2}, #{answer3})
+        insert into graduation.bank_fill(timu, kemu, answer1, answer2, answer3)
+        values (#{timu}, #{kemu}, #{answer1}, #{answer2}, #{answer3})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update graduation.bank_fill
         <set>
-            <if test="subject != null and subject != ''">
-                subject = #{subject},
+            <if test="timu != null and timu != ''">
+                timu = #{timu},
             </if>
-            <if test="title != null and title != ''">
-                title = #{title},
+            <if test="kemu != null and kemu != ''">
+                kemu = #{kemu},
             </if>
             <if test="answer1 != null and answer1 != ''">
                 answer1 = #{answer1},
@@ -90,7 +105,59 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from graduation.bank_fill where id = #{id}
+        delete
+        from graduation.bank_fill
+        where id = #{id}
     </delete>
+
+
+    <!--    以下为真实代码-->
+
+
+    <!--以下为测试内容-->
+    <select id="getUserList" parameterType="com.example.demo.entity.BankFill" resultMap="BaseResultMap">
+
+        select *
+        from graduation.bank_fill,graduation.teacher
+        where 1=1 and bank_fill.teacherid=teacher.teacher_id
+
+        <if test="timu != null and timu != ''">
+            and INSTR(bank_fill.timu, #{timu} )&gt; 0
+        </if>
+
+        <if test="kemu != null and kemu != ''">
+            and INSTR(bank_fill.kemu, #{kemu} )&gt; 0
+        </if>
+
+        <if test="teacherid != null and teacherid != ''">
+            and INSTR(bank_fill.teacherid, #{teacherid} )&gt; 0
+        </if>
+
+
+    </select>
+
+
+    <!--以下为测试内容-->
+    <select id="getUserListCount" resultType="int">
+        select count(*)
+        from graduation.bank_fill,graduation.teacher
+        where 1=1 and bank_fill.teacherid=teacher.teacher_id
+
+
+        <if test="timu != null and timu != ''">
+            and INSTR(bank_fill.timu, #{timu} )&gt; 0
+        </if>
+
+        <if test="kemu != null and kemu != ''">
+            and INSTR(bank_fill.kemu, #{kemu} )&gt; 0
+        </if>
+
+
+        <if test="teacherid != null and teacherid != ''">
+            and INSTR(bank_fill.teacherid, #{teacherid} )&gt; 0
+        </if>
+
+    </select>
+
 
 </mapper>

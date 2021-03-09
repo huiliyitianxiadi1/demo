@@ -2,7 +2,10 @@ package com.example.demo.service;
 
 
 
+import com.example.demo.entity.BankChoice;
 import com.example.demo.entity.BankFill;
+import com.example.demo.entity.R;
+
 import java.util.List;
 
 /**
@@ -53,5 +56,15 @@ public interface BankFillService {
      * @return 是否成功
      */
     boolean deleteById(Integer id);
+
+
+
+    //-------------------------------测试部分begin---------------------------//
+    /**
+     *
+     * @param bankFill
+     * @return
+     */
+    R select_all(BankFill bankFill);
 
 }

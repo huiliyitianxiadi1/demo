@@ -1,10 +1,14 @@
 package com.example.demo.dao;
 
 
+import com.example.demo.entity.BankFill;
 import com.example.demo.entity.BankSubjective;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 主观题(BankSubjective)表数据库访问层
@@ -64,5 +68,29 @@ public interface BankSubjectiveDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
+
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+
+    //查询分页数据
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<BankSubjective> getUserList(RowBounds rowBounds, Map<String, Object> map);
+
+    //查询数据总条数
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCount(RowBounds rowBounds, Map<String, Object> map);
+
 
 }

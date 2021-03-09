@@ -5,28 +5,50 @@
     <resultMap id="BaseResultMap" type="com.example.demo.entity.BankChoice">
         <!--@Table bank_choice-->
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="subject" column="subject" jdbcType="VARCHAR"/>
-        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+        <result property="timu" column="timu" jdbcType="VARCHAR"/>
         <result property="a" column="A" jdbcType="VARCHAR"/>
         <result property="b" column="B" jdbcType="VARCHAR"/>
         <result property="c" column="C" jdbcType="VARCHAR"/>
         <result property="d" column="D" jdbcType="VARCHAR"/>
         <result property="answer" column="answer" jdbcType="VARCHAR"/>
         <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+        <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        <!--封装映射company表数据，user表与company表1对1关系，配置1对1的映射
+          association:用于配置1对1的映射
+                      属性property：company对象在user对象中的属性名
+                      属性javaType：company属性的java对象 类型
+                      属性column：user表中的外键引用company表
+      -->
+
+        <!--教师表的关联-->
+        <association javaType="com.example.demo.entity.Teacher" property="teacher">
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+            <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+            <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+            <result property="teacherSex" column="teacher_sex" jdbcType="VARCHAR"/>
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="subject" column="subject" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+            <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        </association>
+
     </resultMap>
+
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, subject, title, A, B, C, D, answer, teacherid
+        select *
         from graduation.bank_choice
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, subject, title, A, B, C, D, answer, teacherid
+        select *
         from graduation.bank_choice
         limit #{offset}, #{limit}
     </select>
@@ -34,17 +56,17 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, subject, title, A, B, C, D, answer, teacherid
+      *
         from graduation.bank_choice
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="subject != null and subject != ''">
-                and subject = #{subject}
+            <if test="kemu != null and kemu != ''">
+                and kemu = #{kemu}
             </if>
-            <if test="title != null and title != ''">
-                and title = #{title}
+            <if test="timu != null and timu != ''">
+                and timu = #{timu}
             </if>
             <if test="a != null and a != ''">
                 and A = #{a}
@@ -69,19 +91,19 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into graduation.bank_choice(subject, title, A, B, C, D, answer, teacherid)
-        values (#{subject}, #{title}, #{a}, #{b}, #{c}, #{d}, #{answer}, #{teacherid})
+        insert into graduation.bank_choice(kemu, timu, A, B, C, D, answer, teacherid)
+        values (#{kemu}, #{timu}, #{a}, #{b}, #{c}, #{d}, #{answer}, #{teacherid})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update graduation.bank_choice
         <set>
-            <if test="subject != null and subject != ''">
-                subject = #{subject},
+            <if test="kemu != null and kemu != ''">
+                kemu = #{kemu},
             </if>
-            <if test="title != null and title != ''">
-                title = #{title},
+            <if test="timu != null and timu != ''">
+                timu = #{timu},
             </if>
             <if test="a != null and a != ''">
                 A = #{a},
@@ -107,7 +129,62 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from graduation.bank_choice where id = #{id}
+        delete
+        from graduation.bank_choice
+        where id = #{id}
     </delete>
+
+
+    <!--    以下为真实代码-->
+
+
+    <!--以下为测试内容-->
+    <select id="getUserList" parameterType="com.example.demo.entity.BankChoice" resultMap="BaseResultMap">
+
+        select *
+        from graduation.bank_choice,graduation.teacher
+        where 1=1 and bank_choice.teacherid=teacher.teacher_id
+
+        <if test="timu != null and timu != ''">
+            and INSTR(bank_choice.timu, #{timu} )&gt; 0
+        </if>
+
+        <if test="kemu != null and kemu != ''">
+            and INSTR(bank_choice.kemu, #{kemu} )&gt; 0
+        </if>
+
+        <if test="teacherid != null and teacherid != ''">
+            and INSTR(bank_choice.teacherid, #{teacherid} )&gt; 0
+        </if>
+
+
+    </select>
+
+
+    <!--以下为测试内容-->
+    <select id="getUserListCount" resultType="int">
+        select count(*)
+        from graduation.bank_choice,graduation.teacher
+        where 1=1 and bank_choice.teacherid=teacher.teacher_id
+
+
+        <if test="timu != null and timu != ''">
+            and INSTR(bank_choice.timu, #{timu} )&gt; 0
+        </if>
+
+        <if test="kemu != null and kemu != ''">
+            and INSTR(bank_choice.kemu, #{kemu} )&gt; 0
+        </if>
+
+
+        <if test="teacherid != null and teacherid != ''">
+            and INSTR(bank_choice.teacherid, #{teacherid} )&gt; 0
+        </if>
+
+    </select>
+
+
+
+
 
 </mapper>

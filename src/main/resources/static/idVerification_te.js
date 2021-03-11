@@ -229,10 +229,6 @@ firstTable = $('#datatable_buttons_t').DataTable(datatables_options);
 
 
 
-
-
-//BUG
-
 //添加点击事件
 //点击行即可触发全选按钮
 $('#datatable_buttons_t').on('click', 'tr', function () {

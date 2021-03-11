@@ -9,6 +9,8 @@
         <result property="timu" column="timu" jdbcType="VARCHAR"/>
         <result property="referenceanswer" column="ReferenceAnswer" jdbcType="VARCHAR"/>
         <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+        <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+
 
         <!--教师表的关联-->
         <association javaType="com.example.demo.entity.Teacher" property="teacher">

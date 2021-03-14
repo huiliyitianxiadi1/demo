@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="card-body" th:fragment="AddTable">
+
+    <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+        <li class="nav-item">
+            <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
+                <span class="d-none d-lg-block">单选题</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#profile1" data-toggle="tab" aria-expanded="true"
+               class="nav-link rounded-0 active">
+                <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
+                <span class="d-none d-lg-block">填空题</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#settings1" data-toggle="tab" aria-expanded="false"
+               class="nav-link rounded-0">
+                <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+                <span class="d-none d-lg-block">主观题</span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+
+        <p id="textID">1</p>
+        <!--        单选题-->
+        <div class="tab-pane" id="home1">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <!--左-->
+                                <div class="col-md-6">
+                                    <div class="bg-dragula p-2 p-lg-4">
+                                        <h5 class="mt-0">试卷选择题</h5>
+
+                                        <table id="Testdanxuan"
+                                               class="table table-striped dt-responsive nowrap"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="all" style="width: 20px;">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox"
+                                                               class="custom-control-input"
+                                                               id="customCheckLeft1">
+                                                        <label class="custom-control-label"
+                                                               for="customCheckLeft1">&nbsp;</label>
+                                                    </div>
+                                                </th>
+                                                <th>ID</th>
+                                                <th>科目</th>
+                                                <th>题目</th>
+                                                <th>A</th>
+                                                <th>B</th>
+                                                <th>C</th>
+                                                <th>D</th>
+                                                <th>答案</th>
+
+                                                <th>分值</th>
+                                                <th>出题人</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <!--右-->
+                                <div class="col-md-6">
+                                    <div class="bg-dragula p-2 p-lg-4">
+                                        <h5 class="mt-0">选择题题库</h5>
+
+
+                                        <p class="text-muted font-14 mb-4">
+                                            <button type="button" id="toastr-three1">
+                                            </button>
+                                            <button type="button" id="toastr-three2">
+                                            </button>
+                                            <button type="button" id="toastr-three3">
+                                            </button>
+
+                                            <button type="button" id="toastr-four1">
+                                            </button>
+                                            <button type="button" id="toastr-four2">
+                                            </button>
+                                            <button type="button" id="toastr-four3">
+                                            </button>
+                                        </p>
+
+                                        <form class="form-inline">
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="DANkemu" placeholder="科目">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="DANtimu" placeholder="题目">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="DANchutiren"
+                                                       placeholder="出题人ID">
+                                            </div>
+
+                                            <button type=button class="btn btn-success" id="DANsearchButton"> 条 件 查 询
+                                            </button>
+                                            <button type=button class="btn btn-warning" id="DANclearSearchButton"> 清 空 条
+                                                件
+                                            </button>
+                                        </form>
+
+                                        <p class="text-muted font-14 mb-4">
+
+                                        </p>
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#AddModal_dan"> 添加新题
+                                        </button>
+
+                                        <p class="text-muted font-14 mb-4">
+
+                                        </p>
+
+
+                                        <table id="danxuan"
+                                               class="table table-striped dt-responsive nowrap"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="all" style="width: 20px;">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="customCheckRight1">
+                                                        <label class="custom-control-label"
+                                                               for="customCheckRight1">&nbsp;</label>
+                                                    </div>
+                                                </th>
+                                                <th>ID</th>
+                                                <th>科目</th>
+                                                <th>题目</th>
+                                                <th>A</th>
+                                                <th>B</th>
+                                                <th>C</th>
+                                                <th>D</th>
+                                                <th>答案</th>
+
+                                                <th>分值</th>
+                                                <th>出题人</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--        填空题-->
+        <div class="tab-pane show active" id="profile1">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <!--左-->
+                                    <div class="col-md-6">
+                                        <div class="bg-dragula p-2 p-lg-4">
+                                            <h5 class="mt-0">试卷填空题</h5>
+                                            <table id="Testtiankong"
+                                                   class="table table-striped dt-responsive nowrap"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customCheckLeft2">
+                                                            <label class="custom-control-label"
+                                                                   for="customCheckLeft2">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th>ID</th>
+                                                    <th>科目</th>
+                                                    <th>题目</th>
+                                                    <th>答案1</th>
+                                                    <th>答案2</th>
+                                                    <th>答案3</th>
+
+
+                                                    <th>分值</th>
+                                                    <th>出题人</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                    <!--右-->
+                                    <div class="col-md-6">
+                                        <div class="bg-dragula p-2 p-lg-4">
+                                            <h5 class="mt-0">填空题题库</h5>
+
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+                                            <form class="form-inline">
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Tiankemu"
+                                                           placeholder="科目">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Tiantimu"
+                                                           placeholder="题目">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Tianchutiren"
+                                                           placeholder="出题人ID">
+                                                </div>
+
+                                                <button type=button class="btn btn-success"
+                                                        id="TiansearchButton">
+                                                    条 件 查 询
+                                                </button>
+                                                <button type=button class="btn btn-warning"
+                                                        id="TianclearSearchButton"> 清 空
+                                                    条 件
+                                                </button>
+                                            </form>
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#AddModal_tian"> 添加新题
+                                            </button>
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+                                            <table id="tiankong" class="table table-striped dt-responsive nowrap"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customCheckRight2">
+                                                            <label class="custom-control-label"
+                                                                   for="customCheckRight2">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th>ID</th>
+                                                    <th>科目</th>
+                                                    <th>题目</th>
+                                                    <th>答案1</th>
+                                                    <th>答案2</th>
+                                                    <th>答案3</th>
+
+
+                                                    <th>分值</th>
+                                                    <th>出题人</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--        主观题-->
+        <div class="tab-pane" id="settings1">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <!--左-->
+                                    <div class="col-md-6">
+                                        <div class="bg-dragula p-2 p-lg-4">
+                                            <h5 class="mt-0">试卷主观题</h5>
+
+
+                                            <table id="Testzhuguan"
+                                                   class="table table-striped dt-responsive nowrap"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customCheckLeft3">
+                                                            <label class="custom-control-label"
+                                                                   for="customCheckLeft3">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th>ID</th>
+                                                    <th>科目</th>
+                                                    <th>题目</th>
+
+                                                    <th>参考答案</th>
+
+                                                    <th>分 值</th>
+                                                    <th>出题人</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                    <!--右-->
+                                    <div class="col-md-6">
+                                        <div class="bg-dragula p-2 p-lg-4">
+                                            <h5 class="mt-0">主观题题库</h5>
+
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+                                            <form class="form-inline">
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Zhukemu"
+                                                           placeholder="科目">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Zhutimu"
+                                                           placeholder="题目">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="Zhuchutiren"
+                                                           placeholder="出题人ID">
+                                                </div>
+
+                                                <button type=button class="btn btn-success" id="ZhusearchButton"> 条 件 查
+                                                    询
+                                                </button>
+                                                <button type=button class="btn btn-warning" id="ZhuclearSearchButton"> 清
+                                                    空
+                                                    条 件
+                                                </button>
+                                            </form>
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+                                            <button type="button" class="btn btn-primary"
+                                                    data-toggle="modal"
+                                                    data-target="#AddModal_zhu"> 添加新题
+                                            </button>
+
+                                            <p class="text-muted font-14 mb-4">
+
+                                            </p>
+
+
+                                            <table id="zhuguan_zhu"
+                                                   class="table table-striped dt-responsive nowrap" width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customCheckRight3">
+                                                            <label class="custom-control-label"
+                                                                   for="customCheckRight3">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th>ID</th>
+                                                    <th>科目</th>
+                                                    <th>题目</th>
+
+                                                    <th>参考答案</th>
+
+                                                    <th>分 值</th>
+                                                    <th>出题人</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

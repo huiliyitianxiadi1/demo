@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
 
-
 import com.example.demo.entity.BankChoice;
 import com.example.demo.entity.R;
 import com.example.demo.entity.Student;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 
@@ -28,10 +28,21 @@ public interface BankChoiceService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<BankChoice> queryAllByLimit(int offset, int limit);
+
+
+    //-------------------------------测试部分begin---------------------------//
+
+    /**
+     * @param bankChoice
+     * @return
+     */
+    R select_all(BankChoice bankChoice);
+
+
 
     /**
      * 新增数据
@@ -39,7 +50,12 @@ public interface BankChoiceService {
      * @param bankChoice 实例对象
      * @return 实例对象
      */
-    BankChoice insert(BankChoice bankChoice);
+    boolean insert(BankChoice bankChoice);
+
+
+
+
+
 
     /**
      * 修改数据
@@ -47,7 +63,7 @@ public interface BankChoiceService {
      * @param bankChoice 实例对象
      * @return 实例对象
      */
-    BankChoice update(BankChoice bankChoice);
+    int update(BankChoice bankChoice);
 
     /**
      * 通过主键删除数据
@@ -55,15 +71,7 @@ public interface BankChoiceService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    int deleteById(Integer id);
 
-
-    //-------------------------------测试部分begin---------------------------//
-    /**
-     *
-     * @param bankChoice
-     * @return
-     */
-    R select_all(BankChoice bankChoice);
 
 }

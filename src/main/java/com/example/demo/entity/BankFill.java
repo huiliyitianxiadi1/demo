@@ -50,5 +50,22 @@ public class BankFill extends Page {
      * 引入teacher
      */
     private Teacher teacher;
+    /**
+     * 权限
+     */
 
+    private Integer quanxian;
+
+
+    /**
+     * 考试编号ID
+     */
+    private Integer textId;
+
+    /**
+     * 判断左右
+     * 1左
+     * 2右
+     */
+    private  Integer lr;
 }

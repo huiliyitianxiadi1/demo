@@ -7,7 +7,7 @@
 <body>
 
 
-<div th:fragment="danxuanti">
+<div th:fragment="shijuan">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -32,16 +32,20 @@
                     <form class="form-inline">
 
                         <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder="名字">
+                        </div>
+
+                        <div class="form-group">
                             <input type="text" class="form-control" id="kemu" placeholder="科目">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="timu" placeholder="题目">
+                            <input type="text" class="form-control" id="begin" placeholder="开始时间">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="end" placeholder="结束时间">
                         </div>
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="chutiren" placeholder="出题人ID">
-                        </div>
 
                         <button type=button class="btn btn-success" id="searchButton"> 条 件 查 询</button>
                         <button type=button class="btn btn-warning" id="clearSearchButton"> 清 空 条 件</button>
@@ -52,8 +56,14 @@
                     </p>
 
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#AddModal"> 添加新题
+                            data-target="#AddModal"> 随机出题
                     </button>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#AddModal"> 手动出题
+                    </button>
+
+
 
                     <p class="text-muted font-14 mb-4">
 
@@ -63,15 +73,12 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>科目</th>
-                            <th>题目</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>答案</th>
+                            <th>考试名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
 
-                            <th>分值</th>
+
+                            <th>考试码</th>
                             <th>出题人</th>
                             <th>操作</th>
                         </tr>
@@ -185,9 +192,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="Upkemu">科目</label>
-                        <input type="text"
-                               id="Upkemu"
-                               name="kemu"
+                        <input type="text" id="Upkemu" name="kemu"
                                class="form-control form-control-sm">
                     </div>
                     <div class="form-group mb-3">

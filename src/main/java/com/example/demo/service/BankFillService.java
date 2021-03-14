@@ -33,30 +33,6 @@ public interface BankFillService {
      */
     List<BankFill> queryAllByLimit(int offset, int limit);
 
-    /**
-     * 新增数据
-     *
-     * @param bankFill 实例对象
-     * @return 实例对象
-     */
-    BankFill insert(BankFill bankFill);
-
-    /**
-     * 修改数据
-     *
-     * @param bankFill 实例对象
-     * @return 实例对象
-     */
-    BankFill update(BankFill bankFill);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
-
 
 
     //-------------------------------测试部分begin---------------------------//
@@ -66,5 +42,31 @@ public interface BankFillService {
      * @return
      */
     R select_all(BankFill bankFill);
+
+
+
+    /**
+     * 新增数据
+     *
+     * @param bankFill 实例对象
+     * @return 实例对象
+     */
+    boolean insert(BankFill bankFill);
+
+    /**
+     * 修改数据
+     *
+     * @param bankFill 实例对象
+     * @return 实例对象
+     */
+    int update(BankFill bankFill);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    int deleteById(Integer id);
 
 }

@@ -42,6 +42,7 @@ public class login {
     @Resource
     private AdminService adminService;
 
+
     @RequestMapping({"/login.html", "/login"})//访问登录页
     public String login() {
         return "login";

@@ -31,29 +31,6 @@ public interface BankSubjectiveService {
      */
     List<BankSubjective> queryAllByLimit(int offset, int limit);
 
-    /**
-     * 新增数据
-     *
-     * @param bankSubjective 实例对象
-     * @return 实例对象
-     */
-    BankSubjective insert(BankSubjective bankSubjective);
-
-    /**
-     * 修改数据
-     *
-     * @param bankSubjective 实例对象
-     * @return 实例对象
-     */
-    BankSubjective update(BankSubjective bankSubjective);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
 
 
 
@@ -65,5 +42,28 @@ public interface BankSubjectiveService {
      */
     R select_all(BankSubjective bankSubjective);
 
+    /**
+     * 新增数据
+     *
+     * @param bankSubjective 实例对象
+     * @return 实例对象
+     */
+    boolean insert(BankSubjective bankSubjective);
+
+    /**
+     * 修改数据
+     *
+     * @param bankSubjective 实例对象
+     * @return 实例对象
+     */
+    int update(BankSubjective bankSubjective);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    int deleteById(Integer id);
 
 }

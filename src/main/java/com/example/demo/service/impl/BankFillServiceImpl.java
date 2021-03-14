@@ -49,42 +49,6 @@ public class BankFillServiceImpl implements BankFillService {
         return this.bankFillDao.queryAllByLimit(offset, limit);
     }
 
-    /**
-     * 新增数据
-     *
-     * @param bankFill 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public BankFill insert(BankFill bankFill) {
-        this.bankFillDao.insert(bankFill);
-        return bankFill;
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param bankFill 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public BankFill update(BankFill bankFill) {
-        this.bankFillDao.update(bankFill);
-        return this.queryById(bankFill.getId());
-    }
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    @Override
-    public boolean deleteById(Integer id) {
-        return this.bankFillDao.deleteById(id) > 0;
-    }
-
-
     //---------------------------------以下为实际代码
 
 
@@ -97,9 +61,6 @@ public class BankFillServiceImpl implements BankFillService {
     @Override
     public R select_all(BankFill bankFill) {
         Map<String, Object> searchCondition = new HashMap<String, Object>();
-
-
-        System.out.println("测试bankFillService传值select_all:"+bankFill);
 
 
         //科目
@@ -119,18 +80,55 @@ public class BankFillServiceImpl implements BankFillService {
             searchCondition.put("timu", null);
         }
 
-//出题老师iD
+        //出题老师iD
         searchCondition.put("teacherid", bankFill.getTeacherid());
+
+        //考试ID
+
+        searchCondition.put("textId", bankFill.getTextId());
 
 
         System.out.println("imp传值1-bankFill:" + bankFill);
 
         System.out.println("imp传值2-searchCondition:" + searchCondition);
 
-        List<BankFill> list = bankFillDao.getUserList(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
-        int count = bankFillDao.getUserListCount(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+        R r = new R();
+        int count = 0;
+        List<BankFill> list = null;
 
-        R r = new R(bankFill.getDraw(), count, count, list);
+
+        //查询非考试添加题库
+        if (bankFill.getTextId() == null) {
+            System.out.println("此处为getUserList==null");
+            list = bankFillDao.getUserList(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+            count = bankFillDao.getUserListCount(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+
+            r = new R(bankFill.getDraw(), count, count, list);
+
+        }
+
+        /*
+*        根据试卷查询
+       找不包含在试卷中的题*/
+        else {
+            if (bankFill.getLr() == 1) {
+                System.out.println("此处为getUserListB ！=null+LR=1");
+                list = bankFillDao.getUserListC(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+                count = bankFillDao.getUserListCountC(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+                r = new R(bankFill.getDraw(), count, count, list);
+
+            } else if (bankFill.getLr() == 2) {
+
+                System.out.println("此处为getUserListB ！=null+LR=2");
+                list = bankFillDao.getUserListB(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+                count = bankFillDao.getUserListCountB(new RowBounds(bankFill.getOffset(), bankFill.getPageSize()), searchCondition);
+                r = new R(bankFill.getDraw(), count, count, list);
+
+            }
+        }
+
+
+
 
 
         System.out.println("list:" + list);
@@ -138,5 +136,42 @@ public class BankFillServiceImpl implements BankFillService {
         System.out.println("R:" + r);
         return r;
     }
+
+
+    /**
+     * 新增数据
+     *
+     * @param bankFill 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public boolean insert(BankFill bankFill) {
+
+        return this.bankFillDao.insert(bankFill);
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param bankFill 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public int update(BankFill bankFill) {
+
+        return this.bankFillDao.update(bankFill);
+    }
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    @Override
+    public int deleteById(Integer id) {
+        return this.bankFillDao.deleteById(id);
+    }
+
 
 }

@@ -1,19 +1,58 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>usually function</title>
-</head>
-<script>
-    function load(){
-        //下面两种方法效果是一样的
-        document.getElementById("target").onclick();
-        document.getElementById("target").click();
-    }
-    function test(){
-        alert("test");
-    }
-</script>
-<body onload="load()">
-<button id="target" onclick="test()">test</button>
-</body>
-<html>
+    <meta charset="utf-8"/>
+    <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
 
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center p-3">
+            <p>Info Example</p>
+            <button type="button" class="btn btn-info btn-sm" id="toastr-one">Click me
+            </button>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="text-center p-3">
+            <p>Warning Example</p>
+            <button type="button"
+                    class="btn btn-warning btn-sm"
+                    id="toastr-two">Click me
+            </button>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="text-center p-3">
+            <p>Success Example</p>
+            <button type="button" class="btn btn-success btn-sm" id="toastr-three">Click
+                me
+            </button>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="text-center p-3">
+            <p>Danger Example</p>
+            <button type="button" class="btn btn-danger btn-sm" id="toastr-four">Click me
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script src="assets/js/app.min.js"></script>
+
+<script src="assets/js/pages/demo.toastr.js"></script>
+
+</body>
+</html>

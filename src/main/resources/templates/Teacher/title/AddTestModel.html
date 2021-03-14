@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!--选择题-->
+<!--添加新题-->
+<div id="AddModal_dan"
+     th:fragment="AddModal_dan"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1_dan">添加新题</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                        id="guanbi11">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tianjiatable_dan">
+                    <div class="form-group mb-3">
+                        <label for="kemu_dan">科目</label>
+                        <input type="text" id="kemu_dan" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="timu_dan">题目</label>
+                        <input type="text" id="timu_dan" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="A">A</label>
+                        <input type="text" id="A" name="A"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="B">B</label>
+                        <input type="text" id="B" name="B"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="C">C</label>
+                        <input type="text" id="C" name="C"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="D">D</label>
+                        <input type="text" id="D" name="D"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="daan">答案</label>
+                        <select id="daan" name="answer">
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="fenzhi_dan">分值</label>
+                        <input type="number"
+                               id="fenzhi_dan"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" onclick="tijiaoButton_dan()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div id="UpModal_dan"
+     th:fragment="UpModal_dan"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel12">
+                    修改
+                </h4>
+                <button type="button"
+                        id="guanbi12"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="xiugaitable_dan">
+                    <div class="form-group mb-3">
+                        <label for="Upid_dan">ID</label>
+                        <input type="text"
+                               id="Upid_dan"
+                               onfocus="this.blur();"
+                               name="id"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upkemu_dan">科目</label>
+                        <input type="text"
+                               id="Upkemu_dan"
+                               name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Uptimu_dan">题目</label>
+                        <input type="text"
+                               id="Uptimu_dan"
+                               name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="UpA">A</label>
+                        <input type="text"
+                               id="UpA"
+                               name="A"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="UpB">B</label>
+                        <input type="text"
+                               id="UpB"
+                               name="B"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="UpC">C</label>
+                        <input type="text"
+                               id="UpC"
+                               name="C"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="UpD">D</label>
+                        <input type="text"
+                               id="UpD"
+                               name="D"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="Updaan">答案</label>
+                        <select id="Updaan"
+                                name="answer">
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upfenzhi_dan">分值</label>
+                        <input type="number"
+                               id="Upfenzhi_dan"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-light"
+                        data-dismiss="modal">离开
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="Up_dan()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除-->
+<div id="DelModal_dan"
+     th:fragment="DelModal_dan"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel13">删除</h4>
+                <button type="button" id="guanbi13"
+                        class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title"
+                    id="topModalLabel_dan">是否删除id为<span id="zhi_dan">
+
+                </span>的信息</h4>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button"
+                        class="btn btn-primary" onclick="del_dan()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------------------------------------------------填空题-------------------------------------------->
+<!--添加新题-->
+<div id="AddModal_tian"
+     th:fragment="AddModal_tian"
+     class="modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel21">添加新题</h4>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true"
+                        id="guanbi21">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tianjiatable_tian">
+                    <div class="form-group mb-3">
+                        <label for="Tkemu">科目</label>
+                        <input type="text"
+                               id="Tkemu"
+                               name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-input-normal1">题目</label>
+                        <input type="text"
+                               id="example-input-normal1" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer1">answer1</label>
+                        <input type="text" id="answer1"
+                               name="answer1"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer2">answer2</label>
+                        <input type="text"
+                               id="answer2"
+                               name="answer2"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer3">answer3</label>
+                        <input type="text"
+                               id="answer3" name="answer3"
+                               class="form-control form-control-lg">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="fenzhi">分值</label>
+                        <input type="number" id="fenzhi_tian"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light"
+                        data-dismiss="modal">Close
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="tijiaoButton_tian()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div id="UpModal_tian"
+     th:fragment="UpModal_tian"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel22">修改</h4>
+                <button type="button"
+                        id="guanbi22"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="xiugaitable_tian">
+                    <div class="form-group mb-3">
+                        <label for="Upid_tian">ID</label>
+                        <input type="text" id="Upid_tian"
+                               onfocus="this.blur();"
+                               name="id"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upkemu_tian">科目</label>
+                        <input type="text" id="Upkemu_tian" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-input-normal">题目</label>
+                        <input type="text" id="Uptimu_tian" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer1">answer1</label>
+                        <input type="text" id="Upanswer1" name="answer1"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer2">answer2</label>
+                        <input type="text" id="Upanswer2" name="answer2"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer3">answer3</label>
+                        <input type="text" id="Upanswer3" name="answer3"
+                               class="form-control form-control-lg">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="fenzhi">分值</label>
+                        <input type="number" id="Upfenzhi_tian"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button"
+                        class="btn btn-primary" onclick="Up_tian()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除-->
+<div id="DelModal_tian"
+     th:fragment="DelModal_tian"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">删除</h4>
+                <button type="button" id="guanbi23" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel_tian">
+                    是否删除id为<span id="zhi_tian"></span>的信息</h4>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button"
+                        class="btn btn-primary" onclick="del_tian()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!----------------------------------------------------------主观题-->
+<!--添加新题-->
+<div id="AddModal_zhu"
+     th:fragment="AddModal_zhu"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">添加新题</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="guanbi31">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tianjiatable_zhu">
+                    <div class="form-group mb-3">
+                        <label for="">科目</label>
+                        <input type="text" id="" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-input-normal">题目</label>
+                        <input type="text" id="example-input-normal" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="referenceanswer">参考答案</label>
+                        <input type="text" id="referenceanswer" name="referenceanswer"
+                               class="form-control form-control-lg">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="fenzhi">分值</label>
+                        <input type="number" id="fenzhi"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary" onclick="tijiaoButton_zhu()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div id="UpModal_zhu"
+     th:fragment="UpModal_zhu"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">修改</h4>
+                <button type="button"
+                        id="guanbi32"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="xiugaitable_zhu">
+                    <div class="form-group mb-3">
+                        <label for="">ID</label>
+                        <input type="text"
+                               id="Upid_zhu"
+                               onfocus="this.blur();"
+                               name="id"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upkemu_zhu">科目</label>
+                        <input type="text" id="Upkemu_zhu" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Uptimu_zhu">题目</label>
+                        <input type="text" id="Uptimu_zhu" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upreferenceanswer">参考答案</label>
+                        <input type="text" id="Upreferenceanswer" name="referenceanswer"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upfenzhi_zhu">分值</label>
+                        <input type="number"
+                               id="Upfenzhi_zhu"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button" class="btn btn-primary" onclick="Up_zhu()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除-->
+<div id="DelModal_zhu"
+     th:fragment="DelModal_zhu"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel3">删除</h4>
+                <button type="button" id="guanbi33" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">是否删除id为<span id="zhi_zhu"></span>的信息</h4>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button" class="btn btn-primary" onclick="del_zhu()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

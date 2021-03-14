@@ -12,10 +12,24 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Buttons example</h4>
-                    <p class="text-muted font-14 mb-4">
 
+
+                    <p class="text-muted font-14 mb-4">
+                        <button type="button" id="toastr-three1">
+                        </button>
+                        <button type="button" id="toastr-three2">
+                        </button>
+                        <button type="button" id="toastr-three3">
+                        </button>
+
+                        <button type="button" id="toastr-four1">
+                        </button>
+                        <button type="button" id="toastr-four2">
+                        </button>
+                        <button type="button" id="toastr-four3">
+                        </button>
                     </p>
+
 
                     <form class="form-inline">
 
@@ -36,7 +50,13 @@
                     </form>
 
                     <p class="text-muted font-14 mb-4">
+                    </p>
 
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#AddModal"> 添加新题
+                    </button>
+
+                    <p class="text-muted font-14 mb-4">
                     </p>
                     <table id="xx" class="table table-striped dt-responsive nowrap" width="100%">
                         <thead>
@@ -64,6 +84,160 @@
     </div>
 </div>
 
+<!--添加新题-->
+<div id="AddModal"
+     th:fragment="AddModal"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">添加新题</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="guanbi1">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="tianjiatable">
+                    <div class="form-group mb-3">
+                        <label for="Tkemu">科目</label>
+                        <input type="text" id="Tkemu" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-input-normal">题目</label>
+                        <input type="text" id="example-input-normal" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer1">answer1</label>
+                        <input type="text" id="answer1" name="answer1"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer2">answer2</label>
+                        <input type="text" id="answer2" name="answer2"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer3">answer3</label>
+                        <input type="text" id="answer3" name="answer3"
+                               class="form-control form-control-lg">
+                    </div>
 
+
+                    <div class="form-group mb-3">
+                        <label for="fenzhi">分值</label>
+                        <input type="number" id="fenzhi"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary" onclick="tijiaoButton()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div id="UpModal"
+     th:fragment="UpModal"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">修改</h4>
+                <button type="button"
+                        id="guanbi2"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="xiugaitable">
+                    <div class="form-group mb-3">
+                        <label for="Upid">ID</label>
+                        <input type="text" id="Upid"
+                               onfocus="this.blur();"
+                               name="id"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Upkemu">科目</label>
+                        <input type="text" id="Upkemu" name="kemu"
+                               class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="example-input-normal">题目</label>
+                        <input type="text" id="Uptimu" name="timu"
+                               class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer1">answer1</label>
+                        <input type="text" id="Upanswer1" name="answer1"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer2">answer2</label>
+                        <input type="text" id="Upanswer2" name="answer2"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="answer3">answer3</label>
+                        <input type="text" id="Upanswer3" name="answer3"
+                               class="form-control form-control-lg">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="fenzhi">分值</label>
+                        <input type="number" id="Upfenzhi"
+                               name="fenzhi"
+                               class="form-control form-control-lg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button" class="btn btn-primary" onclick="Up()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除-->
+<div id="DelModal"
+     th:fragment="DelModal"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel3">删除</h4>
+                <button type="button" id="guanbi3" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">是否删除id为<span id="zhi"></span>的信息</h4>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button" class="btn btn-primary" onclick="del()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

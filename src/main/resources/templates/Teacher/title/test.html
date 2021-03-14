@@ -6,8 +6,9 @@
 </head>
 <body>
 
+<!--显示试卷Table-->
 
-<div th:fragment="danxuanti">
+<div th:fragment="shijuan">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -28,48 +29,57 @@
                         <button type="button" id="toastr-four3">
                         </button>
                     </p>
+                    <p class="text-muted font-14 mb-4">
 
+                    <div class="form-group">
+                        <input width="300px" type="text" class="form-control date" id="daterangetime"
+                               data-toggle="date-picker"
+                               data-time-picker="true" data-locale="{'format': 'DD/MM hh:mm A'}">
+                    </div>
+                    </p>
                     <form class="form-inline">
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder="名字">
+                        </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="kemu" placeholder="科目">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="timu" placeholder="题目">
-                        </div>
-
-                        <div class="form-group">
                             <input type="text" class="form-control" id="chutiren" placeholder="出题人ID">
                         </div>
+
 
                         <button type=button class="btn btn-success" id="searchButton"> 条 件 查 询</button>
                         <button type=button class="btn btn-warning" id="clearSearchButton"> 清 空 条 件</button>
                     </form>
 
                     <p class="text-muted font-14 mb-4">
-
+                        <button onclick="ceshi()">测试</button>
                     </p>
 
+
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#AddModal"> 添加新题
+                            data-target="#AddModal"> 手动出题
                     </button>
+
 
                     <p class="text-muted font-14 mb-4">
 
                     </p>
 
-                    <table id="xx" class="table table-striped dt-responsive nowrap" width="100%">
+                    <table id="xx" class="table table-striped dt-responsive nowrap"
+                           width="100%">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>科目</th>
-                            <th>题目</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>答案</th>
+                            <th>考试码-ID</th>
+                            <th>考试名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+
 
                             <th>分值</th>
                             <th>出题人</th>
@@ -86,7 +96,7 @@
     </div>
 </div>
 
-<!--添加新题-->
+<!--添加新试卷-->
 <div id="AddModal"
      th:fragment="AddModal"
      class="modal fade" tabindex="-1" role="dialog"
@@ -102,50 +112,45 @@
             <div class="modal-body">
                 <form id="tianjiatable">
                     <div class="form-group mb-3">
-                        <label for="">科目</label>
-                        <input type="text" id="" name="kemu"
+                        <label for="ADDname">考试名</label>
+                        <input type="text" id="ADDname" name="name"
                                class="form-control form-control-sm">
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="example-input-normal">题目</label>
-                        <input type="text" id="example-input-normal" name="timu"
-                               class="form-control">
+
+
+                    <label for="birthdatepickerBegin">开始时间</label>
+                    <div class="input-group">
+
+                        <input type="text" class="form-control date" id="birthdatepickerBegin"
+                               data-toggle="date-picker" data-single-date-picker="true">
+                        <input type="text" class="form-control"
+                               id="TimeBegin"
+                               data-toggle='timepicker'
+                               data-show-meridian="false">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="dripicons-clock"></i></span>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="A">A</label>
-                        <input type="text" id="A" name="A"
-                               class="form-control form-control-lg">
+
+
+                    <label for="birthdatepickerEnd">结束时间</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control date"
+                               id="birthdatepickerEnd"
+                               data-toggle="date-picker"
+                               data-single-date-picker="true">
+                        <input type="text"
+                               id="TimeEnd"
+                               class="form-control" data-toggle='timepicker'
+                               data-show-meridian="false">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="dripicons-clock"></i></span>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="B">B</label>
-                        <input type="text" id="B" name="B"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="C">C</label>
-                        <input type="text" id="C" name="C"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="D">D</label>
-                        <input type="text" id="D" name="D"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="daan">答案</label>
-                        <select id="daan" name="answer">
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="fenzhi">分值</label>
-                        <input type="number" id="fenzhi"
-                               name="fenzhi"
-                               class="form-control form-control-lg">
-                    </div>
+
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -176,60 +181,68 @@
             </div>
             <div class="modal-body">
                 <form id="xiugaitable">
+
                     <div class="form-group mb-3">
-                        <label for="">ID</label>
-                        <input type="text" id="Upid"
-                               onfocus="this.blur();"
-                               name="id"
+                        <label for="Upid">ID</label>
+                        <input onfocus="this.blur();"
+                               type="text" id="Upid" name="id"
                                class="form-control form-control-sm">
                     </div>
+
+
                     <div class="form-group mb-3">
-                        <label for="Upkemu">科目</label>
+                        <label for="UPname">考试名</label>
                         <input type="text"
-                               id="Upkemu"
-                               name="kemu"
+                               id="UPname"
+                               name="name"
                                class="form-control form-control-sm">
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="Uptimu">题目</label>
-                        <input type="text" id="Uptimu" name="timu"
-                               class="form-control">
+
+                    <p id="ce">ce</p>
+
+                    <label for="birthdatepickerBegin">开始时间</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               data-provide="datepicker"
+                               id="UpbirthdatepickerBegin"
+
+                        >
+
+                        <input type="text"
+                               class="form-control"
+                               id="UpTimeBegin"
+                               data-toggle='timepicker'
+                               data-show-meridian="false">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="dripicons-clock">
+                                </i>
+                            </span>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="UpA">A</label>
-                        <input type="text" id="UpA" name="A"
-                               class="form-control form-control-lg">
+
+
+                    <label for="birthdatepickerEnd">结束时间</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               data-provide="datepicker"
+                               id="UpbirthdatepickerEnd"
+
+                        >
+
+
+                        <input type="text"
+                               id="UpTimeEnd"
+                               class="form-control" data-toggle='timepicker'
+                               data-show-meridian="false">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="dripicons-clock"></i></span>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="UpB">B</label>
-                        <input type="text" id="UpB" name="B"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="UpC">C</label>
-                        <input type="text" id="UpC" name="C"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="UpD">D</label>
-                        <input type="text" id="UpD" name="D"
-                               class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="Updaan">答案</label>
-                        <select id="Updaan" name="answer">
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="Upfenzhi">分值</label>
-                        <input type="number" id="Upfenzhi"
-                               name="fenzhi"
-                               class="form-control form-control-lg">
-                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">

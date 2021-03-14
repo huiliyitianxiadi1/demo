@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
@@ -9,541 +9,631 @@
 
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+    <link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css"/>
+
+
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
-
-
-
-
-    <script type="text/javascript" src="DatatablesDemo/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript"
-            src="DatatablesDemo/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript"
-            src="DatatablesDemo/DataTables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="DatatablesDemo/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="DatatablesDemo/js/moment.js"></script>
-    <script type="text/javascript" src="DatatablesDemo/js/daterangepicker.js"></script>
-
-
 </head>
 <body>
-<div class="row" style="margin-top:20px;">
-    <div class="col-lg-12 col-lg-offset-1">
-        <form class="form-inline">
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="StudentName" placeholder="名字">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="StudentEmail" placeholder="账号">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="StudentNumber" placeholder="学号">
-            </div>
 
 
-            <div class="form-group">
-                <select id="StudentSex" class="form-control">
-                    <option value="-1">性别</option>
-                    <option value="1">男</option>
-                    <option value="0">女</option>
-                </select>
-            </div>
+<div class="container-fluid">
 
-            <div class="form-group">
-                <select id="StudentSchool" class="form-control">
-                    <option value="-1">大学</option>
-                    <option value="1">男</option>
-                    <option value="0">女</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="StudentPhone" placeholder="手机号">
-            </div>
-
-            <div class="form-group">
-                <select id="StudentStatus" class="form-control">
-                    <option value="-1">状态</option>
-                    <option value="1">待确认</option>
-                    <option value="2">已确认</option>
-                    <option value="3">未上传</option>
-
-                </select>
-            </div>
-
-
-            <button type=button class="btn btn-success" id="searchButton"> 条 件 查 询</button>
-            <button type=button class="btn btn-warning" id="clearSearchButton"> 清 空 条 件</button>
-            <button type=button class="btn btn-primary" id="addButton">添加用户</button>
-        </form>
-
-
-    </div>
-
-    <div class="table-responsive col-lg-10 col-lg-offset-1">
-        <table id="datatable_buttons" class="table table-bordered table-hover">
-
-            <thead>
-            <tr>
-                <th width="75px"><input id="all" type="checkbox">全选</th>
-                <th>序号</th>
-                <th>编号ID</th>
-                <th>名字</th>
-                <th>账号</th>
-                <th>密码</th>
-                <th>学号</th>
-                <th>性别</th>
-                <th>大学</th>
-                <th>手机号</th>
-                <th>状态</th>
-                <th>学生证照片</th>
-                <th>操作</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<button  id="btnDelSpell">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</button>
-
-<!-- 添加模态框 -->
-<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">添加用户</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="addUserName" placeholder="用户名">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
                 </div>
-
-                <div class="form-group">
-                    <input type="text" class="form-control" id="addUserAddr" placeholder="用户地址">
-                </div>
-
-                <div class="form-group">
-                    <select id="addStatus" class="form-control">
-                        <option value="-1">请选择状态</option>
-                        <option value="1">通过</option>
-                        <option value="0">驳回</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <select id="addRole" class="form-control">
-                        <option value="-1">请选择角色</option>
-                        <option value="1">普通用户</option>
-                        <option value="2">管理员</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addUser()">确定</button>
+                <h4 class="page-title">Products</h4>
             </div>
         </div>
     </div>
-</div>
 
-<!-- 修改模态框 -->
-<div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">修改用户</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="updateUserName" placeholder="用户名">
-                </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <a href="javascript:void(0);" class="btn btn-danger mb-2"><i
+                                    class="mdi mdi-plus-circle mr-2"></i> Add Products</a>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-right">
+                                <button type="button" class="btn btn-success mb-2 mr-1"><i
+                                        class="mdi mdi-settings"></i></button>
+                                <button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+                                <button type="button" class="btn btn-light mb-2">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                            <thead class="thead-light">
+                            <tr>
+                                <th class="all" style="width: 20px;">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th class="all">Product</th>
+                                <th>Category</th>
+                                <th>Added Date</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th style="width: 85px;">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-1.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Amazing
+                                            Modern Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Aeron Chairs
+                                </td>
+                                <td>
+                                    09/12/2018
+                                </td>
+                                <td>
+                                    $148.66
+                                </td>
+                                <td>
+                                    254
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
 
-                <div class="form-group">
-                    <input type="text" class="form-control" id="updateUserAddr" placeholder="用户地址">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <label class="custom-control-label" for="customCheck3">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Biblio
+                                            Plastic Armchair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Wooden Chairs
+                                </td>
+                                <td>
+                                    09/08/2018
+                                </td>
+                                <td>
+                                    $8.99
+                                </td>
+                                <td>
+                                    1,874
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <label class="custom-control-label" for="customCheck4">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Branded
+                                            Wooden Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-outline"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Dining Chairs
+                                </td>
+                                <td>
+                                    09/05/2018
+                                </td>
+                                <td>
+                                    $68.32
+                                </td>
+                                <td>
+                                    2,541
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <label class="custom-control-label" for="customCheck5">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Designer
+                                            Awesome Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                        <span class="text-warning mdi mdi-star-outline"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Baby Chairs
+                                </td>
+                                <td>
+                                    08/23/2018
+                                </td>
+                                <td>
+                                    $112.00
+                                </td>
+                                <td>
+                                    3,540
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <label class="custom-control-label" for="customCheck6">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-5.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Cardan
+                                            Armchair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Plastic Armchair
+                                </td>
+                                <td>
+                                    08/02/2018
+                                </td>
+                                <td>
+                                    $59.69
+                                </td>
+                                <td>
+                                    26
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                        <label class="custom-control-label" for="customCheck7">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Bootecos
+                                            Plastic Armchair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Wing Chairs
+                                </td>
+                                <td>
+                                    07/15/2018
+                                </td>
+                                <td>
+                                    $148.66
+                                </td>
+                                <td>
+                                    485
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger">Deactive</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck8">
+                                        <label class="custom-control-label" for="customCheck8">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-6.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Adirondack
+                                            Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Aeron Chairs
+                                </td>
+                                <td>
+                                    07/07/2018
+                                </td>
+                                <td>
+                                    $65.94
+                                </td>
+                                <td>
+                                    652
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck9">
+                                        <label class="custom-control-label" for="customCheck9">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-2.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Bean Bag
+                                            Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Wooden Chairs
+                                </td>
+                                <td>
+                                    06/30/2018
+                                </td>
+                                <td>
+                                    $99
+                                </td>
+                                <td>
+                                    1,021
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger">Deactive</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck10">
+                                        <label class="custom-control-label" for="customCheck10">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">The
+                                            butterfly chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Dining Chairs
+                                </td>
+                                <td>
+                                    06/19/2018
+                                </td>
+                                <td>
+                                    $58
+                                </td>
+                                <td>
+                                    874
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
+                                        <label class="custom-control-label" for="customCheck11">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Eames
+                                            Lounge Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Baby Chairs
+                                </td>
+                                <td>
+                                    05/06/2018
+                                </td>
+                                <td>
+                                    $39.5
+                                </td>
+                                <td>
+                                    1,254
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                        <label class="custom-control-label" for="customCheck12">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-5.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Farthingale
+                                            Chair</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Plastic Armchair
+                                </td>
+                                <td>
+                                    04/09/2018
+                                </td>
+                                <td>
+                                    $78.66
+                                </td>
+                                <td>
+                                    524
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger">Deactive</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                        <label class="custom-control-label" for="customCheck13">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="assets/images/products/product-6.jpg" alt="contact-img"
+                                         title="contact-img" class="rounded mr-3" height="48"/>
+                                    <p class="m-0 d-inline-block align-middle font-16">
+                                        <a href="apps-ecommerce-products-details.html" class="text-body">Unpowered
+                                            aircraft</a>
+                                        <br/>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star"></span>
+                                        <span class="text-warning mdi mdi-star-half"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    Wing Chairs
+                                </td>
+                                <td>
+                                    03/24/2018
+                                </td>
+                                <td>
+                                    $49
+                                </td>
+                                <td>
+                                    204
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger">Deactive</span>
+                                </td>
+                                <td class="table-action">
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-eye"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-square-edit-outline"></i></a>
+                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                            class="mdi mdi-delete"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <select id="updateStatus" class="form-control">
-                        <option value="-1">请选择状态</option>
-                        <option value="1">通过</option>
-                        <option value="0">驳回</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <select id="updateRole" class="form-control">
-                        <option value="-1">请选择角色</option>
-                        <option value="1">普通用户</option>
-                        <option value="2">管理员</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateUser()">确定</button>
             </div>
         </div>
     </div>
+
 </div>
 
-<script>
-  
+
+<script src="assets/js/app.min.js"></script>
+
+<script src="assets/js/vendor/jquery.dataTables.min.js"></script>
+<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
+<script src="assets/js/vendor/dataTables.responsive.min.js"></script>
+<script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
+<script src="assets/js/vendor/dataTables.checkboxes.min.js"></script>
 
 
-    $("#btnDelSpell").click(function () {
-        var checkLength = $("input:checkbox[name='cb']:checked").length;
-        if (checkLength == 0) {
-            alert("请至少选择一条咒语！");
-            return;
-        }
-        $("input[type='checkbox']").each(function () { //遍历checkbox的选择状态
-            if ($(this).prop("checked")) { //如果值为checked表明选中了，
-                if (($(this).attr("name")) == ("cb")) {//且name值为check
-                    alert($(this).closest('tr').find('td').eq(1).text() + "   " + $(this).attr("name")); //获取eq为1的那一列数据
-                }
-            }
-        });
-    });
-</script>
-
-<script type="text/javascript">
-
-    var datatables_options = {
-        language: {
-            "lengthMenu": '每页显示<select class="form-control input-xsmall">' + '<option value="10">10</option>'
-                + '<option value="20">20</option>'
-                + '<option value="30">30</option>'
-                + '<option value="40">40</option>'
-                + '<option value="50">50</option>' + '</select>条',
-            "paginate": {
-                "first": "首页",
-                "last": "尾页",
-                "previous": "上一页",
-                "next": "下一页"
-            },
-            "processing": "加载中...",  //DataTables载入数据时，是否显示‘进度’提示
-            "emptyTable": "暂无数据",
-            "info": "共 _PAGES_ 页  _TOTAL_ 条数据  ",
-            "infoEmpty": "暂无数据",
-            "emptyTable": "暂无要处理的数据...",  //表格中无数据
-            "search": "搜索:",
-            "infoFiltered": " —— 从  _MAX_ 条数据中筛选",
-            "zeroRecords": "没有找到记录"
-
-        },
-        ordering: false,//排序显示控制
-        searching: false,
-        paging: true,//开启分页
-        processing: true,
-        serverSide: true,//是否开启服务器模式
-
-        ajax: {
-            url: '/student/list',
-            type: 'post',
-            cache: false,
-            data: function (d) {
-                var student = {};
-
-                student.studentName = $("#StudentName").val();
-                student.studentEmail = $("#StudentEmail").val();
-                student.studentNumber = $("#StudentNumber").val();
-
-
-                if ($("#StudentSex").val() == 1) {
-                    student.studentSex = "男";
-                } else if ($("#StudentSex").val() == 0) {
-                    student.studentSex = "女";
-                } else {
-                    student.studentSex = "";
-                }
-
-                student.studentSchool = $("#studentSchool").val();
-
-                student.studentSchool = "";
-
-                student.studentPhone = $("#StudentPhone").val();
-
-                if ($("#StudentStatus").val() === '-1') {
-                    student.studentStatus = "";
-                } else {
-                    student.studentStatus = $("#StudentStatus").val();
-                }
-
-
-                student.pageSize = d.length;
-                student.draw = d.draw;
-                student.offset = d.start;
-                return student;
-            },
-
-            dataFilter: function (json) {
-
-                json = JSON.parse(json);
-
-                var returnData = {};
-                returnData.draw = json.draw;
-                returnData.recordsTotal = json.recordsTotal;  //返回数据全部记录
-                returnData.recordsFiltered = json.recordsFiltered;  //后台不实现过滤功能，每次查询均视作全部结果
-                returnData.data = json.data;  //返回的数据列表
-                return JSON.stringify(returnData); //这几个参数都是datatable需要的，必须要
-
-
-            }
-        },
-
-        columns: [
-
-            {
-                "orderable": false,
-                "data": null,
-                "sWidth": "75px",
-                'sClass': "text-center",
-                "render": function (data, type, row, meta) {
-                    var id = row.studentId;
-                    var html = "";
-                    html += "<input type=\"checkbox\" name='cb' id=cb" + id + " '  > "
-                    return html;
-                }
-            },
-            {
-                sTitle: '序号',
-                data: null,
-                className: 'text-center whiteSpace',
-                render: function (data, type, row, meta) {
-                    return meta.row + 1 +
-                        meta.settings._iDisplayStart;
-                }
-            },
-            {
-                "data": "studentId",
-                "name": "id",
-                "orderable": true,
-                "sDefaultContent": "",  //默认空字符串
-                "sClass": "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentName",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentEmail",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentPassword",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentNumber",
-                'sClass': "text-center"
-            },
-
-            {
-                "orderable": false,
-                "data": "studentSex",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentSchool",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": true,
-                "data": "studentPhone",
-                'sClass': "text-center"
-            },
-            {
-                "orderable": false,
-                "data": "studentStatus",
-                'sClass': "text-center",
-                'render': function (data, type, row, meta) {
-                    var status = row.studentStatus
-                    var str = ''
-                    if (status === '1') {
-                        str = '已确认'
-                    }
-                    if (status === '2') {
-                        str = '待确认'
-                    }
-                    if (status === '3') {
-                        str = '未确认'
-                    }
-                    return str
-
-                }
-            },
-
-            {
-                "orderable": false,
-                "targets": 2,//操作按钮目标列
-                "data": null,
-                "sWidth": "250px",
-
-                "render": function (data, type, row, meta) {
-                    var id = row.studentId;
-                    var html = "";
-
-
-                    if (row.photo != null) {
-                        html += "<img  src='/getImgByIdAdmin?id=" + id + " '  > "
-                    } else {
-                        html = "空";
-                    }
-                    return html;
-                }
-            },
-
-
-            {
-                "orderable": false,
-                "targets": 2,//操作按钮目标列
-                "data": null,
-                "sWidth": "250px",
-                'sClass': "text-center",
-                "render": function (data, type, row, meta) {
-                    var id = row.studentId;
-                    var html = "";
-                    html += "<button onclick='edit(" + id + ")'  style='margin-right:10px;' class='up btn btn-warning '>编辑</button>"
-                    html += "<a href='javascript:void(0);'   onclick='deleteData(" + id + ")'  class='down btn btn-danger '> 删除</a>"
-                    return html;
-                }
-            }
-
-        ],
-
-
-    };
-
-
-    var firstTable;
-    firstTable = $('#datatable_buttons').DataTable(datatables_options);
-
-    //添加点击事件
-    //点击行即可触发全选按钮
-    $('#datatable_buttons').on('click', 'tr', function () {
-        var data = firstTable.row(this).data(); //获取单击那一行的数据
-        var hkid = +data.studentId;
-
-        if ($("#cb" + hkid).prop("checked") == true) { //如果值为checked表明选中了，
-            //选中了
-            $("#cb" + hkid).attr("checked", false);
-        } else {
-            //没选中
-            $("#cb" + hkid).attr("checked", true);
-
-        }
-
-    });
-
-    //执行条件查询
-    $("#searchButton").click(function () {
-        firstTable.ajax.reload(null, false);
-        firstTable.draw(false);
-    });
-
-    //触发编辑model框
-    $("#addButton").click(function () {
-        $("#addModal").modal()
-    })
-
-
-    /*
-    function clearAddData() {
-        $("#StudentName").val('')
-        $("#StudentEmail").val('')
-        $("#StudentNumber").val('')
-
-        $("#StudentSex").val(-1)
-
-        $("#StudentSchool").val(-1)
-        $("#StudentPhone").val('')
-        $("#StudentStatus").val(-1)
-
-
-    }
-
-*/
-
-    //全局用户id
-    var userId;
-
-    function edit(id) {
-        $.ajax({
-            type: "get",
-            url: "/student/get",
-            async: true,
-            data: {
-                userId: id
-            },
-            success: function (res) {
-                //设置回显用户数据
-                //赋值给全局id，方便修改后使用
-                userId = res.userId;
-                /*  $("#updateuserName").val(res.studentName)
-                  $("#updateuserEmail").val(res.studentName)
-                  $("#updateuserPassword").val(res.studentName)
-                  $("#updateuserNumber").val(res.studentName)
-
-                  $("#updateuserSex").val(res.studentName)
-                  $("#updateuserSchool").val(res.studentSchool)
-                  $("#updateuserPhone").val(res.studentPhone)
-                  $("#updateuserStatus").val(res.studentStatus)
-  */
-                $("#updateModal").modal()
-            }
-        });
-    }
-
-
-    //清除已输入条件
-    $("#clearSearchButton").click(function () {
-
-        $("#StudentName").val('')
-        $("#StudentEmail").val('')
-        $("#StudentNumber").val('')
-
-        $("#StudentSex").val(-1)
-
-        $("#StudentSchool").val(-1)
-        $("#StudentPhone").val('')
-        $("#StudentStatus").val(-1)
-
-        //重置表单+6534
-        firstTable.ajax.reload(null, false);
-        firstTable.draw(false);
-    });
-
-
-</script>
-
-
-<script type="text/javascript">
-
-    //全选控制
-    $("#all").on('click', function () {
-        $("input[name='cb']").prop("checked", this.checked);
-    });
-
-    $("input[name='cb']").on('click', function () {
-        var $subs = $("input[name='cb']");
-        $("#all").prop("checked", $subs.length == $subs.filter(":checked").length ? true : false);
-    });
-</script>
+<script src="assets/js/pages/demo.products.js"></script>
 
 </body>
 </html>

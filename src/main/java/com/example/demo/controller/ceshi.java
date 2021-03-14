@@ -1,14 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.BankSubjective;
 import com.example.demo.entity.Fileaddress;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import com.example.demo.interceptor.ImgRegulation;
 import com.example.demo.service.StudentService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -52,6 +53,5 @@ public class ceshi {
     public String ceshi3() {
         return "ceshi3";
     }
-
 
 }

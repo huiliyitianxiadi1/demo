@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TestTableDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.TestTable">
+        <!--@Table test_table-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="testId" column="test_id" jdbcType="INTEGER"/>
+
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="danId" column="dan_id" jdbcType="INTEGER"/>
+        <result property="tianId" column="tian_id" jdbcType="INTEGER"/>
+        <result property="zhuId" column="zhu_id" jdbcType="INTEGER"/>
+
+
+        <!--封装映射company表数据，user表与company表1对1关系，配置1对1的映射
+         association:用于配置1对1的映射
+                     属性property：company对象在user对象中的属性名
+                     属性javaType：company属性的java对象 类型
+                     属性column：user表中的外键引用company表
+     -->
+
+        <!--教师表的关联-->
+        <association javaType="com.example.demo.entity.Teacher" property="teacher">
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+            <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+            <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+            <result property="teacherSex" column="teacher_sex" jdbcType="VARCHAR"/>
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="subject" column="subject" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+        </association>
+
+        <!--        单选题-->
+        <association javaType="com.example.demo.entity.BankChoice" property="bankChoice">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="a" column="A" jdbcType="VARCHAR"/>
+            <result property="b" column="B" jdbcType="VARCHAR"/>
+            <result property="c" column="C" jdbcType="VARCHAR"/>
+            <result property="d" column="D" jdbcType="VARCHAR"/>
+            <result property="answer" column="answer" jdbcType="VARCHAR"/>
+            <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+        <!--填空题-->
+        <association javaType="com.example.demo.entity.BankFill" property="bankFill">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="answer1" column="answer1" jdbcType="VARCHAR"/>
+            <result property="answer2" column="answer2" jdbcType="VARCHAR"/>
+            <result property="answer3" column="answer3" jdbcType="VARCHAR"/>
+            <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+        <!--主官题-->
+        <association javaType="com.example.demo.entity.BankSubjective" property="bankSubjective">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="referenceanswer" column="ReferenceAnswer" jdbcType="VARCHAR"/>
+            <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select *
+        from graduation.test_table
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select *
+        from graduation.test_table
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        *
+        from graduation.test_table
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="testId != null">
+                and test_id = #{testId}
+            </if>
+
+
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="danId != null">
+                and dan_id = #{danId}
+            </if>
+            <if test="tianId != null">
+                and tian_id = #{tianId}
+            </if>
+            <if test="zhuId != null">
+                and zhu_id = #{zhuId}
+            </if>
+        </where>
+    </select>
+
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update graduation.test_table
+        <set>
+            <if test="testId != null">
+                test_id = #{testId},
+            </if>
+            <if test="teacherid != null">
+                teacherid = #{teacherid},
+            </if>
+            <if test="begin != null">
+                begin = #{begin},
+            </if>
+            <if test="end != null">
+                end = #{end},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="danId != null">
+                dan_id = #{danId},
+            </if>
+            <if test="tianId != null">
+                tian_id = #{tianId},
+            </if>
+            <if test="zhuId != null">
+                zhu_id = #{zhuId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <!--    有效代码-->
+
+
+    <!--BUG-->
+
+    <!--    根据id获得全部的试题内容-->
+    <select id="selectByTestId" resultMap="BaseResultMap">
+        SELECT *
+
+        FROM graduation.test_table
+
+                 LEFT OUTER JOIN graduation.bank_choice ON
+                test_table.dan_id = graduation.bank_choice.id AND
+                test_table.type = 1
+
+                 LEFT OUTER JOIN graduation.bank_fill ON
+                test_table.tian_id = graduation.bank_fill.id AND
+                test_table.type = 2
+
+                 LEFT OUTER JOIN graduation.bank_subjective ON
+                test_table.zhu_id = graduation.bank_subjective.id AND
+                test_table.type = 3
+           , graduation.teacher
+        where test_table.test_id = #{testid}
+
+
+    </select>
+
+    <!--新增单选考试题-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into graduation.test_table(test_id, type, dan_id, tian_id, zhu_id)
+        values (#{testId}, #{type}, #{danId}, #{tianId}, #{zhuId})
+    </insert>
+
+
+    <!--通过传入类删除-->
+    <delete id="deleteById">
+        delete
+        from graduation.test_table
+
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="testId != null">
+                and test_id = #{testId}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="danId != null">
+                and dan_id = #{danId}
+            </if>
+            <if test="tianId != null">
+                and tian_id = #{tianId}
+            </if>
+            <if test="zhuId != null">
+                and zhu_id = #{zhuId}
+            </if>
+        </where>
+
+    </delete>
+
+
+</mapper>

@@ -45,8 +45,8 @@
 
 
             <!--出题部分-->
-            <!--主官题-->
-            <div th:replace="Teacher/title/zhuguan.html ::zhuguanti"></div>
+
+            <div th:replace="Teacher/title/AddTest.html ::AddTable"></div>
 
 
         </div>
@@ -61,13 +61,34 @@
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
-<!--添加model框-->
-<span th:replace="Teacher/title/zhuguan.html:: AddModal"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/zhuguan.html:: UpModal"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/zhuguan.html:: DelModal"></span>
 
+<!--单选内容-->
+<!--添加model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: AddModal_dan"></span>
+<!--修改model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: UpModal_dan"></span>
+<!--删除model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: DelModal_dan"></span>
+
+<!--填空内容-->
+<!--添加model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: AddModal_tian"></span>
+<!--修改model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: UpModal_tian"></span>
+<!--删除model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: DelModal_tian"></span>
+
+
+<!--主管题内容-->
+<!--添加model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: AddModal_zhu"></span>
+<!--修改model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: UpModal_zhu"></span>
+<!--删除model框-->
+<span th:replace="Teacher/title/AddTestModel.html:: DelModal_zhu"></span>
+
+
+<script src="jquery.js"></script>
 
 <script src="assets/js/app.min.js"></script>
 
@@ -86,8 +107,20 @@
 
 <script src="assets/js/pages/demo.datatable-init.js"></script>
 
-<script src="teacher_zhuguan.js"></script>
 
 <script src="assets/js/pages/demo.toastr.js"></script>
+<script src="assets/js/vendor/dragula.min.js"></script>
+
+<script src="assets/js/ui/component.dragula.js"></script>
+
+
+<!--控制单选题-填空题-主观题的题库-->
+<script src="/teacher_Addshijuan_Bank.js"></script>
+
+<!--控制单选题-填空题-主观题的试卷-->
+<script src="/teacher_Addshijuan_Test.js"></script>
+
+
+
 </body>
 </html>

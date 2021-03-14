@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TestDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Test">
+        <!--@Table test-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="begin" column="begin" jdbcType="TIMESTAMP"/>
+        <result property="end" column="end" jdbcType="TIMESTAMP"/>
+        <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+
+        <!--教师表的关联-->
+        <association javaType="com.example.demo.entity.Teacher" property="teacher">
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+            <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+            <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+            <result property="teacherSex" column="teacher_sex" jdbcType="VARCHAR"/>
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="subject" column="subject" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+        </association>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               name,
+               begin,
+               end,
+               fenzhi,
+               teacherid
+        from graduation.test
+        where id = #{id}
+    </select>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, name, begin, end, fenzhi, teacherid
+        from graduation.test
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="begin != null">
+                and begin = #{begin}
+            </if>
+            <if test="end != null">
+                and end = #{end}
+            </if>
+            <if test="fenzhi != null">
+                and fenzhi = #{fenzhi}
+            </if>
+            <if test="teacherid != null">
+                and teacherid = #{teacherid}
+            </if>
+        </where>
+    </select>
+
+
+    <!--    有效代码-->
+
+    <!--获得分组-->
+    <select id="getUserList" parameterType="com.example.demo.entity.Test" resultMap="BaseResultMap">
+
+        select *
+        from graduation.test,graduation.teacher
+        where 1=1 and test.teacherid=teacher.teacher_id
+
+        <if test="testid != null and testid != ''">
+            and INSTR(test.id, #{testid} )&gt; 0
+        </if>
+        <if test="begin != null and begin != ''">
+            and INSTR(test.begin, #{begin} )&gt; 0
+        </if>
+        <if test="end != null and end != ''">
+            and INSTR(test.end, #{end} )&gt; 0
+        </if>
+
+
+    </select>
+
+
+    <!--获得行数-->
+    <select id="getUserListCount" resultType="int">
+        select count(distinct id)
+        from graduation.test,graduation.teacher
+        where 1=1 and teacher.teacher_id = test.teacherid
+
+        <if test="testid != null and testid != ''">
+            and INSTR(test.id, #{testid} )&gt; 0
+        </if>
+        <if test="begin != null and begin != ''">
+            and INSTR(test.begin, #{begin} )&gt; 0
+        </if>
+        <if test="end != null and end != ''">
+            and INSTR(test.end, #{end} )&gt; 0
+        </if>
+
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into graduation.test(name, begin, end, fenzhi, teacherid)
+        values (#{name}, #{begin}, #{end}, #{fenzhi}, #{teacherid})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update graduation.test
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="begin != null">
+                begin = #{begin},
+            </if>
+            <if test="end != null">
+                end = #{end},
+            </if>
+            <if test="fenzhi != null">
+                fenzhi = #{fenzhi},
+            </if>
+            <if test="teacherid != null">
+                teacherid = #{teacherid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from graduation.test
+        where id = #{id}
+    </delete>
+
+
+</mapper>

@@ -61,7 +61,15 @@
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
+<!--添加model框-->
+<span th:replace="Teacher/title/danxuan.html:: AddModal"></span>
+<!--修改model框-->
+<span th:replace="Teacher/title/danxuan.html:: UpModal"></span>
+<!--删除model框-->
+<span th:replace="Teacher/title/danxuan.html:: DelModal"></span>
 
+
+<script src="jquery.js"></script>
 
 <script src="assets/js/app.min.js"></script>
 
@@ -82,5 +90,6 @@
 
 <script src="teacher_danxuan.js"></script>
 
+<script src="assets/js/pages/demo.toastr.js"></script>
 </body>
 </html>

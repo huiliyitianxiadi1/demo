@@ -45,8 +45,8 @@
 
 
             <!--出题部分-->
-            <!--主官题-->
-            <div th:replace="Teacher/title/zhuguan.html ::zhuguanti"></div>
+            <!--单选题-->
+            <div th:replace="Teacher/title/test.html ::shijuan"></div>
 
 
         </div>
@@ -61,13 +61,12 @@
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
-<!--添加model框-->
-<span th:replace="Teacher/title/zhuguan.html:: AddModal"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/zhuguan.html:: UpModal"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/zhuguan.html:: DelModal"></span>
+<span th:replace="Teacher/title/test.html :: AddModal"></span>
+<span th:replace="Teacher/title/test.html:: DelModal"></span>
+<span th:replace="Teacher/title/test.html :: UpModal"></span>
 
+
+<script src="jquery.js"></script>
 
 <script src="assets/js/app.min.js"></script>
 
@@ -86,7 +85,7 @@
 
 <script src="assets/js/pages/demo.datatable-init.js"></script>
 
-<script src="teacher_zhuguan.js"></script>
+<script src="teacher_selectshijuan.js"></script>
 
 <script src="assets/js/pages/demo.toastr.js"></script>
 </body>

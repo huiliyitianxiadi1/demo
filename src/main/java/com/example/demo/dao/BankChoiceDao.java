@@ -46,13 +46,90 @@ public interface BankChoiceDao {
      */
     List<BankChoice> queryAll(BankChoice bankChoice);
 
+
+    /**
+     * 以下为测试
+     */
+
+    //-------------------------------测试部分begin---------------------------//
+
+
+    //查询分页数据
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<BankChoice> getUserList(RowBounds rowBounds, Map<String, Object> map);
+
+
+    //查询数据总条数
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCount(RowBounds rowBounds, Map<String, Object> map);
+
+
+    //查询分页数据
+/*
+*        根据试卷查询
+       找不包含在试卷中的题*/
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<BankChoice> getUserListB(RowBounds rowBounds, Map<String, Object> map);
+
+    //查询数据总条数
+/*
+*        根据试卷查询
+       找包含在试卷中的题*/
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCountC(RowBounds rowBounds, Map<String, Object> map);
+
+
+    //查询分页数据
+/*
+*        根据试卷查询
+       找包含在试卷中的题*/
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    List<BankChoice> getUserListC(RowBounds rowBounds, Map<String, Object> map);
+
+    //查询数据总条数
+/*
+*        根据试卷查询
+       找不包含在试卷中的题*/
+
+    /**
+     * @param rowBounds
+     * @param map
+     * @return
+     */
+    int getUserListCountB(RowBounds rowBounds, Map<String, Object> map);
+
     /**
      * 新增数据
      *
      * @param bankChoice 实例对象
      * @return 影响行数
      */
-    int insert(BankChoice bankChoice);
+    boolean insert(BankChoice bankChoice);
 
     /**
      * 修改数据
@@ -70,32 +147,5 @@ public interface BankChoiceDao {
      */
     int deleteById(Integer id);
 
-
-    /**
-     * 以下为测试
-     */
-
-    //-------------------------------测试部分begin---------------------------//
-
-
-    //查询分页数据
-
-    /**
-     *
-     * @param rowBounds
-     * @param map
-     * @return
-     */
-    List<BankChoice> getUserList(RowBounds rowBounds, Map<String, Object> map);
-
-    //查询数据总条数
-
-    /**
-     *
-     * @param rowBounds
-     * @param map
-     * @return
-     */
-    int getUserListCount(RowBounds rowBounds, Map<String, Object> map);
 
 }

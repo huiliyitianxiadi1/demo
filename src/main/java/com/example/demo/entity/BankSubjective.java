@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @since 2021-03-09 13:58:27
  */
 @Data
-public class BankSubjective  extends Page {
+public class BankSubjective extends Page {
 
     private Integer id;
     /**
@@ -41,6 +41,24 @@ public class BankSubjective  extends Page {
     /**
      * 引入teacher
      */
-    private  Teacher teacher;
+    private Teacher teacher;
+    /**
+     * 权限
+     */
 
+    private Integer quanxian;
+
+    /**
+     * 考试编号ID
+     */
+    private Integer textId;
+
+
+
+    /**
+     * 判断左右
+     * 1左
+     * 2右
+     */
+    private  Integer lr;
 }

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentTestDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.StudentTest">
+        <!--@Table student_test-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="studentid" column="studentid" jdbcType="INTEGER"/>
+        <result property="testid" column="testid" jdbcType="INTEGER"/>
+        <result property="chengji" column="chengji" jdbcType="INTEGER"/>
+        <result property="time" column="time" jdbcType="TIMESTAMP"/>
+        <result property="ny" column="ny" jdbcType="INTEGER"/>
+
+
+        <!--考试信息表的关联-->
+        <association javaType="com.example.demo.entity.Test" property="test">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="begin" column="begin" jdbcType="TIMESTAMP"/>
+            <result property="end" column="end" jdbcType="TIMESTAMP"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+            <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+        </association>
+        <!--教师表的关联-->
+        <association javaType="com.example.demo.entity.Teacher" property="teacher">
+            <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+            <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+            <result property="teacherNumber" column="teacher_number" jdbcType="VARCHAR"/>
+
+            <result property="school" column="school" jdbcType="VARCHAR"/>
+            <result property="subject" column="subject" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+
+        </association>
+
+        <association javaType="com.example.demo.entity.Student" property="student">
+            <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+            <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+            <result property="studentEmail" column="student_email" jdbcType="VARCHAR"/>
+            <result property="studentPassword" column="student_password" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="student_number" jdbcType="VARCHAR"/>
+            <result property="studentSex" column="student_sex" jdbcType="VARCHAR"/>
+            <result property="studentSchool" column="student_school" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
+
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               studentid,
+               testid,
+               chengji,
+               time,
+               ny
+        from graduation.student_test
+        where id = #{id}
+    </select>
+
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update graduation.student_test
+        <set>
+            <if test="studentid != null">
+                studentid = #{studentid},
+            </if>
+            <if test="testid != null">
+                testid = #{testid},
+            </if>
+            <if test="chengji != null">
+                chengji = #{chengji},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="ny != null">
+                ny = #{ny},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from graduation.student_test
+        where id = #{id}
+    </delete>
+
+
+
+    <!--教师查询参加自己创建的考试的学生试卷    -->
+    <select id="TeacherSelectStudentTest" parameterType="com.example.demo.entity.Test" resultMap="BaseResultMap">
+        select *
+        from graduation.test,
+             graduation.student_test,
+             graduation.student
+        where  test.id = student_test.testid
+          and student_test.studentid = student.student_id
+          and test.teacherid = #{teacherid}
+    </select>
+
+
+    <!--=====================================有效代码==========================-->
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into graduation.student_test(studentid, testid, chengji, time, ny)
+        values (#{studentid}, #{testid}, #{chengji}, #{time}, #{ny})
+    </insert>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, studentid, testid, chengji, time, ny
+        from graduation.student_test
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="studentid != null">
+                and studentid = #{studentid}
+            </if>
+            <if test="testid != null">
+                and testid = #{testid}
+            </if>
+            <if test="chengji != null">
+                and chengji = #{chengji}
+            </if>
+            <if test="time != null">
+                and time = #{time}
+            </if>
+            <if test="ny != null">
+                and ny = #{ny}
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+
+    <select id="getUserList"
+            parameterType="com.example.demo.entity.StudentTest"
+            resultMap="BaseResultMap">
+        select *
+        from graduation.student_test,graduation.teacher,graduation.test
+        where student_test.testid = test.id
+          and test.teacherid = teacher.teacher_id
+          and 1 = 1
+          and student_test.studentid=#{studentid}
+
+
+    </select>
+
+
+
+</mapper>

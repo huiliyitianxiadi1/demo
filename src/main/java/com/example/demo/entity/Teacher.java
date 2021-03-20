@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2021-01-25 15:06:18
  */
 @Data
-public class Teacher  extends Page{
+public class Teacher extends Page {
 
 
     private Integer teacherId;
@@ -52,5 +52,9 @@ public class Teacher  extends Page{
     private String teacherStatus;
 
 
-    private byte[]  photo;
+    private byte[] photo;
+
+    private Test test;
+    private Student student;
+    private StudentTest studentTest;
 }

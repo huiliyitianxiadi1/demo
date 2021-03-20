@@ -117,7 +117,7 @@ var datatables_options = {
                 var t = data.quanxian;
 
                 html = "";
-                if (t == 0) {
+                if (t === 0) {
                     html = "无权限操作";
                 } else {
 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.DajuanDao">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Dajuan">
+        <!--@Table dajuan-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="studentid" column="studentid" jdbcType="INTEGER"/>
+        <result property="kaoshima" column="kaoshima" jdbcType="INTEGER"/>
+        <result property="tiid" column="tiid" jdbcType="INTEGER"/>
+        <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        <result property="daan" column="daan" jdbcType="VARCHAR"/>
+        <result property="xx" column="xx" jdbcType="INTEGER"/>
+
+
+        <association javaType="com.example.demo.entity.TestTable" property="testTable">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="testId" column="test_id" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="danId" column="dan_id" jdbcType="INTEGER"/>
+            <result property="tianId" column="tian_id" jdbcType="INTEGER"/>
+            <result property="zhuId" column="zhu_id" jdbcType="INTEGER"/>
+        </association>
+
+
+        <!--        单选题-->
+        <association javaType="com.example.demo.entity.BankChoice" property="bankChoice">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="a" column="A" jdbcType="VARCHAR"/>
+            <result property="b" column="B" jdbcType="VARCHAR"/>
+            <result property="c" column="C" jdbcType="VARCHAR"/>
+            <result property="d" column="D" jdbcType="VARCHAR"/>
+            <result property="answer" column="answer" jdbcType="VARCHAR"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+        <!--填空题-->
+        <association javaType="com.example.demo.entity.BankFill" property="bankFill">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="answer1" column="answer1" jdbcType="VARCHAR"/>
+            <result property="answer2" column="answer2" jdbcType="VARCHAR"/>
+            <result property="answer3" column="answer3" jdbcType="VARCHAR"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+        <!--主官题-->
+        <association javaType="com.example.demo.entity.BankSubjective" property="bankSubjective">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="kemu" column="kemu" jdbcType="VARCHAR"/>
+            <result property="timu" column="timu" jdbcType="VARCHAR"/>
+            <result property="referenceanswer" column="ReferenceAnswer" jdbcType="VARCHAR"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+        </association>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               studentid,
+               kaoshima,
+               tiid,
+               fenzhi,
+               daan
+        from graduation.dajuan
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select id,
+               studentid,
+               kaoshima,
+               tiid,
+               fenzhi,
+               daan
+        from graduation.dajuan
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, studentid, kaoshima, tiid, fenzhi, daan
+        from graduation.dajuan
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="studentid != null">
+                and studentid = #{studentid}
+            </if>
+            <if test="kaoshima != null">
+                and kaoshima = #{kaoshima}
+            </if>
+            <if test="tiid != null">
+                and tiid = #{tiid}
+            </if>
+            <if test="fenzhi != null">
+                and fenzhi = #{fenzhi}
+            </if>
+            <if test="daan != null and daan != ''">
+                and daan = #{daan}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into graduation.dajuan(studentid, kaoshima, tiid, fenzhi, daan)
+        values (#{studentid}, #{kaoshima}, #{tiid}, #{fenzhi}, #{daan})
+    </insert>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from graduation.dajuan
+        where id = #{id}
+    </delete>
+    <!--==================================================================================================-->
+
+    <insert id="sendAllMessage">
+        INSERT INTO graduation.dajuan(studentid, kaoshima, tiid)
+        SELECT student_test.studentid, test_table.test_id, test_table.id
+        FROM graduation.test_table,
+             graduation.student_test
+        where student_test.studentid = #{studentid}
+          and student_test.testid = #{kaoshima}
+          and student_test.testid = test_table.test_id
+        ON DUPLICATE KEY UPDATE studentid=student_test.studentid,
+                                kaoshima= test_table.test_id,
+                                tiid=test_table.id
+    </insert>
+
+
+<!--    学生查看试卷-->
+    <select id="selectShiJuanDan" resultMap="BaseResultMap">
+        SELECT *,bank_choice.fenzhi as xx
+        FROM graduation.dajuan,
+             graduation.test_table,
+             graduation.bank_choice
+        where dajuan.studentid = #{studentid}
+          and dajuan.kaoshima = #{kaoshima}
+          and test_table.type = 1
+          and test_table.id = dajuan.tiid
+          and bank_choice.id = test_table.dan_id;
+
+
+    </select>
+    <select id="selectShiJuanTian" resultMap="BaseResultMap">
+        SELECT *,bank_fill.fenzhi as xx
+        FROM graduation.dajuan,
+             graduation.test_table,
+             graduation.bank_fill
+        where dajuan.studentid = #{studentid}
+          and dajuan.kaoshima = #{kaoshima}
+          and test_table.type = 2
+          and test_table.id = dajuan.tiid
+          and bank_fill.id = test_table.tian_id;
+    </select>
+    <select id="selectShiJuanZhu" resultMap="BaseResultMap">
+        SELECT *,bank_subjective.fenzhi as xx
+        FROM graduation.dajuan,
+             graduation.test_table,
+             graduation.bank_subjective
+        where dajuan.studentid = #{studentid}
+          and dajuan.kaoshima = #{kaoshima}
+          and test_table.type = 3
+          and test_table.id = dajuan.tiid
+          and bank_subjective.id = test_table.zhu_id;
+    </select>
+
+
+
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update graduation.dajuan
+        <set>
+            <if test="fenzhi != null and fenzhi != ''">
+                fenzhi = #{fenzhi},
+            </if>
+            <if test="daan != null and daan != ''">
+                daan = #{daan},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

@@ -68,7 +68,14 @@ public class BankChoiceServiceImpl implements BankChoiceService {
 
 
 
-        //科目
+        //题目
+        if (StringUtils.isNotBlank(bankChoice.getTimu())) {
+            searchCondition.put("timu", bankChoice.getTimu());
+        } else {
+            searchCondition.put("timu", null);
+        }
+
+        //--科目
         if (StringUtils.isNotBlank(bankChoice.getKemu())) {
             System.out.println(":" + bankChoice.getKemu());
             searchCondition.put("kemu", bankChoice.getKemu());
@@ -77,13 +84,6 @@ public class BankChoiceServiceImpl implements BankChoiceService {
             searchCondition.put("kemu", null);
         }
 
-
-        //题目
-        if (StringUtils.isNotBlank(bankChoice.getTimu())) {
-            searchCondition.put("timu", bankChoice.getTimu());
-        } else {
-            searchCondition.put("timu", null);
-        }
 
         //出题老师iD
         searchCondition.put("teacherid", bankChoice.getTeacherid());

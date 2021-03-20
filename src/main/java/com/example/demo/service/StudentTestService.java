@@ -1,0 +1,81 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.BankChoice;
+import com.example.demo.entity.R;
+import com.example.demo.entity.StudentTest;
+import com.example.demo.entity.Test;
+
+import java.util.List;
+
+/**
+ * 考试与学生关系表(StudentTest)表服务接口
+ *
+ * @author makejava
+ * @since 2021-03-17 01:53:49
+ */
+public interface StudentTestService {
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    StudentTest queryById(Integer id);
+
+
+    /**
+     * 修改数据
+     *
+     * @param studentTest 实例对象
+     * @return 实例对象
+     */
+    StudentTest update(StudentTest studentTest);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    boolean deleteById(Integer id);
+
+    //=====================================有效代码==========================
+
+    /**
+     * 教师查询参加自己考试的学生
+     *
+
+     * @return
+     */
+    List<Test> TeacherSelectStudentTest();
+
+
+    /**
+     * 获得所有该用户数据
+     *
+     * @return
+     */
+    List<StudentTest> getUserList(Integer studentid);
+
+    /**
+     * 新增数据
+     *
+     * @param studentTest 实例对象
+     * @return 实例对象
+     */
+    int insert(StudentTest studentTest);
+
+
+
+    /**
+     * 通过实体作为筛选条件查询
+     *
+     * @param studentTest 实例对象
+     * @return 对象列表
+     */
+    List<StudentTest> queryAll(StudentTest studentTest);
+
+
+
+}

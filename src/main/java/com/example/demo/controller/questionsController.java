@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.*;
-import com.example.demo.service.BankChoiceService;
-import com.example.demo.service.BankFillService;
-import com.example.demo.service.BankSubjectiveService;
-import com.example.demo.service.TeacherService;
+import com.example.demo.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.xml.internal.stream.Entity;
 import org.springframework.stereotype.Controller;
@@ -34,8 +31,11 @@ public class questionsController {
     private BankSubjectiveService bankSubjectiveService;
     @Resource
     private TeacherService teacherService;
+    @Resource
+    private TestService testService;
 
 
+    //-------------------------------------------------------------单选题主观题填空题页面跳转------------------------------------------------
     /**
      * 单选
      *
@@ -119,9 +119,6 @@ public class questionsController {
 
         return r;
     }
-
-
-
 
 
     @ResponseBody
@@ -355,7 +352,7 @@ public class questionsController {
 
 
         System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("1:"+r.getData());
+        System.out.println("1:" + r.getData());
 
 
         //将r.getData()解析为list数组
@@ -371,7 +368,7 @@ public class questionsController {
                 subjectiveList.get(i).setQuanxian(0);
             }
         }
-        System.out.println("2:"+r.getData());
+        System.out.println("2:" + r.getData());
 
         return r;
     }

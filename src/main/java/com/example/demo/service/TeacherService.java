@@ -4,6 +4,7 @@ package com.example.demo.service;
 import com.example.demo.entity.R;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.Teacher;
+import com.example.demo.entity.Test;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
  * @since 2021-01-25 17:15:45
  */
 public interface TeacherService {
+
+
 
 
     //-----------------------------------------------增-----------------------------------------------

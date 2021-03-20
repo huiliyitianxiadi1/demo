@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.Teacher;
 import com.example.demo.entity.Teacher;
+import com.example.demo.entity.Test;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -47,6 +48,11 @@ public interface TeacherDao {
     Teacher teacher_queryByEmail(String teacherEmail);
 
     //-------------------------------分割线---------------------------//
+
+
+
+
+
 
     /**
      * 通过ID查询单条数据

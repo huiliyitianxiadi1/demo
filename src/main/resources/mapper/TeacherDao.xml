@@ -15,10 +15,41 @@
         <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
         <result property="photo" column="photo" jdbcType="VARCHAR"/>
 
+
+        <association javaType="com.example.demo.entity.Test" property="test">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="begin" column="begin" jdbcType="TIMESTAMP"/>
+            <result property="end" column="end" jdbcType="TIMESTAMP"/>
+            <result property="fenzhi" column="fenzhi" jdbcType="INTEGER"/>
+            <result property="teacherid" column="teacherid" jdbcType="INTEGER"/>
+
+        </association>
+
+        <association javaType="com.example.demo.entity.Student" property="student">
+            <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+            <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+            <result property="studentEmail" column="student_email" jdbcType="VARCHAR"/>
+            <result property="studentPassword" column="student_password" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="student_number" jdbcType="VARCHAR"/>
+            <result property="studentSex" column="student_sex" jdbcType="VARCHAR"/>
+            <result property="studentSchool" column="student_school" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
+
+        </association>
+
+        <association javaType="com.example.demo.entity.StudentTest" property="studentTest">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="studentid" column="studentid" jdbcType="INTEGER"/>
+            <result property="testid" column="testid" jdbcType="INTEGER"/>
+            <result property="chengji" column="chengji" jdbcType="INTEGER"/>
+            <result property="time" column="time" jdbcType="TIMESTAMP"/>
+
+        </association>
     </resultMap>
 
 
-    <!--学生注册，添加一条信息-->
+
     <insert id="register_teacher" keyProperty="teacherId" useGeneratedKeys="true">
         insert
             ignore
@@ -42,6 +73,8 @@
         where teacher_email = #{teacherEmail}
     </select>
     <!--==============================分界线==============================-->
+
+
 
 
     <!--查询单个-->

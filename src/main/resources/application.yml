@@ -6,7 +6,6 @@ server:
 
 
 
-
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -53,3 +52,7 @@ mybatis:
   type-aliases-package: com.example.demo.model  # 注意：对应实体类的路径
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+pagehelper:
+  helper-dialect:mysql

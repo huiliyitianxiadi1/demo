@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.R;
+import com.example.demo.entity.Teacher;
 import com.example.demo.entity.Test;
 import com.example.demo.entity.Test;
 
@@ -23,18 +24,18 @@ public interface TestService {
     Test queryById(Integer id);
 
 
-
-
     // ----------------------------   有效代码    ----------------------------
+
+
 
 
     /**
      * 分页
+     *
      * @param test
      * @return
      */
     R select_all(Test test);
-
 
 
     /**

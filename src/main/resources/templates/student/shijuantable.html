@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div th:fragment="shijuan">
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="xxx">
+                                <h4 class="header-title mb-4">单选题</h4>
+
+                                <div class="mt-3 chartjs-chart" th:each="dajuanListDan:${dajuanListDan}">
+                                    <div th:text="${dajuanListDan.bankChoice.timu} "></div>
+                                    <div>
+                                        <div><input th:checked="${dajuanListDan.daan == 'A'} ? true : false"
+                                                    type="radio" th:name="'d'+ ${dajuanListDan.bankChoice.id}"
+                                                    value="A" th:id=" ${dajuanListDan.bankChoice.id}">
+                                            <span th:text="${dajuanListDan.bankChoice.a} "></span></div>
+
+                                        <div><input th:checked="${dajuanListDan.daan == 'B'} ? true : false"
+                                                    type="radio" th:name="'d'+ ${dajuanListDan.bankChoice.id}"
+                                                    value="B" th:id=" ${dajuanListDan.bankChoice.id}">
+                                            <span th:text="${dajuanListDan.bankChoice.b} "></span></div>
+
+                                        <div><input th:checked="${dajuanListDan.daan == 'C'} ? true : false"
+                                                    type="radio" th:name="'d'+ ${dajuanListDan.bankChoice.id}"
+                                                    value="C" th:id=" ${dajuanListDan.bankChoice.id}">
+                                            <span th:text="${dajuanListDan.bankChoice.c} "></span></div>
+
+                                        <div><input th:checked="${dajuanListDan.daan == 'D'} ? true : false"
+                                                    type="radio" th:name="'d'+ ${dajuanListDan.bankChoice.id}"
+                                                    value="D" th:id=" ${dajuanListDan.bankChoice.id}">
+                                            <span th:text="${dajuanListDan.bankChoice.d} "></span></div>
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                                <h4 class="header-title mb-4">填空题</h4>
+                                <div class="mt-3 chartjs-chart" th:each="dajuanListTian:${dajuanListTian}">
+
+
+                                    <div th:text="${dajuanListTian.bankFill.timu} "></div>
+
+                                    <input th:value="${dajuanListTian.daan}"
+                                           type="text"
+                                           th:id="'t'+${dajuanListTian.bankFill.id}"
+                                           th:name="'t'+${dajuanListTian.bankFill.id}">
+
+
+                                </div>
+                                <hr>
+
+                                <h4 class="header-title mb-4">主观题</h4>
+                                <div class="mt-3 chartjs-chart" th:each="dajuanListZhu:${dajuanListZhu}">
+                                    <div th:text="${dajuanListZhu.bankSubjective.timu} "></div>
+
+                                    <div id="testForm" class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <textarea
+                                                        th:text="${dajuanListZhu.daan}"
+                                                        th:id="'z'+${dajuanListZhu.bankSubjective.id}"
+                                                        th:name="'z'+${dajuanListZhu.bankSubjective.id}"
+                                                        th:class="form-control"
+                                                        onkeyup='textAreaChange(this)'
+                                                        onkeydown='textAreaChange(this)' rows='5'></textarea>
+                                                <div class='text-right'>
+                                                    <em style='color:red'>200</em>/<span>200</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </form>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <button type="button" class="btn btn-info" id="baocun" onclick="baocun()">保存
+                                    </button>
+                                    <button type="button" class="btn btn-info" id="tijiao">提交
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

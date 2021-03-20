@@ -6,8 +6,9 @@
 </head>
 <body>
 
+<!--教师-->
 <div class="left-side-menu" th:fragment="left_Bar_te">
-    <div class="slimscroll-menu" id="left-side-menu-container">
+    <div class="slimscroll-menu" id="left-side-menu-container1">
 
         <a href="/welcome.html" class="logo text-center">
 <span class="logo-lg">
@@ -20,12 +21,8 @@
 
         <ul class="metismenu side-nav">
 
-            <a href="/teacher_Addshijuan" class="side-nav-link">
-                <i class="dripicons-view-apps"></i>
-                <span> 出题系统ceshi </span>
-                <span class="menu-arrow"></span>
-            </a>
 
+            <!--个人空间-->
             <li class="side-nav-item">
                 <a href="/teacherInformation.html" class="side-nav-link">
 
@@ -36,6 +33,7 @@
             </li>
 
 
+            <!--出题系统-->
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-view-apps"></i>
@@ -66,6 +64,18 @@
 
                 </ul>
             </li>
+
+            <!--答卷列表-->
+            <li class="side-nav-item">
+                <a href="/Teacher_Select_Student_Test" class="side-nav-link">
+
+                    <span> 答卷列表 </span>
+
+                </a>
+
+            </li>
+
+
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-copy"></i>
@@ -182,9 +192,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="side-nav-title side-nav-item mt-1">Components</li>
-
-
 
 
         </ul>
@@ -198,7 +205,7 @@
 
 <!--管理员-->
 <div class="left-side-menu" th:fragment="left_Bar_admin">
-    <div class="slimscroll-menu" id="left-side-menu-container1">
+    <div class="slimscroll-menu" id="left-side-menu-container2">
 
         <a href="/welcome.html" class="logo text-center">
             <span class="logo-lg">
@@ -522,6 +529,185 @@
 
     </div>
 
+</div>
+
+<!--学生-->
+<div class="left-side-menu" th:fragment="left_Bar_st">
+    <div class="slimscroll-menu" id="left-side-menu-container3">
+
+        <a href="/welcome.html" class="logo text-center">
+            <span class="logo-lg">
+<img src="assets/images/logo.png" alt="" height="16">
+</span>
+            <span class="logo-sm">
+<img src="assets/images/logo_sm.png" alt="" height="16">
+</span>
+        </a>
+
+        <ul class="metismenu side-nav">
+
+
+            <li class="side-nav-item">
+                <a href="/studentInformation.html" class="side-nav-link">
+                    <span> 个人空间 </span>
+                </a>
+            </li>
+
+
+            <li class="side-nav-item">
+                <a href="/student_select_test" class="side-nav-link">
+                    <i class="dripicons-view-apps"></i>
+                    <span> 考试列表 </span>
+                    <!--查看考试信息-->
+                    <span class="menu-arrow"></span>
+                </a>
+
+            </li>
+
+            <li class="side-nav-item">
+                <a href="/student_myTest" class="side-nav-link">
+                    <i class="dripicons-view-apps"></i>
+                    <span> 我的考试 </span>
+                    <!--查看考试信息-->
+                    <span class="menu-arrow"></span>
+                </a>
+
+            </li>
+
+
+            <li class="side-nav-item">
+                <a href="/shijuan" class="side-nav-link">
+                    <i class="dripicons-view-apps"></i>
+                    <span> 卷 </span>
+                    <!--查看考试信息-->
+                    <span class="menu-arrow"></span>
+                </a>
+
+            </li>
+
+
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="dripicons-copy"></i>
+                    <span> Pages </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="pages-starter.html">Starter Page</a>
+                    </li>
+                    <li>
+                        <a href="pages-profile.html">Profile</a>
+                    </li>
+                    <li>
+                        <a href="pages-invoice.html">Invoice</a>
+                    </li>
+                    <li>
+                        <a href="pages-faq.html">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="pages-pricing.html">Pricing</a>
+                    </li>
+                    <li>
+                        <a href="pages-maintenance.html">Maintenance</a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" aria-expanded="false">Authentication
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-third-level" aria-expanded="false">
+                            <li>
+                                <a href="pages-login.html">Login</a>
+                            </li>
+                            <li>
+                                <a href="pages-login-2.html">Login 2</a>
+                            </li>
+                            <li>
+                                <a href="pages-register.html">Register</a>
+                            </li>
+                            <li>
+                                <a href="pages-register-2.html">Register 2</a>
+                            </li>
+                            <li>
+                                <a href="pages-logout.html">Logout</a>
+                            </li>
+                            <li>
+                                <a href="pages-logout-2.html">Logout 2</a>
+                            </li>
+                            <li>
+                                <a href="pages-recoverpw.html">Recover Password</a>
+                            </li>
+                            <li>
+                                <a href="pages-recoverpw-2.html">Recover Password 2</a>
+                            </li>
+                            <li>
+                                <a href="pages-lock-screen.html">Lock Screen</a>
+                            </li>
+                            <li>
+                                <a href="pages-lock-screen-2.html">Lock Screen 2</a>
+                            </li>
+                            <li>
+                                <a href="pages-confirm-mail.html">Confirm Mail</a>
+                            </li>
+                            <li>
+                                <a href="pages-confirm-mail-2.html">Confirm Mail 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" aria-expanded="false">Error
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-third-level" aria-expanded="false">
+                            <li>
+                                <a href="pages-404.html">Error 404</a>
+                            </li>
+                            <li>
+                                <a href="pages-404-alt.html">Error 404-alt</a>
+                            </li>
+                            <li>
+                                <a href="pages-500.html">Error 500</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="dripicons-browser"></i>
+                    <span> Layouts </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="layouts-horizontal.html">Horizontal</a>
+                    </li>
+                    <li>
+                        <a href="layouts-light-sidenav.html">Light Sidenav</a>
+                    </li>
+                    <li>
+                        <a href="layouts-collapsed.html">Collapsed Sidenav</a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="right-bar-toggle">Right Sidebar</a>
+                    </li>
+                    <li>
+                        <a href="layouts-boxed-vertical.html">Boxed Vertical</a>
+                    </li>
+                    <li>
+                        <a href="layouts-boxed-horizontal.html">Boxed Horizontal</a>
+                    </li>
+                    <li>
+                        <a href="layouts-scrollable-sidenav.html">Scrollable Sidenav</a>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+
+
+    </div>
 </div>
 
 </body>

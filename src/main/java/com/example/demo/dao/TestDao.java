@@ -1,11 +1,13 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.Teacher;
 import com.example.demo.entity.Test;
 import com.example.demo.entity.TestTable;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +29,6 @@ public interface TestDao {
     Test queryById(Integer id);
 
 
-
-
     /**
      * 通过实体作为筛选条件查询
      *
@@ -39,10 +39,9 @@ public interface TestDao {
 
 //  ------------------------------------------------------------------------  有效代码    -----------------------------------------------------------------------
 
-    //查询分页数据
 
     /**
-     * @param rowBounds
+     //查询分页数据
      * @param map
      * @return
      */
@@ -81,7 +80,6 @@ public interface TestDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
-
 
 
 }

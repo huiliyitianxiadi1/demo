@@ -4,15 +4,32 @@
         t.NotificationApp.send("Heads up!", "This alert needs your attention, but it is not super important.", "top-right", "rgba(0,0,0,0.2)", "info")
     }), t("#toastr-two").on("click", function (i) {
         t.NotificationApp.send("Heads up!", "Check below fields please.", "top-center", "rgba(0,0,0,0.2)", "warning")
-    }), t("#toastr-three1").on("click", function (i) {
-        t.NotificationApp.send("成功!", "你提交的数据已添加成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
-    }), t("#toastr-three2").on("click", function (i) {
-        t.NotificationApp.send("成功!", "你提交的数据已修改成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
-    }), t("#toastr-three3").on("click", function (i) {
-        t.NotificationApp.send("成功!", "你选择的数据已删除成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
-    }) , t("#toastr-four1").on("click", function (i) {
-        t.NotificationApp.send("失败!", "请检查内容，然后再次尝试提交.", "bottom-left", "rgba(0,0,0,0.2)", "error")
-    })   , t("#toastr-four2").on("click", function (i) {
+    }),
+        t("#toastr-three1").on("click", function (i) {
+            t.NotificationApp.send("成功!", "你提交的数据已添加成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
+        }),
+
+
+        t("#toastr-three2").on("click", function (i) {
+            t.NotificationApp.send("成功!", "你提交的数据已修改成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
+        }),
+
+        t("#toastr-three3").on("click", function (i) {
+            t.NotificationApp.send("成功!", "你选择的数据已删除成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
+        }) ,
+
+        t("#toastr-three11").on("click", function (i) {
+            t.NotificationApp.send("成功!", "提交成功", "bottom-right", "rgba(0,0,0,0.2)", "success")
+        }) ,
+
+        t("#toastr-four11").on("click", function (i) {
+            t.NotificationApp.send("失败!", "已添加过", "bottom-right", "rgba(0,0,0,0.2)", "error")
+        }) ,
+
+
+        t("#toastr-four1").on("click", function (i) {
+            t.NotificationApp.send("失败!", "请检查内容，然后再次尝试提交.", "bottom-left", "rgba(0,0,0,0.2)", "error")
+        })   , t("#toastr-four2").on("click", function (i) {
         t.NotificationApp.send("失败!", "请检查内容，然后再次尝试提交.", "bottom-left", "rgba(0,0,0,0.2)", "error")
     })   , t("#toastr-four3").on("click", function (i) {
         t.NotificationApp.send("失败!", "请检查内容，然后再次尝试提交.", "bottom-left", "rgba(0,0,0,0.2)", "error")

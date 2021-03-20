@@ -1,14 +1,16 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.R;
-import com.example.demo.entity.Test;
+import com.example.demo.entity.*;
 import com.example.demo.dao.TestDao;
-import com.example.demo.entity.TestTable;
+import com.example.demo.service.TeacherService;
 import com.example.demo.service.TestService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,8 @@ import java.util.Map;
 public class TestServiceImpl implements TestService {
     @Resource
     private TestDao testDao;
+    @Resource
+    private TeacherService teacherService;
 
     /**
      * 通过ID查询单条数据
@@ -37,6 +41,10 @@ public class TestServiceImpl implements TestService {
 
 
 //======================================================================
+
+
+
+
 
     /***
      *分页

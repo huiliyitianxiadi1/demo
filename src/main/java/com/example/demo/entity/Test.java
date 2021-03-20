@@ -32,5 +32,20 @@ public class Test extends Page {
 
     private Teacher teacher;
 
-    private  Integer quanxian;
+    private Integer quanxian;
+
+
+    /**
+     * 判断传入身份
+     * <p>
+     * 1教师
+     * 2学生
+     * 3管理员
+     */
+    private Integer shenfen;
+
+
+    private Student student;
+    private StudentTest studentTest;
+
 }

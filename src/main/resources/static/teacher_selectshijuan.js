@@ -55,6 +55,7 @@ var datatables_options = {
         data: function (d) {
             var test = {};
 
+            test.shenfen=1;
             //名字
             test.name = $("#name").val();
             //科目
@@ -142,7 +143,8 @@ var datatables_options = {
                 if (t == 0) {
                     html = "无权限操作";
                 } else {
-                    html +=" <a href=\"javascript:void(0);\" class=\"action-icon\"> <i class=\"mdi mdi-eye\"></i></a>";
+                    //?data=1
+                    html += " <a href=\"/teacher_Addshijuan?textID=" + id + "\" class=\"action-icon\"> <i class=\"mdi mdi-eye\"></i></a>";
                     html += "<a onclick='Look(" + id + ")' class=\"action-icon\">  <i class=\"mdi mdi-square-edit-outline\"></i></a>"
                     html += "<a onclick='deleteData(" + id + ")'  class=\"action-icon\"> <i class=\"mdi mdi-delete\"></i></a>"
 
@@ -344,7 +346,7 @@ function del() {
             //设置回显用户数据
             //赋值给全局id，方便修改后使用
 
-            if (res === 1) {
+            if (res === true) {
                 SUCCESS(3);
             } else {
                 ERROR(3);

@@ -94,7 +94,9 @@
 
 
     <!--获得分组-->
-    <select id="getUserList" parameterType="com.example.demo.entity.BankChoice" resultMap="BaseResultMap">
+    <select id="getUserList"
+            parameterType="com.example.demo.entity.BankChoice"
+            resultMap="BaseResultMap">
 
         select *
         from graduation.bank_choice,graduation.teacher

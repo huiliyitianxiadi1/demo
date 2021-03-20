@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>编辑试卷</title>
-
+    <title>学生空间</title>
 
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -17,19 +16,26 @@
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css"/>
 
 
+
 </head>
 
-<!-- 教师通过此界面编辑试卷内容-->
+<!--此处页面为学生个人空间-->
+
+<!--点击修改信息，表单变为可编辑，按钮变为提交按钮-->
+
 
 <body>
 
 <!--model-->
-
+<button type="button" id="toastr-three11">
+</button>
+<button type="button" id="toastr-four11">
+</button>
 
 <div class="wrapper">
 
     <!--左侧栏==-->
-    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_te"></div>
+    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_st"></div>
 
 
     <div class="content-page">
@@ -39,10 +45,10 @@
             <!--导航1(个人)-->
             <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
 
+            <div th:replace="student/shijuantable.html ::shijuan"></div>
 
-            <!--出题部分-->
 
-            <div th:replace="Teacher/title/AddTest.html ::AddTable"></div>
+
 
 
         </div>
@@ -58,30 +64,9 @@
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
 
 
-<!--单选内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_dan"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_dan"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_dan"></span>
+<!--是否创建考试卷-->
+<span th:replace="student/Model.html :: chuangjiankaoshi"></span>
 
-<!--填空内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_tian"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_tian"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_tian"></span>
-
-
-<!--主管题内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_zhu"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_zhu"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_zhu"></span>
 
 
 <script src="jquery.js"></script>
@@ -102,21 +87,14 @@
 
 
 <script src="assets/js/pages/demo.datatable-init.js"></script>
-
-
 <script src="assets/js/pages/demo.toastr.js"></script>
-<script src="assets/js/vendor/dragula.min.js"></script>
-
-<script src="assets/js/ui/component.dragula.js"></script>
 
 
-<!--控制单选题-填空题-主观题的题库-->
-<script src="/teacher_Addshijuan_Bank.js"></script>
-
-<!--控制单选题-填空题-主观题的试卷-->
-<script src="/teacher_Addshijuan_Test.js"></script>
 
 
+
+<!--自定义js-->
+<script src="shijuan.js"></script>
 
 </body>
 </html>

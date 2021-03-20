@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>学生试卷</title>
+
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link th:href="@{../assets/css/vendor/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{../assets/css/vendor/responsive.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{../assets/css/vendor/buttons.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{../assets/css/vendor/select.bootstrap4.css}" rel="stylesheet" type="text/css"/>
+
+
+    <link th:href="@{../assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{../assets/css/app.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" th:src="@{/jquery.min.js}"></script>
+</head>
+
+<!-- 教师通过此界面编辑试卷内容-->
+
+<body>
+
+<!--model-->
+
+
+<div class="wrapper">
+
+    <!--左侧栏==-->
+    <div th:replace="Page_Component/LeftToolbar.html ::left_Bar_te"></div>
+
+
+    <div class="content-page">
+        <div class="content">
+
+
+            <!--导航1(个人)-->
+            <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
+
+
+
+            <div th:fragment="table_refresh" th:id="table_refresh">
+                <button onClick="localRefresh()">点击刷新表格</button>
+                <div class="row">
+                    <div class="col-12">
+
+                        <button type="button" class="btn btn-primary" onclick="shuaxinchengji()"> 刷新成绩
+                        </button>
+                        <br>
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                <table id="basic-datatable" class="table dt-responsive nowrap" width="100%">
+                                    <thead>
+                                    <tr>
+
+                                        <th>考试码</th>
+                                        <th>考试名称</th>
+                                        <th>考试人</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>提交时间</th>
+                                        <th>分值</th>
+                                        <th>成绩</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="list:${lists}">
+
+                                        <td th:text="${list.testid}">考试码</td>
+                                        <td th:text="${list.test.name}">考试名称</td>
+                                        <td th:text="${list.student.studentName}">考试人</td>
+                                        <td th:text="${list.test.begin}">开始时间</td>
+                                        <td th:text="${list.test.end}">结束时间</td>
+                                        <td th:text="${list.time}">提交时间</td>
+                                        <td th:text="${list.test.fenzhi}">试卷分值</td>
+                                        <td th:text="${list.chengji}">成绩</td>
+
+                                        <td class="table-action">
+                                            <a th:href="'/shijuanTeacher?textID='+${list.id}+'&StudentID='+${list.student.studentId}"
+                                               class="action-icon">
+
+                                                <i class="mdi mdi-eye"></i></a>
+
+                                            <a href="javascript:void(0);"
+                                               class="action-icon">
+                                                <i class="mdi mdi-square-edit-outline"
+                                                   data-toggle="modal"
+                                                   data-target="#teacher_box_modify"
+                                                   onclick="modify_teacher(this.id)">
+                                                </i>
+                                            </a>
+                                            <a href="javascript:void(0);" class="action-icon">
+                                                <i class="mdi mdi-delete"
+
+                                                   data-toggle="modal"
+                                                   onclick="delete_teacher(this.id)">
+                                                </i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <!--底部信息-->
+    <div th:replace="Page_Component/Footer_Component.html ::footer_component_welcome"></div>
+
+
+</div>
+
+<!--退出model框-->
+<span th:replace="Model/Logout.html :: LogOutModel"></span>
+
+
+
+
+<script th:src="@{../assets/js/app.min.js}"></script>
+
+<script th:src="@{/assets/js/vendor/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.responsive.min.js}"></script>
+<script th:src="@{/assets/js/vendor/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.buttons.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.flash.min.js}"></script>
+<script th:src="@{/assets/js/vendor/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.keyTable.min.js}"></script>
+<script th:src="@{/assets/js/vendor/dataTables.select.min.js}"></script>
+<script th:src="@{/assets/js/pages/demo.datatable-init.js}"></script>
+<script th:src="@{/assets/js/pages/demo.toastr.js}"></script>
+<script th:src="@{/assets/js/vendor/dragula.min.js}"></script>
+<script th:src="@{/assets/js/ui/component.dragula.js}"></script>
+
+
+<script>
+    function localRefresh() {
+        // 装载局部刷新返回的页面
+        $('#table_refresh').load("/local");
+    }
+</script>
+</body>
+</html>

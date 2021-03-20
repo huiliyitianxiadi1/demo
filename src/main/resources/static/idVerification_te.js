@@ -47,8 +47,8 @@ var datatables_options = {
                 teacher.teacherSex = "";
             }
 
-
             teacher.school = $("#TeacherSchool").val();
+
             teacher.subject = $("#TeacherSubject").val();
 
 
@@ -584,8 +584,6 @@ $("#oneOk_t").click(function () {
             if (($(this).attr("name")) == ("cb")) {//且name值为check
                 var id = $(this).closest('tr').find('td').eq(2).text();
                 alert(id); //获取eq为1的那一列数据
-
-
 
 
 

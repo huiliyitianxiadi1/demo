@@ -22,7 +22,29 @@
             <result property="school" column="school" jdbcType="VARCHAR"/>
             <result property="subject" column="subject" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="teacherStatus" column="teacherstatus" jdbcType="VARCHAR"/>
+
+        </association>
+
+
+        <association javaType="com.example.demo.entity.Student" property="student">
+            <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+            <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+            <result property="studentEmail" column="student_email" jdbcType="VARCHAR"/>
+            <result property="studentPassword" column="student_password" jdbcType="VARCHAR"/>
+            <result property="studentNumber" column="student_number" jdbcType="VARCHAR"/>
+            <result property="studentSex" column="student_sex" jdbcType="VARCHAR"/>
+            <result property="studentSchool" column="student_school" jdbcType="VARCHAR"/>
+            <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
+
+        </association>
+
+        <association javaType="com.example.demo.entity.StudentTest" property="studentTest">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="studentid" column="studentid" jdbcType="INTEGER"/>
+            <result property="testid" column="testid" jdbcType="INTEGER"/>
+            <result property="chengji" column="chengji" jdbcType="INTEGER"/>
+            <result property="time" column="time" jdbcType="TIMESTAMP"/>
+
         </association>
 
     </resultMap>
@@ -69,6 +91,9 @@
 
 
     <!--    有效代码-->
+
+
+
 
     <!--获得分组-->
     <select id="getUserList" parameterType="com.example.demo.entity.Test" resultMap="BaseResultMap">

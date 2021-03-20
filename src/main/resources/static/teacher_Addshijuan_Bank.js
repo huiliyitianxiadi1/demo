@@ -5,9 +5,16 @@ $("#toastr-four1").hide();
 $("#toastr-four2").hide();
 $("#toastr-four3").hide();
 
+var textID = window.location.href.split("?")[1].split("=")[1];
+
+ 
+
+
+
 //***
 //类型
 //操作
+
 
 //提交成功
 function SUCCESS(t) {
@@ -122,7 +129,7 @@ var datatables_options_dan = {
 
             BankChoice.teacherid = $("#DANchutiren").val();
 
-            BankChoice.textId = $("#textID").text();
+            BankChoice.textId = textID;
 
             BankChoice.pageSize = d.length;
             BankChoice.draw = d.draw;
@@ -238,7 +245,7 @@ var datatables_options_dan = {
                 var t = data.quanxian;
 
                 var Tetype = 1;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='TianJiaDan(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {
@@ -435,7 +442,7 @@ var datatables_options_test_dan = {
 
             BankChoice.teacherid = $("#DANchutiren").val();
 
-            BankChoice.textId = $("#textID").text();
+            BankChoice.textId = textID;
 
             BankChoice.pageSize = d.length;
             BankChoice.draw = d.draw;
@@ -551,7 +558,7 @@ var datatables_options_test_dan = {
                 var t = data.quanxian;
 
                 var Tetype = 1;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='YiChu(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {
@@ -605,7 +612,7 @@ var datatables_options_Tian = {
 
             BankFill.teacherid = $("#Tianchutiren").val();
 
-            BankFill.textId = $("#textID").text();
+            BankFill.textId = textID;
 
 
             BankFill.pageSize = d.length;
@@ -707,7 +714,7 @@ var datatables_options_Tian = {
                 var t = data.quanxian;
 
                 var Tetype = 2;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='TianJiaDan(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {
@@ -899,7 +906,7 @@ var datatables_options_Test_Tian = {
             BankSubjective.lr = 1;
 
 
-            BankSubjective.textId = $("#textID").text();
+            BankSubjective.textId = textID;
 
 
             BankSubjective.pageSize = d.length;
@@ -1000,7 +1007,7 @@ var datatables_options_Test_Tian = {
                 var t = data.quanxian;
 
                 var Tetype = 2;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='YiChu(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {
@@ -1045,7 +1052,7 @@ var datatables_options_Zhu = {
             var BankSubjective = {};
 
 
-            BankSubjective.textId = $("#textID").text();
+            BankSubjective.textId = textID;
 
 
             //科目
@@ -1148,7 +1155,7 @@ var datatables_options_Zhu = {
                 var t = data.quanxian;
 
                 var Tetype = 3;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='TianJiaDan(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {
@@ -1343,7 +1350,7 @@ var datatables_options_Test_Zhu = {
 
             BankSubjective.teacherid = $("#chutiren").val();
 
-            BankSubjective.textId = $("#textID").text();
+            BankSubjective.textId = textID;
 
             BankSubjective.lr = 1;
 
@@ -1439,7 +1446,7 @@ var datatables_options_Test_Zhu = {
                 var t = data.quanxian;
 
                 var Tetype = 3;
-                var TestId = $("#textID").text();
+                var TestId = textID;
 
                 html = "<a onclick='YiChu(" + id + "," + +Tetype + "," + TestId + ")' class=\"action-icon\"> <i class=\"mdi mdi-zodiac-cancer\"></i></a>";
                 if (t === 0) {

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div th:fragment="shijuan">
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="xxx">
+
+                                <!--================================================单选题部分================================================-->
+
+                                <h4 class="header-title mb-4">单选题</h4>
+
+                                <div class="mt-3 chartjs-chart" th:each="TdajuanListDan:${TdajuanListDan}">
+
+                                    <div th:text="'题目:'+${TdajuanListDan.bankChoice.timu} "></div>
+                                    <p th:text="'参考答案:'+${TdajuanListDan.bankChoice.answer} "></p>
+                                    <div>
+                                        <div><input th:checked="${TdajuanListDan.daan == 'A'} ? true : false"
+                                                    type="radio"
+                                                    value="A" disabled>
+                                            <span th:text="${TdajuanListDan.bankChoice.a} "></span></div>
+
+                                        <div><input th:checked="${TdajuanListDan.daan == 'B'} ? true : false"
+                                                    type="radio"
+                                                    value="B" disabled>
+                                            <span th:text="${TdajuanListDan.bankChoice.b} "></span></div>
+
+                                        <div><input th:checked="${TdajuanListDan.daan == 'C'} ? true : false"
+                                                    type="radio"
+                                                    value="C" disabled>
+                                            <span th:text="${TdajuanListDan.bankChoice.c} "></span></div>
+
+                                        <div><input th:checked="${TdajuanListDan.daan == 'D'} ? true : false"
+                                                    type="radio"
+                                                    value="D" disabled>
+                                            <span th:text="${TdajuanListDan.bankChoice.d} "></span></div>
+
+
+                                        <div>
+                                            <div th:if="${TdajuanListDan.bankChoice.answer} eq ${TdajuanListDan.daan } ">
+                                                评分：<input
+                                                    th:id="'d'+ ${TdajuanListDan.bankChoice.id}"
+                                                    th:name="'d'+ ${TdajuanListDan.bankChoice.id}"
+                                                    th:type="number" th:value="${TdajuanListDan.xx}">
+                                            </div>
+                                            <div th:id="'d'+ ${TdajuanListDan.bankChoice.id}"
+                                                 th:name="'d'+ ${TdajuanListDan.bankChoice.id}"
+                                                 th:if="${TdajuanListDan.bankChoice.answer} ne ${TdajuanListDan.daan }">
+                                                评分：<input th:type="number" >
+                                            </div>
+
+                                            <span th:text="'分值：'+${TdajuanListDan.xx} "></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                                <!--================================================填空题部分================================================-->
+
+                                <div>
+                                    <h4 class="header-title mb-4">填空题</h4>
+                                    <div class="mt-3 chartjs-chart" th:each="TdajuanListTian:${TdajuanListTian}">
+
+
+                                        <div th:text="'题目：'+${TdajuanListTian.bankFill.timu} "></div>
+                                        <p th:text="'参考答案①:'+${TdajuanListTian.bankFill.answer1} "></p>
+                                        <p th:text="'参考答案②:'+${TdajuanListTian.bankFill.answer2} "></p>
+                                        <p th:text="'参考答案③:'+${TdajuanListTian.bankFill.answer3} "></p>
+                                        <div>
+                                            学生答案: <input th:value="${TdajuanListTian.daan}"
+                                                         type="text"
+                                                         onfocus="this.blur();"
+                                        >
+                                        </div>
+                                        <p></p>
+                                        <div>
+                                            <div th:if="(${TdajuanListTian.bankFill.answer1} eq ${TdajuanListTian.daan }) or (${TdajuanListTian.bankFill.answer2} eq ${TdajuanListTian.daan }) or( ${TdajuanListTian.bankFill.answer3} eq ${TdajuanListTian.daan })">
+                                                评分：<input
+                                                    th:id="'t'+${TdajuanListTian.bankFill.id}"
+                                                    th:name="'t'+${TdajuanListTian.bankFill.id}"
+                                                    th:type="number" th:value="${TdajuanListTian .xx}">
+                                            </div>
+
+                                            <div th:if="${TdajuanListTian.bankFill.answer1} ne ${TdajuanListTian.daan }">
+                                                评分：<input
+                                                    th:id="'t'+${TdajuanListTian.bankFill.id}"
+                                                    th:name="'t'+${TdajuanListTian.bankFill.id}"
+                                                    th:type="number" >
+                                            </div>
+
+                                            <span th:text="'分值：'+${TdajuanListTian.xx} "></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+
+                                <!--================================================主观题部分================================================-->
+                                <div>
+                                    <h4 class="header-title mb-4">主观题</h4>
+                                    <div class="mt-3 chartjs-chart" th:each="TdajuanListZhu:${TdajuanListZhu}">
+
+                                        <div>
+                                            <div th:text="'题目:'+${TdajuanListZhu.bankSubjective.timu} "></div>
+
+                                            <div id="testForm" class="form-horizontal">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                <textarea
+                                                        onfocus="this.blur();"
+                                                        th:text="${TdajuanListZhu.daan}"
+
+                                                        th:class="form-control"
+                                                        onkeyup='textAreaChange(this)'
+                                                        onkeydown='textAreaChange(this)' rows='5'>
+                                                </textarea>
+                                                        <div class='text-right'>
+                                                            <em style='color:red'>200</em>/<span>200</span>
+                                                        </div>
+                                                    </div>
+                                                    评分: <input th:if="${TdajuanListZhu.fenzhi} ne ''"
+                                                               th:name="'z'+${TdajuanListZhu.bankSubjective.id}"
+                                                               th:id="'z'+${TdajuanListZhu.bankSubjective.id}"
+                                                               th:type="number"
+                                                               th:value="${TdajuanListZhu.fenzhi}"
+                                                >
+                                                    评分: <input th:if="${TdajuanListZhu.fenzhi} eq ''"
+                                                               th:name="'z'+${TdajuanListZhu.bankSubjective.id}"
+                                                               th:id="'z'+${TdajuanListZhu.bankSubjective.id}"
+                                                               th:type="number"
+                                                               th:value="0"
+                                                >
+                                                    <span th:text="'分值：'+${TdajuanListZhu.xx} "></span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <hr>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <button type="button" class="btn btn-info" id="baocun" onclick="baocun()">保存
+                                    </button>
+                                    <button type="button" class="btn btn-info" id="tijiao">提交
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,14 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Teacher;
-import com.example.demo.entity.Test;
+import com.example.demo.entity.*;
+import com.example.demo.service.TeacherService;
 import com.example.demo.service.TestService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * (Test)表控制层
@@ -24,6 +28,12 @@ public class TestController {
      */
     @Resource
     private TestService testService;
+    @Resource
+    private TeacherService teacherService;
+
+
+
+
 
 
 //=============================================================================================

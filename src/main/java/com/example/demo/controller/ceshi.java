@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.BankSubjective;
-import com.example.demo.entity.Fileaddress;
-import com.example.demo.entity.Student;
-import com.example.demo.entity.Teacher;
+import com.example.demo.entity.*;
 import com.example.demo.interceptor.ImgRegulation;
-import com.example.demo.service.StudentService;
+import com.example.demo.service.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,27 +19,52 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * @author DONG
- * @title: ceshi
- * @projectName demo
- * @description: TODO
- * @date 2021/1/27        18:00
- */
+
 @Controller
 public class ceshi {
 
-    /**
-     * 服务对象
-     */
     @Resource
-    private StudentService studentService;
+    private TestService testService;
+    @Resource
+    private DajuanService dajuanService;
+    @Resource
+    private TeacherService teacherService;
+    @Resource
+    private StudentTestService studentTestService;
+
+
 
     @RequestMapping({"/ceshi.html", "/ceshi"})//
-    public String ceshi() {
+    public String ceshi(Model model) {
+
+        List<Test> list = this.studentTestService.TeacherSelectStudentTest();
+
+        System.out.println("Teacher_Select_Student_Test_Html:" + list);
+
+        model.addAttribute("lists", list);
+
         return "ceshi";
     }
 
+    /**
+     * 局部刷新，注意返回值
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/local1")
+    public String localRefresh(Model model) {
+        List<Test> list = this.studentTestService.TeacherSelectStudentTest();
+
+        System.out.println("Teacher_Select_Student_Test_Html/local:" + list);
+
+        model.addAttribute("lists", list);
+
+        // "test"是test.html的名，
+        // "table_refresh"是test.html中需要刷新的部分标志,
+        // 在标签里加入：th:fragment="table_refresh"
+        return "ceshi::table_refresh";
+    }
 
     @RequestMapping({"/ceshi2.html", "/ceshi2"})//
     public String ceshi2() {
@@ -53,5 +76,10 @@ public class ceshi {
     public String ceshi3() {
         return "ceshi3";
     }
+
+
+
+
+
 
 }

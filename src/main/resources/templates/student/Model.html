@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="top-modal" class="modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true"
+     th:id="chuangjiankaoshi"
+     th:fragment="chuangjiankaoshi">
+    <div class="modal-dialog modal-top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>是否参加</span>
+                    <span id="testid"></span>
+                    <span>的考试</span>
+                </h4>
+
+                <h4 class="modal-title"></h4>
+
+                <button type="button"
+                        id="guanbi"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">取消
+                </button>
+                <!--                点击确认后创建学生-考试信息表-->
+                <a class="btn btn-sm btn-primary" onclick="tianjia()">确定</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

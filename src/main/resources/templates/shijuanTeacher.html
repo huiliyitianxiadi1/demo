@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>编辑试卷</title>
+    <title>查卷</title>
 
 
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -19,7 +19,6 @@
 
 </head>
 
-<!-- 教师通过此界面编辑试卷内容-->
 
 <body>
 
@@ -39,10 +38,8 @@
             <!--导航1(个人)-->
             <div th:replace="Welcome_Component/NavigationBar.html ::welcome_Bar_1"></div>
 
+            <div th:replace="Teacher/title/shijuanTable.html :: shijuan"></div>
 
-            <!--出题部分-->
-
-            <div th:replace="Teacher/title/AddTest.html ::AddTable"></div>
 
 
         </div>
@@ -56,32 +53,6 @@
 
 <!--退出model框-->
 <span th:replace="Model/Logout.html :: LogOutModel"></span>
-
-
-<!--单选内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_dan"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_dan"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_dan"></span>
-
-<!--填空内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_tian"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_tian"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_tian"></span>
-
-
-<!--主管题内容-->
-<!--添加model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: AddModal_zhu"></span>
-<!--修改model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: UpModal_zhu"></span>
-<!--删除model框-->
-<span th:replace="Teacher/title/AddTestModel.html:: DelModal_zhu"></span>
 
 
 <script src="jquery.js"></script>
@@ -110,13 +81,7 @@
 <script src="assets/js/ui/component.dragula.js"></script>
 
 
-<!--控制单选题-填空题-主观题的题库-->
-<script src="/teacher_Addshijuan_Bank.js"></script>
-
-<!--控制单选题-填空题-主观题的试卷-->
-<script src="/teacher_Addshijuan_Test.js"></script>
-
-
+<script src="shijuanTeacher.js"></script>
 
 </body>
 </html>

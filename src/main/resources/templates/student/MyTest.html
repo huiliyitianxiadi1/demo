@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div th:fragment="myTest">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <p class="text-muted font-14 mb-4">
+
+                    </p>
+
+                    <table id="myTestTable" class="table table-striped dt-responsive nowrap" width="100%">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>考试码</th>
+                            <th>考试名称</th>
+                            <th>出题人</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>提交时间</th>
+                            <th>分值</th>
+                            <th>成绩</th>
+
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="studenttestList:${studenttestList}">
+                            <td th:text="${studenttestList.id}">编号</td>
+                            <td th:text="${studenttestList.testid}">考试码</td>
+                            <td th:text="${studenttestList.test.name}">考试名称</td>
+                            <td th:text="${studenttestList.teacher.teacherName}">出题人</td>
+                            <td th:text="${studenttestList.test.begin}">开始时间</td>
+                            <td th:text="${studenttestList.test.end}">结束时间</td>
+                            <td th:text="${studenttestList.time}">提交时间</td>
+                            <td th:text="${studenttestList.test.fenzhi}">分值</td>
+                            <td th:text="${studenttestList.chengji}">成绩</td>
+                            <td class="table-action">
+                                <a th:href="'/shijuan?textID='+${studenttestList.testid}"
+
+                                   class="action-icon">
+
+                                    <i class="mdi mdi-eye"></i></a>
+
+                                <a href="javascript:void(0);"
+                                   class="action-icon">
+                                    <i class="mdi mdi-square-edit-outline"
+
+                                       th:id="${studenttestList.testid}"
+                                       data-toggle="modal"
+                                       data-target="#teacher_box_modify"
+                                       onclick="modify_teacher(this.id)">
+                                    </i>
+                                </a>
+                                <a href="javascript:void(0);" class="action-icon">
+                                    <i class="mdi mdi-delete"
+                                       th:id="${studenttestList.testid}"
+                                       data-target="#myModal_gai"
+                                       data-toggle="modal"
+                                       onclick="delete_teacher(this.id)">
+                                    </i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--删除-->
+<div id="DelModal"
+     th:fragment="DelModal"
+     class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel3">删除</h4>
+                <button type="button" id="guanbi3" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="topModalLabel">是否删除id为<span id="zhi"></span>的信息</h4>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">离开
+                </button>
+                <button type="button" class="btn btn-primary" onclick="del()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

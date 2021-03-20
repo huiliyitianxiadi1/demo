@@ -25,6 +25,7 @@ public class WriteTestController {
     @Resource
     private TestService testService;
 
+    //教师编辑考试
 
     /**
      * 教师进入试卷管理界面
@@ -64,6 +65,7 @@ public class WriteTestController {
 
 
     /**
+     * 教师端查询
      * 分页查询考试信息-开始结束时间-出题人-考试编号-考试名称
      *
      * @param test
@@ -75,35 +77,36 @@ public class WriteTestController {
     public R select_all(Test test) {
 
         System.out.println("传值test:" + test);
-
-
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Teacher user = (Teacher) request.getSession().getAttribute("loginUser");
-
-
-        //核心
         R r = this.testService.select_all(test);
 
+        if (test.getShenfen() == 1) {
+            Teacher user = (Teacher) request.getSession().getAttribute("loginUser");
+            //核心
 
-        System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("1:" + r.getData());
 
+            System.out.println("++++++++++++++++++++++++++++");
+            System.out.println("1:" + r.getData());
 
-        //将r.getData()解析为list数组
-        List<Test> testList = (List<Test>) r.getData();
+            //将r.getData()解析为list数组
+            List<Test> testList = (List<Test>) r.getData();
 
-        System.out.println("teacher.getTeacherId()" + user.getTeacherId());
+            System.out.println("teacher.getTeacherId()" + user.getTeacherId());
 
-        for (int i = 0; i < testList.size(); i++) {
-            //如果当前教师id与题库的出题教师id相同
-            if ((user.getTeacherId()).equals(testList.get(i).getTeacherid())) {
-                testList.get(i).setQuanxian(1);
-            } else {
-                testList.get(i).setQuanxian(0);
+            for (int i = 0; i < testList.size(); i++) {
+                //如果当前教师id与题库的出题教师id相同
+                if ((user.getTeacherId()).equals(testList.get(i).getTeacherid())) {
+                    testList.get(i).setQuanxian(1);
+                } else {
+                    testList.get(i).setQuanxian(0);
+                }
             }
+
+            System.out.println("2:" + r.getData());
+
         }
 
-        System.out.println("2:" + r.getData());
+
         return r;
     }
 
@@ -143,14 +146,6 @@ public class WriteTestController {
 
         return t;
     }
-
-
-
-
-
-
-
-
 
 
 }
